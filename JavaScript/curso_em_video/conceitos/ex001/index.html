@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Completo de JavaScript</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Guia Completo de JavaScript (JS)</h1>
+            <p>Todas as explicações fundamentais para entender a linguagem da web.</p>
+        </header>
+
+        <nav>
+            <h2>Sumário</h2>
+            <ul>
+                <li><a href="#o-que-e">1. O que é JavaScript?</a></li>
+                <li><a href="#como-adicionar">2. Como Adicionar JS a uma Página</a></li>
+                <li><a href="#fundamentos">3. Fundamentos da Linguagem</a>
+                    <ul>
+                        <li><a href="#variaveis">3.1. Variáveis (var, let, const)</a></li>
+                        <li><a href="#tipos-de-dados">3.2. Tipos de Dados</a></li>
+                        <li><a href="#operadores">3.3. Operadores</a></li>
+                    </ul>
+                </li>
+                <li><a href="#controle">4. Estruturas de Controle</a>
+                    <ul>
+                        <li><a href="#condicionais">4.1. Condicionais (if, else, switch)</a></li>
+                        <li><a href="#loops">4.2. Laços de Repetição (for, while)</a></li>
+                    </ul>
+                </li>
+                <li><a href="#funcoes">5. Funções</a></li>
+                <li><a href="#objetos-arrays">6. Objetos e Arrays</a></li>
+                <li><a href="#dom">7. O DOM (Document Object Model)</a>
+                    <ul>
+                        <li><a href="#selecionando">7.1. Selecionando Elementos</a></li>
+                        <li><a href="#manipulando">7.2. Manipulando Elementos</a></li>
+                    </ul>
+                </li>
+                <li><a href="#eventos">8. Eventos</a></li>
+                <li><a href="#moderno">9. JavaScript Moderno (ES6+)</a>
+                    <ul>
+                        <li><a href="#arrow-functions">9.1. Arrow Functions</a></li>
+                        <li><a href="#async-await">9.2. Promises e Async/Await</a></li>
+                    </ul>
+                </li>
+                <li><a href="#proximos-passos">10. Próximos Passos</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <section id="o-que-e">
+                <h2>1. O que é JavaScript?</h2>
+                <p>
+                    JavaScript (frequentemente abreviado como JS) é uma linguagem de programação de alto nível, interpretada e dinâmica. Ela é uma das três principais tecnologias da World Wide Web, ao lado do HTML e do CSS.
+                </p>
+                <ul>
+                    <li><strong>HTML:</strong> Fornece a <strong>estrutura</strong> da página (títulos, parágrafos, imagens).</li>
+                    <li><strong>CSS:</strong> Cuida da <strong>apresentação e estilo</strong> (cores, fontes, layout).</li>
+                    <li><strong>JavaScript:</strong> Adiciona <strong>comportamento e interatividade</strong> (menus que abrem, formulários que validam, conteúdo que muda dinamicamente).</li>
+                </ul>
+                <p>
+                    Originalmente criado para rodar apenas nos navegadores (client-side), o JavaScript hoje também é usado no lado do servidor (server-side) graças a ambientes como o <strong>Node.js</strong>.
+                </p>
+            </section>
+
+            <section id="como-adicionar">
+                <h2>2. Como Adicionar JS a uma Página</h2>
+                <p>Existem três formas de incluir JavaScript em um arquivo HTML:</p>
+
+                <h3>2.1. Script Externo (Recomendado)</h3>
+                <p>Você cria um arquivo separado com a extensão <code>.js</code> e o vincula ao seu HTML. Isso mantém o código organizado e permite que o navegador armazene o script em cache.</p>
+                <pre><code>&lt;!-- Colocado geralmente antes de fechar a tag &lt;/body&gt; --&gt;
+&lt;script src="meu-script.js"&gt;&lt;/script&gt;</code></pre>
+
+                <h3>2.2. Script Interno</h3>
+                <p>Você pode colocar o código diretamente no HTML dentro da tag <code>&lt;script&gt;</code>.</p>
+                <pre><code>&lt;script&gt;
+    alert("Olá, mundo!");
+&lt;/script&gt;</code></pre>
+
+                <h3>2.3. Inline (Não recomendado para código complexo)</h3>
+                <p>O código é colocado diretamente em um atributo de um elemento HTML, como <code>onclick</code>.</p>
+                <pre><code>&lt;button onclick="alert('Você clicou!')"&gt;Clique em mim&lt;/button&gt;</code></pre>
+            </section>
+
+            <section id="fundamentos">
+                <h2>3. Fundamentos da Linguagem</h2>
+
+                <article id="variaveis">
+                    <h3>3.1. Variáveis (var, let, const)</h3>
+                    <p>Variáveis são "contêineres" para armazenar valores.</p>
+                    <ul>
+                        <li><code>var</code>: A forma antiga. Tem escopo de função e pode ser "hoisted" (içada). Evite seu uso em código moderno.</li>
+                        <li><code>let</code>: A forma moderna. Tem escopo de bloco (<code>{}</code>) e seu valor pode ser reatribuído.</li>
+                        <li><code>const</code>: A forma moderna. Tem escopo de bloco e seu valor <strong>não</strong> pode ser reatribuído após a declaração (é uma constante).</li>
+                    </ul>
+                    <pre><code>// Antigo (evitar)
+var nome = "Maria";
+
+// Moderno
+let idade = 30;
+idade = 31; // Válido
+
+const PI = 3.14159;
+// PI = 3.14; // Inválido! Gerará um erro.</code></pre>
+                </article>
+
+                <article id="tipos-de-dados">
+                    <h3>3.2. Tipos de Dados</h3>
+                    <p>O JavaScript tem vários tipos de dados primitivos:</p>
+                    <ul>
+                        <li><strong>String:</strong> Texto. Ex: <code>"Olá"</code>, <code>'Mundo'</code>.</li>
+                        <li><strong>Number:</strong> Números, sejam inteiros ou decimais. Ex: <code>10</code>, <code>2.5</code>.</li>
+                        <li><strong>Boolean:</strong> Valor lógico, verdadeiro ou falso. Ex: <code>true</code>, <code>false</code>.</li>
+                        <li><strong>null:</strong> Representa a ausência intencional de um valor.</li>
+                        <li><strong>undefined:</strong> Uma variável que foi declarada mas ainda não teve um valor atribuído.</li>
+                        <li><strong>Symbol:</strong> (ES6+) Um valor único e imutável.</li>
+                        <li><strong>BigInt:</strong> (ES2020+) Para números inteiros maiores do que o <code>Number</code> pode suportar.</li>
+                    </ul>
+                    <p>Além dos primitivos, existe o tipo <strong>Object</strong>, que é usado para coleções complexas de dados.</p>
+                </article>
+
+                <article id="operadores">
+                    <h3>3.3. Operadores</h3>
+                    <p>São símbolos que realizam operações.</p>
+                    <ul>
+                        <li><strong>Aritméticos:</strong> <code>+</code> (adição), <code>-</code> (subtração), <code>*</code> (multiplicação), <code>/</code> (divisão), <code>%</code> (módulo/resto).</li>
+                        <li><strong>Atribuição:</strong> <code>=</code> (atribui valor), <code>+=</code> (adiciona e atribui), <code>-=</code> (subtrai e atribui).</li>
+                        <li><strong>Comparação:</strong>
+                            <ul>
+                                <li><code>==</code>: Igual (compara valor, mas faz coerção de tipo). Ex: <code>5 == "5"</code> é <code>true</code>.</li>
+                                <li><code>===</code>: Estritamente igual (compara valor E tipo). Ex: <code>5 === "5"</code> é <code>false</code>. <strong>(Prefira este!)</strong></li>
+                                <li><code>!=</code>: Diferente.</li>
+                                <li><code>!==</code>: Estritamente diferente. <strong>(Prefira este!)</strong></li>
+                                <li><code>&gt;</code> (maior que), <code>&lt;</code> (menor que), <code>&gt;=</code> (maior ou igual), <code>&lt;=</code> (menor ou igual).</li>
+                            </ul>
+                        </li>
+                        <li><strong>Lógicos:</strong> <code>&&</code> (E lógico), <code>||</code> (OU lógico), <code>!</code> (NÃO lógico).</li>
+                    </ul>
+                </article>
+            </section>
+
+            <section id="controle">
+                <h2>4. Estruturas de Controle</h2>
+
+                <article id="condicionais">
+                    <h3>4.1. Condicionais (if, else, switch)</h3>
+                    <p>Permitem que o seu código tome decisões.</p>
+                    <pre><code>let temperatura = 25;
+
+if (temperatura > 30) {
+    console.log("Está muito quente!");
+} else if (temperatura > 20) {
+    console.log("Está agradável.");
+} else {
+    console.log("Está frio.");
+}
+
+// Switch (para múltiplas checagens de um mesmo valor)
+let dia = new Date().getDay(); // Retorna 0 (Domingo) a 6 (Sábado)
+let nomeDia;
+
+switch (dia) {
+    case 0:
+        nomeDia = "Domingo";
+        break;
+    case 1:
+        nomeDia = "Segunda";
+        break;
+    // ... outros dias
+    default:
+        nomeDia = "Sábado";
+}</code></pre>
+                </article>
+
+                <article id="loops">
+                    <h3>4.2. Laços de Repetição (for, while)</h3>
+                    <p>Permitem executar um bloco de código várias vezes.</p>
+                    
+                    <h4>Loop `for`</h4>
+                    <p>Usado quando você sabe o número de iterações.</p>
+                    <pre><code>// Conta de 0 a 4
+for (let i = 0; i < 5; i++) {
+    console.log("O número é " + i);
+}</code></pre>
+
+                    <h4>Loop `while`</h4>
+                    <p>Usado quando a condição de parada é baseada em algo que muda dentro do loop.</p>
+                    <pre><code>let contador = 0;
+while (contador < 5) {
+    console.log("Contador: " + contador);
+    contador++;
+}</code></pre>
+                </article>
+            </section>
+
+            <section id="funcoes">
+                <h2>5. Funções</h2>
+                <p>
+                    Funções são blocos de código reutilizáveis. Elas podem receber dados (parâmetros) e retornar um valor.
+                </p>
+
+                <h3>Declaração de Função (Padrão)</h3>
+                <pre><code>function saudar(nome) {
+    return "Olá, " + nome + "!";
+}
+
+let saudacao = saudar("Ana"); // saudacao agora é "Olá, Ana!"
+console.log(saudacao);</code></pre>
+
+                <h3>Expressão de Função (Anônima)</h3>
+                <pre><code>const somar = function(a, b) {
+    return a + b;
+};
+
+let resultado = somar(5, 3); // resultado é 8
+console.log(resultado);</code></pre>
+                <p>Veja sobre <strong>Arrow Functions</strong> na seção <a href="#moderno">JavaScript Moderno</a>.</p>
+            </section>
+
+            <section id="objetos-arrays">
+                <h2>6. Objetos e Arrays</h2>
+                
+                <h3>Objetos</h3>
+                <p>Coleções de pares chave-valor. Usado para agrupar dados relacionados.</p>
+                <pre><code>const pessoa = {
+    nome: "Carlos",
+    sobrenome: "Silva",
+    idade: 42,
+    ativo: true,
+    // Um método (função dentro de um objeto)
+    nomeCompleto: function() {
+        return this.nome + " " + this.sobrenome;
+    }
+};
+
+// Acessando propriedades
+console.log(pessoa.nome); // "Carlos"
+console.log(pessoa["idade"]); // 42
+console.log(pessoa.nomeCompleto()); // "Carlos Silva"</code></pre>
+
+                <h3>Arrays (Matrizes)</h3>
+                <p>Listas ordenadas de valores. Os índices começam em 0.</p>
+                <pre><code>const frutas = ["Maçã", "Banana", "Laranja"];
+
+// Acessando valores
+console.log(frutas[0]); // "Maçã"
+console.log(frutas[2]); // "Laranja"
+
+// Adicionando um item no final
+frutas.push("Uva");
+console.log(frutas); // ["Maçã", "Banana", "Laranja", "Uva"]
+
+// Iterando sobre um array
+frutas.forEach(function(fruta) {
+    console.log("Eu gosto de " + fruta);
+});</code></pre>
+            </section>
+
+            <section id="dom">
+                <h2>7. O DOM (Document Object Model)</h2>
+                <p>
+                    O DOM é a parte mais importante do JavaScript no navegador. É uma representação em forma de árvore (objeto) do seu documento HTML. O JavaScript usa o DOM para "enxergar" e "modificar" o HTML e o CSS.
+                </p>
+
+                <article id="selecionando">
+                    <h3>7.1. Selecionando Elementos</h3>
+                    <p>Para manipular um elemento, você primeiro precisa selecioná-lo.</p>
+                    <pre><code>// Seleciona um elemento pelo seu ID
+const titulo = document.getElementById("meu-titulo");
+
+// Seleciona o *primeiro* elemento que bate com um seletor CSS
+const primeiroBotao = document.querySelector(".btn-comprar");
+
+// Seleciona *todos* os elementos que batem com um seletor CSS
+const todosOsLinks = document.querySelectorAll("a");
+
+// Seleciona pela classe (antigo, retorna uma HTMLCollection)
+const paragrafos = document.getElementsByClassName("paragrafo");</code></pre>
+                    <div class="nota">
+                        <strong>Nota:</strong> <code>querySelector</code> (para um elemento) e <code>querySelectorAll</code> (para múltiplos) são os métodos modernos e preferidos.
+                    </div>
+                </article>
+
+                <article id="manipulando">
+                    <h3>7.2. Manipulando Elementos</h3>
+                    <p>Uma vez selecionado, você pode mudar seu conteúdo, estilo ou atributos.</p>
+                    <pre><code>// Suponha que temos: <h1 id="titulo-principal">Olá</h1>
+const titulo = document.getElementById("titulo-principal");
+
+// Mudar o texto
+titulo.textContent = "Bem-vindo ao JavaScript!";
+
+// Mudar o HTML interno
+// Cuidado: usar .innerHTML pode ser um risco de segurança (XSS) se você inserir dados do usuário.
+titulo.innerHTML = "Bem-vindo ao <i>JavaScript</i>!";
+
+// Mudar o estilo (CSS)
+titulo.style.color = "blue";
+titulo.style.fontSize = "24px";
+
+// Mudar atributos (ex: um link)
+const link = document.querySelector("a");
+link.setAttribute("href", "https://www.google.com");
+
+// Criar e adicionar elementos
+const novoParagrafo = document.createElement("p");
+novoParagrafo.textContent = "Este parágrafo foi criado com JS.";
+document.body.appendChild(novoParagrafo); // Adiciona no final do <body>
+</code></pre>
+                </article>
+            </section>
+
+            <section id="eventos">
+                <h2>8. Eventos</h2>
+                <p>
+                    Eventos são ações que acontecem na página (um clique, um envio de formulário, uma tecla pressionada). O JavaScript pode "ouvir" (listen) esses eventos e executar uma função (um "callback") quando eles ocorrem.
+                </p>
+                <p>A forma moderna de fazer isso é com <code>addEventListener</code>.</p>
+
+                <pre><code>&lt;!-- No seu HTML --&gt;
+&lt;button id="meu-botao"&gt;Clique Aqui!&lt;/button&gt;
+
+&lt;!-- No seu JavaScript --&gt;
+const botao = document.getElementById("meu-botao");
+
+botao.addEventListener("click", function() {
+    // Este código só roda quando o botão é clicado
+    alert("O botão foi clicado!");
+    document.body.style.backgroundColor = "yellow";
+});
+
+// Outros eventos comuns:
+// "mouseover": quando o mouse passa por cima
+// "keydown": quando uma tecla é pressionada
+// "submit": quando um formulário é enviado
+</code></pre>
+            </section>
+
+            <section id="moderno">
+                <h2>9. JavaScript Moderno (ES6+)</h2>
+                <p>
+                    Em 2015, o JavaScript recebeu uma grande atualização chamada <strong>ECMAScript 2015 (ou ES6)</strong>, que modernizou a linguagem.
+                </p>
+
+                <article id="arrow-functions">
+                    <h3>9.1. Arrow Functions (Funções de Seta)</h3>
+                    <p>Uma sintaxe mais curta e limpa para escrever funções.</p>
+                    <pre><code>// Função normal
+const somar = function(a, b) {
+    return a + b;
+};
+
+// Arrow Function (equivalente)
+const somarArrow = (a, b) => {
+    return a + b;
+};
+
+// Se tiver apenas uma linha de retorno, pode ser mais curto
+const somarCurto = (a, b) => a + b;
+
+// Muito usado em callbacks
+const numeros = [1, 2, 3];
+const dobrados = numeros.map(n => n * 2); // [2, 4, 6]</code></pre>
+                </article>
+
+                <article id="async-await">
+                    <h3>9.2. Promises e Async/Await</h3>
+                    <p>
+                        JavaScript é "assíncrono". Isso significa que ele pode iniciar uma tarefa (como buscar dados de um servidor) e continuar executando outro código sem esperar a tarefa terminar.
+                    </p>
+                    <p>
+                        <strong>Promises</strong> são objetos que representam a eventual conclusão (ou falha) de uma operação assíncrona.
+                    </p>
+                    <p>
+                        <strong><code>async/await</code></strong> é uma sintaxe moderna (ES2017) que torna o código assíncrono mais fácil de ler, fazendo-o parecer síncrono.
+                    </p>
+                    <pre><code>// "async" na frente da função diz que ela pode usar "await"
+async function buscarDadosDaAPI() {
+    try {
+        console.log("Buscando dados...");
+        // "await" pausa a execução da função até que a Promise (fetch) seja resolvida
+        const resposta = await fetch("https://api.exemplo.com/dados");
+        
+        // Esta linha só executa após o 'await' acima
+        const dados = await resposta.json(); 
+
+        console.log("Dados recebidos:", dados);
+    } catch (erro) {
+        // 'catch' pega qualquer erro que ocorra no 'try'
+        console.error("Falha ao buscar dados:", erro);
+    }
+}
+
+buscarDadosDaAPI();
+console.log("Este log aparece ANTES dos dados serem recebidos!");</code></pre>
+                </article>
+            </section>
+
+            <section id="proximos-passos">
+                <h2>10. Próximos Passos</h2>
+                <p>Isto foi apenas uma visão geral. O universo JavaScript é vasto. A partir daqui, você pode explorar:</p>
+                <ul>
+                    <li><strong>Frameworks e Bibliotecas:</strong> Ferramentas que facilitam a criação de aplicações complexas.
+                        <ul>
+                            <li><strong>React:</strong> Biblioteca popular (criada pelo Facebook) para construir interfaces de usuário.</li>
+                            <li><strong>Angular:</strong> Framework completo (criado pelo Google) para aplicações robustas.</li>
+                            <li><strong>Vue.js:</strong> Um framework progressivo, conhecido por sua curva de aprendizado mais suave.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Node.js:</strong> Para usar JavaScript no back-end (criar servidores, APIs, scripts de automação).</li>
+                    <li><strong>TypeScript:</strong> Um "superset" do JavaScript que adiciona tipos estáticos, ajudando a prevenir bugs em projetos grandes.</li>
+                </ul>
+            </section>
+        </main>
+
+        <footer>
+            <p>Página gerada como um guia de referência. Para a documentação oficial, consulte o <a href="https://developer.mozilla.org/pt-BR/docs/Web/JavaScript">MDN Web Docs</a>.</p>
+        </footer>
+    </div>
+
+</body>
+</html>

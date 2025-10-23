@@ -4,6 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arrays e Manipulação do DOM</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        #produtoInput {
+            width: 70%;
+            padding: 8px;
+            margin-right: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .btns{
+            margin-top: 10px;
+        }
+        button {
+            padding: 8px 12px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            color: white;
+        }
+        #btnAdicionar {
+            background-color: #28a745;
+        }
+        #btnRemover {
+            background-color: #dc3545;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 20px;
+        }
+        li {
+            padding: 10px;
+            background-color: #eee;
+            margin-bottom: 5px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+    
 </head>
 <body>
     <div class="container">
@@ -12,8 +68,10 @@
         <div>
             <label for="produtoInput">Produto:</label>
             <input type="text" id="produtoInput" placeholder="Digite o nome do produto">
-            <button id="btnAdicionar">Adicionar</button>
-            <button id="btnRemover">Remover</button>
+            <div class="btns">
+                <button id="btnAdicionar">Adicionar</button>
+                <button id="btnRemover">Remover</button>
+            </div>
 
         </div>
 
@@ -30,8 +88,56 @@
 
         function adicionarProduto() {
             const nomeProduto = inputProduto.value;
-            
+
+            if (nomeProduto === ""){
+                alert('Por favor, adicione um produto!')
+                return;
+            }
+
+            const novoItem = document.createElement('li');
+
+            novoItem.textContent = nomeProduto;
+
+            listaProdutos.appendChild(novoItem);
+
+            inputProduto.value = '';
+
+            inputProduto.focus();
         }
+
+        function removerProduto() {
+
+            const nomeProdutoRemover = inputProduto.value.trim();
+
+            if (nomeProdutoRemover === ''){
+                alert('Por favor, digite o nome do produto que deseja remover.');
+                return;
+            }
+
+            const itensDaLista = listaProdutos.getElementsByTagName('li');
+            let produtoEncontrado = false
+
+            for (let i = itensDaLista.length -1; i >= 0; i--){
+                const item = itensDaLista[i]
+
+                if (item.textContent === nomeProdutoRemover){
+                    listaProdutos.removeChild(item);
+                    produtoEncontrado = true
+                    break
+                }
+            }
+
+            if (!produtoEncontrado){
+                alert('Produto não encontrado na lista.')
+            }
+
+            inputProduto.value = '';
+            inputProduto.focus();
+        };
+
+        btnAdicionar.addEventListener('click', adicionarProduto);
+
+        btnRemover.addEventListener('click', removerProduto);
     </script>
 </body>
 </html>
