@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Conversor de Dólar</title>
+</head>
+<body>
+    <h1>Conversor de Dólar para Real e Real para Dólar</h1>
+    <input type="number" id="input_valor" placeholder="Digite um valor">
+    <button onclick="dolarParaReal()">Converter Dólar para Real</button>
+    <button onclick="realParaDolar()">Converter Real para Dólar</button>
+    <h2 id="resultado"></h2>
+    <script>
+        let input_valor = document.getElementById('input_valor');
+        let resultado = document.getElementById('resultado');
+
+        let taxaConversaoDolarParaReal = 5.65; 
+        let taxaConversaoRealParaDolar = 0.18;
+
+        function dolarParaReal() {
+            let valorEmDolar = input_valor.value;
+            let valorEmReal = valorEmDolar * taxaConversaoDolarParaReal;
+            resultado.textContent = 'O valor em dólar é: ' + valorEmReal.toFixed(2);
+        }
+
+        function realParaDolar() {
+            let valorEmReal = input_valor.value;
+            let valorEmDolar = valorEmReal / taxaConversaoRealParaDolar;
+            resultado.textContent = 'O valor em real é: ' + valorEmDolar.toFixed(2);
+        }
+    </script>
+</body>
+</html>

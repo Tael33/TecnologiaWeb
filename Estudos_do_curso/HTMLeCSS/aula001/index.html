@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>estudando HTML</title>
+  </head>
+  <body>
+    <header>
+      <nav></nav>
+    </header>
+
+    <main>
+      <div>
+        <h1>Estudando HTML e CSS.</h1>
+      </div>
+      <hr />
+      <section>
+        <h2>Primeiro contato com HTML.</h2>
+        <h3>O que é HTML?</h3>
+        <p>
+          HTML é uma linguagem de marcação de texto, ou seja, ele não é uma
+          linguagem de programação. <br />
+          Com o HTML, marcamos os elementos para informar ao navegador o que é o
+          que.
+        </p>
+        <h3>O que é CSS?</h3>
+        <p>
+          CSS é uma linguagem de estilização. Com ela, damos "vida" ao nosso
+          documento HTML. <br />
+          Podemos mudar cores, fontes, tamanhos, posicionamento e muito mais.
+        </p>
+        <hr />
+        <h3>Tabela de entidades de caracteres HTML</h3>
+
+        <table>
+          <tbody>
+            <tr>
+              <td>Resultado</td>
+              <td>Descrição</td>
+              <td>Nome da endidade</td>
+              <td>Número da endidade</td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td>espaço</td>
+              <td>&amp;nbsp;</td>
+              <td>&amp;#160;</td>
+            </tr>
+            <tr>
+              <td>&lt;</td>
+              <td>menor que</td>
+              <td>&amp;lt;</td>
+              <td>&amp;#60;</td>
+            </tr>
+            <tr>
+              <td>&gt;</td>
+              <td>maior que</td>
+              <td>&amp;gt;</td>
+              <td>&amp;#62;</td>
+            </tr>
+            <tr>
+              <td>&amp;</td>
+              <td>ampersand</td>
+              <td>&amp;amp;</td>
+              <td>&amp;#38;</td>
+            </tr>
+            <tr>
+              <td>&quot;</td>
+              <td>aspas duplas</td>
+              <td>&amp;quot;</td>
+              <td>&amp;#34;</td>
+            </tr>
+            <tr>
+              <td>&apos;</td>
+              <td>aspas unica</td>
+              <td>&amp;apos;</td>
+              <td>&amp;#39;</td>
+            </tr>
+            <tr>
+              <td>&cent;</td>
+              <td>centavo (dólar)</td>
+              <td>&amp;cent;</td>
+              <td>&amp;#162;</td>
+            </tr>
+            <tr>
+              <td>&pound;</td>
+              <td>peso</td>
+              <td>&amp;pound;</td>
+              <td>&amp;#163;</td>
+            </tr>
+            <tr>
+              <td>&yen;</td>
+              <td>yen</td>
+              <td>&amp;yen;</td>
+              <td>&amp;#165;</td>
+            </tr>
+            <tr>
+              <td>&euro;</td>
+              <td>euro</td>
+              <td>&amp;euro;</td>
+              <td>&amp;#8364;</td>
+            </tr>
+            <tr>
+              <td>&copy;</td>
+              <td>copyright</td>
+              <td>&amp;copy;</td>
+              <td>&amp;#169;</td>
+            </tr>
+            <tr>
+              <td>&reg;</td>
+              <td>marca registrada</td>
+              <td>&amp;reg;</td>
+              <td>&amp;#174;</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Negrito / Destaque</h3>
+        <p>
+          Nesta frase, tenho um <strong>termo em Destaque</strong> usando a tag
+          STRONG .
+        </p>
+
+        <h3>Itáluco / Ênfase</h3>
+        <p>
+          Nesta frase, tenho um <em>termo em itálico/Ênfase</em> usando a tag
+          "EM".
+        </p>
+
+        <h3>Texto marcade.</h3>
+        <p>Pode ser cria do <mark>texto marcado</mark> usando a tag MARK.</p>
+
+        <h3>Texto pequeno.</h3>
+        <p>
+          Nesta frase, tenho um <small><mark>texto pequeno</mark></small> com a
+          tag small.
+        </p>
+
+        <h3>Texto deletado.</h3>
+
+        <p>
+          Nesta frase, tenho um texto <del>marcado como excluído</del> para
+          indicar que ele deve ser lido, mas não conciderado. com a teg DEL.
+        </p>
+
+        <h3>Texto inserido.</h3>
+        <p>
+          Nesta frase, tenho um texto <ins>marcado como inserido</ins> para dar
+          ênfase e indicar que ele foi adicionada depois. com a tag INS.
+        </p>
+
+        <h3>Texto sobrescrito.</h3>
+
+        <p>Para indicar coisas do tipo x<sup>20</sup>+3.</p>
+
+        <h3>Testo subscrito</h3>
+        <p>Para inserir coisas do tipo H<sub>2</sub>O.</p>
+      </section>
+      <hr />
+      <section>
+        <h2>Outras formatações</h2>
+        <h3>Código-fonte</h3>
+        <p>
+          O comondo <code>document.getElementById('teste')</code> é escrito em
+          linguagem JavaScript.
+        </p>
+        <p>
+          Para colocar um Código e não ficar de forma desorganizado basta usar
+          as tag CODE dentro da tag PRE
+        </p>
+        <p>Desta forma:</p>
+        <pre>
+                <code>
+                    num = int(input('Digite um número para saber se é par ou ímpar: '))
+                    if num % 2 == 0:
+                        print(f'{num} é PAR!')
+                    else:
+                        print(f'{num} é ÍMPAR!')
+                    print('Fim do código')
+                </code>
+            </pre>
+
+        <h3>Citações simples</h3>
+
+        <p>Nesta frase,</p>
+        <p>
+          Como diria o pai de um amigo meu:
+          <q>O computador é uma burro muito rápido</q>
+        </p>
+        <p>há uma citação em linha usando a tag Q.</p>
+
+        <h3>Citações completas</h3>
+        <p>Sgundo o livro Estruturação de páginas usando HTML e CSS:</p>
+        <blockquote>
+          Como todo tipo de projeto de software, existem algumas recomendações
+          quanto à organização dos arquivos de um site. Não há nenhum rigor
+          técnico quanto a essa organização e, na maioria das vezes, você vai
+          adaptar as recomendações da maneira que for melhor para o seu projeto.
+        </blockquote>
+        <p>Isso e uma citação em bloco.</p>
+        <h3>Abreviações</h3>
+        <p>
+          Usando a tag ABBR para dizer ou navegador e ao usuário que é uma
+          abreviação
+        </p>
+        <p>
+          Estou aprendendo <abbr title="HyperText Markup Language">HTML</abbr> e
+          <abbr title="Cascading Style Sheets">CSS</abbr>
+        </p>
+      </section>
+      <hr />
+      <section>
+        <h2>Inserir imagens</h2>
+        <blockquote>
+          O HTML 5 introduziu duas novas tags específicas para imagem:
+          <strong>figure</strong> e <strong>figcaption</strong>. A tag
+          <strong>figure</strong> define uma imagem em conjunto com a tag
+          <strong>img</strong>. Além disso, permite adicionar uma legenda para a
+          imagem por meio da tag <strong>figcaption</strong>.
+        </blockquote>
+        <p>Ex...</p>
+        <blockquote>
+          <pre>
+                <code>
+                    &lt;figure&gt;
+                        &lt;img src="img/matriz-musicdot.png" alt="Foto da matriz da musicdot"&gt;
+                        &lt;figcaption&gt;Matriz da MusicDot &lt;/figcaption &gt;
+                    &lt;/figure&gt;
+                </code>
+            </pre>
+        </blockquote>
+      </section>
+      <hr />
+      <section>
+        <h2>Listas</h2>
+        <h3>Lista ordenadas OL</h3>
+        <ol>
+          <li>Arroz</li>
+          <li>Feijão</li>
+          <li>Macarão</li>
+          <li>Carne</li>
+        </ol>
+        <p>
+          Podemos personalizar a lista mudando as formatações do tipo de
+          numerico para alfabético maiúcula e menúcula, números roma maiúcula e
+          menúcula.
+        </p>
+        <ol type="A">
+          <li>Arroz</li>
+          <li>Feijão</li>
+          <li>Macarão</li>
+          <li>Carne</li>
+        </ol>
+        <ol type="a">
+          <li>Arroz</li>
+          <li>Feijão</li>
+          <li>Macarão</li>
+          <li>Carne</li>
+        </ol>
+        <ol type="I">
+          <li>Arroz</li>
+          <li>Feijão</li>
+          <li>Macarão</li>
+          <li>Carne</li>
+        </ol>
+        <ol type="i">
+          <li>Arroz</li>
+          <li>Feijão</li>
+          <li>Macarão</li>
+          <li>Carne</li>
+        </ol>
+        <p>
+          Podemos também colocara para iniciar por um determinado valor usando
+          com o START
+        </p>
+        <ol start="5">
+          <li>Arroz</li>
+          <li>Feijão</li>
+          <li>Macarão</li>
+          <li>Carne</li>
+        </ol>
+
+        <h3>Listas não ordenadas UL</h3>
+
+        <p>Por padrão a tag UL vem com o tipo DISC,</p>
+        <ul>
+          <li>Arroz</li>
+          <li>Feijão</li>
+          <li>Macarão</li>
+          <li>Carne</li>
+        </ul>
+        <p>mas pode se mudade para CIRCLE</p>
+        <ul type="circle">
+          <li>Arroz</li>
+          <li>Feijão</li>
+          <li>Macarão</li>
+          <li>Carne</li>
+        </ul>
+        <p>para SQUARE</p>
+        <ul type="square">
+          <li>Arroz</li>
+          <li>Feijão</li>
+          <li>Macarão</li>
+          <li>Carne</li>
+        </ul>
+        <h3>Listas mistas e listas de definição</h3>
+        <h4>Listas mistas</h4>
+        <ol>
+          <li>Item 1</li>
+          <li>Item 2</li>
+          <ol>
+            <li>Item 2.1</li>
+            <li>Item 2.2</li>
+          </ol>
+          <li>Item 3</li>
+        </ol>
+        <h4>Listas de definição</h4>
+        <dl>
+          <dt>HTML</dt>
+          <dd>Linguagem de marcação para a criação do conteúdo de um site.</dd>
+          <dt>CSS</dt>
+          <dd>Linguagem de estilização para a criação do design de um site.</dd>
+          <dt>JavaScript</dt>
+          <dd>
+            Linguagem de programação para a criação de interatividade de um
+            site.
+          </dd>
+        </dl>
+      </section>
+      <hr>
+        <section>
+            <h2>Links e Âcoragem</h2>
+            <h3>Criando um link externo</h3>
+
+            <p>
+            Para criar um link externo, usamos a tag
+            <strong>&lt;a href="" target="_blank" rel="external" &gt;texto do link&lt;/a&gt;</strong>.
+            </p>
+            <p>
+            Neste caso, o link abrirá em uma nova aba, usamos os atributos
+            <strong>target="_blank"</strong> e <strong>rel="external"</strong>.
+            </p>
+            <p>
+            Exemplo com target e rel:
+            <a href="https://www.google.com" target="_blank" rel="external"
+                >Acessar o Google em nova aba</a>
+
+            <p>
+                Para criar um link na mesma aba, usamos a tag
+                <strong>&lt;a href=""&gt;texto do link&lt;/a&gt;</strong>, mas o
+                atributo <strong>href</strong> apontará para um arquivo local.
+            </p>
+
+            </p>
+            <p>
+            Exemplo:
+            <a href="https://www.google.com">Acessar o Google</a>
+            </p>
+
+            <h3> Hiperlink </h3>
+            <h4>Todo sobre</h4>
+            <p>
+                Você também pode acessar o nosso
+                <a href="noticias/noticia001.html">espaço de notícias</a>
+            </p>
+            
+            <p>ir para a pagina <a href="teste.html">teste</a>
+            </p>
+            <p>ir para a pagina <a href="testeee/testeee.html">teste 2</a></p>
+            teste </p>
+            
+            <h3>Link para download</h3>
+            <ul>
+                <li>
+                    <a href="livro/meulivro.pdf" download="meulivro.pdf" type="application/pdf">Baixar o livro em PDF</a>
+                </li>
+                <li>
+                    <a href="livro/meulivro.zip" download="meulivro.zip" type="application/zip">Baixar livro compactado em ZIP</a>
+                </li>
+            </ul>
+        </section>
+      <section>
+
+      </section>
+    </main>
+  </body>
+</html>

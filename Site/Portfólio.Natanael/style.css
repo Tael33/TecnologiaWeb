@@ -1,0 +1,394 @@
+/*Estilo Geral*/
+
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Oranienbaum&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+body {
+    background-color: rgb(0, 0, 0);
+    height: 100vh;
+    color: rgb(255, 255, 255);
+    font-family: "Crimson Text", serif;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.section-padding {
+    padding: 80px 4%;
+    margin: 40px 0;
+}
+
+.interface {
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+/* Estilo das Imagens */
+.img-topo-do-site img,
+.img-sobre img,
+.img-port {
+    width: 100%;  
+    height: auto;
+    display: block;
+}
+
+/* Flex Utility */
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*Titulo*/
+.titulo {
+    color: #ffffff;
+    font-size: 2.1em;
+    text-align: center;
+    font-family: "Oranienbaum", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+h2.titulo span {
+    color: #00ff08;
+
+}
+
+/* Botão de Contato */
+.btn-contatos button {
+    color: black;
+    background-color: #02e70a;
+    padding: 10px 40px;
+    border: none;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 18px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+button:hover {
+    box-shadow: 2px 2px 10px #00ff08, -2px -2px 10px #0026ffaa;
+    transform: scale(1.07);
+}
+
+/* Botão social */
+
+.btn-socil button {
+    color: black;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 30px;
+    margin: 2%;
+    background-color: #02e70a;
+    border: none;
+    cursor: pointer;
+    transition: .2s;
+}
+
+/* Estilos do Cabeçalho */
+
+header {
+    position: fixed;
+    /* Fixa a navbar */
+    top: 0;
+    /* Posiciona no topo */
+    left: 0;
+    /* Alinha à esquerda */
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 15px 0;
+    z-index: 1000;
+    /* Mantém a navbar acima de outros elementos */
+}
+
+header > .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header > .interface {
+    max-width: 1400px;
+    margin: 0 4%;
+}
+
+.logo a {
+    display: inline-flex;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.logo p {
+    padding-top: 13px;
+}
+
+.logo img {
+    width: 40px;
+    height: 40px;
+}
+
+header a {
+    color: rgba(255, 255, 255, 0.712);
+    text-decoration: none;
+    font-size: 17px;
+    transition: color 0.2s, transform 0.2s;
+}
+
+header a:hover {
+    color: aliceblue;
+    transform: scale(1.09);
+    border-radius: 30px;
+    color: #00FF99;
+    text-shadow: 2px 2px 10px rgba(0, 255, 153, 0.5), -2px -2px 10px rgba(0, 204, 255, 0.5);
+
+}
+
+header nav ul {
+    list-style-type: none;
+    display: flex;
+    gap: 40px;
+}
+
+header nav ul li {
+    display: inline-block;
+}
+
+/*Estilo do Topo*/
+
+section .section-padding {
+    padding: 60px 4%;
+    margin-top: 80px;
+
+}
+
+section > .topo-do-site .flex {
+    gap: 90px;
+}
+
+.topo-do-site .txt-topo-do-site h1 {
+    font-size: 2.9em;
+    text-align: left;
+    line-height: 40px;
+    color: #ffffff;
+}
+
+.topo-do-site .txt-topo-do-site h1 span {
+    color: rgb(55, 255, 0);
+    font-size: 2.0em;
+    text-shadow: 2px 2px 10px rgba(0, 255, 153, 0.5), -2px -2px 10px rgba(0, 204, 255, 0.5);
+}
+
+.topo-do-site .txt-topo-do-site p {
+    color: aliceblue;
+    margin: 40px 0;
+    font-size: 1.3em;
+}
+
+.topo-do-site .txt-topo-do-site .btn-contatos {
+    text-align: center;
+}
+
+.topo-do-site .img-topo-do-site{
+    width: 1000px;
+    height: auto;
+}
+
+.topo-do-site .img-topo-do-site img {
+    position: relative;
+    animation: flutuar 2s ease-in-out infinite alternate;
+    filter: drop-shadow(0 0 8px rgba(0, 255, 64, 0.623)) drop-shadow(0 0 18px rgba(58, 255, 3, 0.682)) drop-shadow(0 0 28px rgba(0, 204, 255, 0.492));
+    -webkit-animation: flutuar 2s ease-in-out infinite alternate;
+}
+
+@keyframes flutuar {
+    0% {
+        top: 0;
+    }
+
+    100% {
+        top: 30px;
+    }
+}
+
+/*Estilos das Especialidades*/
+
+section > .especialidades .flex {
+    gap: 80px;
+}
+
+section .especialidades .interface .titulo h2 {
+    text-align: center;
+}
+
+.especialidades .especialidades-box {
+    color: #ffffff;
+    width: 400px;
+    height: 350px;
+    padding: 40px;
+    margin: 90px 0;
+    transition: transform 0.2s;
+}
+
+.especialidades .especialidades-box:hover {
+    transform: scale(1.05);
+    border: 2px solid #00ff99d0;
+    border-radius: 30px;
+    box-shadow: 2px 2px 10px rgba(0, 255, 153, 0.345), -2px -2px 10px rgba(0, 204, 255, 0.574);
+}
+
+.especialidades .especialidades-box i {
+    font-size: 58px;
+    color: #00FF99;
+    text-shadow: 2px 2px 10px rgba(0, 255, 153, 0.5), -2px -2px 10px rgba(0, 204, 255, 0.5);
+}
+
+.especialidades .especialidades-box h3 {
+    font-size: 1.6em;
+    margin: 18px 0;
+}
+
+.especialidades .especialidades-box p {
+    font-size: 1.1em;
+    text-align: justify;
+}
+
+/* Estilo sobre mim */
+
+section > .sobre .interface {
+    padding: 80px 4%;
+    margin: 40px 0;
+}
+
+section > .sobre .flex {
+    gap: 90px;
+}
+
+.sobre .img-sobre{
+    width: 1200px;
+    height: auto;
+}
+
+.sobre .img-sobre img {
+    filter: drop-shadow(0 0 8px rgba(0, 255, 64, 0.623)) drop-shadow(0 0 18px rgba(58, 255, 3, 0.682)) drop-shadow(0 0 28px rgba(0, 204, 255, 0.492));
+}
+
+.sobre .txt-sobre .titulo {
+    margin-right: 13%;
+}
+
+.sobre .txt-sobre .nome {
+    width: 80%;
+    height: auto;
+    font-size: 1.2em;
+    margin: 4%;
+    padding: 4%;
+    border: 2px solid #00ff99d0;
+    border-radius: 30px;
+    box-shadow: 2px 2px 10px rgba(0, 255, 153, 0.345), -2px -2px 10px rgba(0, 204, 255, 0.574);
+    text-align: justify;
+
+}
+
+.sobre .txt-sobre .nome h2 {
+    font-size: 2.1em;
+    color: #00ff08;
+}
+
+.sobre .txt-sobre .nome p {
+    margin-bottom: 4%;
+}
+
+
+
+/* Estilo dos Projetos */
+
+section .projeto {
+    padding: 80px 4%;
+    margin: 100px 0;
+    box-shadow: 0 2px 30px -1px rgba(0, 255, 153, 0.618), 0 -2px 30px -1px rgba(0, 204, 255, 0.574);
+}
+
+section .projeto .flex {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 60px 0;
+}
+
+.img-port {
+    width: 360px;
+    height: 400px;
+    border-radius: 30px;
+    box-shadow: 0 -2px 30px -1px rgba(0, 255, 153, 0.618), 0 -2px 30px -1px rgba(0, 204, 255, 0.574);
+    
+}
+
+/* Estilo do footer */
+
+
+
+
+
+/* Media Queries para Responsividade */
+@media (max-width: 1200px) {
+    header >.interface {
+        max-width: 100%;
+        margin: 0 2%;
+    }
+
+    .especialidades .especialidades-box {
+        width: 300px; /* Reduz o tamanho das caixas em telas menores */
+    }
+
+    .img-port {
+        width: 300px; /* Ajusta o tamanho das imagens no portfólio */
+    }
+}
+
+@media (max-width: 768px) {
+    .flex {
+        flex-direction: column; /* Empilha os elementos em telas menores */
+        align-items: center; /* Centraliza os itens */
+    }
+
+    .topo-do-site {
+        padding: 30px 2%;
+    }
+
+    .especialidades .especialidades-box {
+        width: 100%; /* Faz as especialidades ocuparem toda a largura */
+        margin: 20px 0; /* Adiciona espaço entre as especialidades */
+    }
+
+    .img-port {
+        width: 100%; /* Faz as imagens ocuparem toda a largura disponível */
+        height: auto; /* Mantém a proporção */
+    }
+}
+
+@media (max-width: 480px) {
+    header nav ul {
+        flex-direction: column; /* Altera a direção do menu para coluna */
+        align-items: center; /* Centraliza os itens do menu */
+    }
+
+    header nav ul li {
+        margin: 10px 0; /* Adiciona espaço entre os itens do menu */
+    }
+
+    .titulo {
+        font-size: 1.8em; /* Ajusta o tamanho do título */
+    }
+
+    .btn-contatos button {
+        padding: 10px 20px; /* Ajusta o padding do botão */
+    }
+}

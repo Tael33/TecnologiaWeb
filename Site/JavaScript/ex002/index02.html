@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caixa interativa</title>
+    <style>
+        #caixa{
+            width: 200px;
+            height: 200px;
+            background-color: blue;
+            margin: auto;
+            line-height: 200px;
+            text-align: center;
+
+        }
+    </style>
+</head>
+<body>
+    <div id="caixa" onclick="clicar()" onmouseenter="entrar()" onmouseout="sair()">
+        TESTANDO
+    </div>
+    <script>
+        var d = window.document.getElementById('caixa')
+
+        function clicar(){
+            d.innerText = 'Clicou'
+            d.style.background = "red"
+        }
+        function entrar(){
+            d.innerText = 'Entrando...'
+            d.style.background = "yellow"
+        }
+        function sair(){
+            d.innerText = 'Saindo...'
+            d.style.background = "green"
+        }
+    </script>
+</body>
+</html>

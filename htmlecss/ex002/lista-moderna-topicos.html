@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tópicos Moderna</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="author" content="Rivaldo Soares do Nascimento">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/5338/5338322.png" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #000000, #6600ff, #fdbb2d);
+            color: #333;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: #1a2a6c;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #555;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .topic-card {
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .topic-header {
+            padding: 25px;
+            background: linear-gradient(to right, #6f00ff, #fff200);
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+
+        .topic-icon {
+            font-size: 2.5rem;
+            margin-right: 20px;
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .topic-title {
+            font-size: 1.6rem;
+            font-weight: 600;
+        }
+
+        .topic-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .topic-description {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #444;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .topic-footer {
+            padding: 15px 25px;
+            background: #f8f9fa;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .topic-date {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .topic-tag {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 25px;
+            color: white;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .topics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .topic-header {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Lista de Tags que eu estou com dificuldades</h1>
+            <p class="subtitle">Um modelo elegante para organizar e apresentar seus tópicos com descrições detalhadas.
+                Cada cartão contém um título, ícone e parágrafo descritivo.</p>
+        </header>
+
+        <div class="topics-grid">
+            <!-- Tópico 1 -->
+            <div class="topic-card">
+                <div class="topic-header">
+                    <div class="topic-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h2 class="topic-title">Desenvolvimento Web</h2>
+                </div>
+                <div class="topic-content">
+                    <p class="topic-description">O desenvolvimento web moderno envolve a criação de aplicações
+                        responsivas, acessíveis e de alto desempenho. Utilizando tecnologias como HTML5, CSS3,
+                        JavaScript e frameworks como React ou Vue, os desenvolvedores criam experiências interativas que
+                        funcionam em múltiplos dispositivos.</p>
+                </div>
+                <div class="topic-footer">
+                    <span class="topic-date">Atualizado: 15/06/2025</span>
+                    <span class="topic-tag">Tecnologia</span>
+                </div>
+            </div>
+
+            <!-- Tópico 2 -->
+            <div class="topic-card">
+                <div class="topic-header">
+                    <div class="topic-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h2 class="topic-title">Design de Interface</h2>
+                </div>
+                <div class="topic-content">
+                    <p class="topic-description">O design de interface foca na criação de experiências intuitivas e
+                        agradáveis para os usuários. Envolve o estudo de cores, tipografia, hierarquia visual e padrões
+                        de interação. Designers utilizam ferramentas como Figma e Adobe XD para prototipar interfaces
+                        antes da implementação.</p>
+                </div>
+                <div class="topic-footer">
+                    <span class="topic-date">Atualizado: 10/06/2025</span>
+                    <span class="topic-tag">Design</span>
+                </div>
+            </div>
+
+            <!-- Tópico 3 -->
+            <div class="topic-card">
+                <div class="topic-header">
+                    <div class="topic-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h2 class="topic-title">Experiência Mobile</h2>
+                </div>
+                <div class="topic-content">
+                    <p class="topic-description">Com o crescimento do uso de dispositivos móveis, criar experiências
+                        otimizadas para smartphones tornou-se essencial. Isso inclui design responsivo, carregamento
+                        rápido e interfaces adaptadas para toque. Progressive Web Apps (PWAs) oferecem uma alternativa
+                        poderosa aos aplicativos nativos.</p>
+                </div>
+                <div class="topic-footer">
+                    <span class="topic-date">Atualizado: 12/06/2025</span>
+                    <span class="topic-tag">Mobile</span>
+                </div>
+            </div>
+
+            <!-- Tópico 4 -->
+            <div class="topic-card">
+                <div class="topic-header">
+                    <div class="topic-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h2 class="topic-title">Otimização de SEO</h2>
+                </div>
+                <div class="topic-content">
+                    <p class="topic-description">A otimização para mecanismos de busca (SEO) é crucial para a
+                        visibilidade online. Envolve técnicas como pesquisa de palavras-chave, estruturação de conteúdo,
+                        otimização de desempenho e construção de links. Um bom SEO aumenta o tráfego orgânico e melhora
+                        o posicionamento nos resultados de busca.</p>
+                </div>
+                <div class="topic-footer">
+                    <span class="topic-date">Atualizado: 08/06/2025</span>
+                    <span class="topic-tag">Marketing</span>
+                </div>
+            </div>
+
+            <!-- Tópico 5 -->
+            <div class="topic-card">
+                <div class="topic-header">
+                    <div class="topic-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h2 class="topic-title">Segurança Digital</h2>
+                </div>
+                <div class="topic-content">
+                    <p class="topic-description">A segurança digital protege sistemas e dados contra ameaças
+                        cibernéticas. Práticas essenciais incluem uso de HTTPS, autenticação de dois fatores,
+                        atualizações regulares e proteção contra injeção de código. A conscientização dos usuários é tão
+                        importante quanto as medidas técnicas de proteção.</p>
+                </div>
+                <div class="topic-footer">
+                    <span class="topic-date">Atualizado: 05/06/2025</span>
+                    <span class="topic-tag">Segurança</span>
+                </div>
+            </div>
+
+            <!-- Tópico 6 -->
+            <div class="topic-card">
+                <div class="topic-header">
+                    <div class="topic-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h2 class="topic-title">Computação em Nuvem</h2>
+                </div>
+                <div class="topic-content">
+                    <p class="topic-description">A computação em nuvem revolucionou a forma como armazenamos dados e
+                        executamos aplicações. Oferece escalabilidade, flexibilidade e redução de custos com
+                        infraestrutura. Serviços como AWS, Azure e Google Cloud Platform fornecem soluções para
+                        hospedagem, armazenamento e processamento de dados.</p>
+                </div>
+                <div class="topic-footer">
+                    <span class="topic-date">Atualizado: 01/06/2025</span>
+                    <span class="topic-tag">Tecnologia</span>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2025 Lista de Tópicos Moderna - Modelo HTML Responsivo</p>
+        </footer>
+    </div>
+</body>
+
+</html>

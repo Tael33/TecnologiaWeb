@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vghvzbd uhd</title>
+    <style>
+        .a1{
+            width:400px;
+            height: 50px;
+            background-color: blue;
+            text-align: center;
+            
+        }
+    </style>
+</head>
+<body>
+    <h1>Tabuada</h1>
+    <div class="a1">
+        <p>Número: <input type="number" id="num" placeholder="Qual Tabuada?">
+        <button onclick="gerar()">Gerar Tabuada!</button></p>
+    </div>
+    <div>
+        <select name="tabuada" id="tabuada" size="10"></select>
+    </div>
+    <script>
+        function gerar(){
+            let num = document.getElementById("num");
+            let tabuada = document.getElementById("tabuada");
+            if(num.value.length == 0){
+                window.alert('Por favor, Digite um Número!')
+            } else{
+                let n = Number(num.value)
+                let c = 1
+                while(c <= 10){
+                    let item = document.createElement('option');
+                    item.text = `${n} x ${c} = ${n*c}`
+                    tabuada.appendChild(item)
+                    c++
+                }
+            }
+
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina de vendas</title>
+    <link rel="stylesheet" href="Style/Style.css">
+</head>
+<body>
+    <div class="navegador show-menu">
+        <div class="header-inner ">
+            <h1 class="logo">KWN<span>Store</span></h1>
+            <nav>
+                <ul>
+                    <li>Home</li>
+                    <li>Produtos</li>
+                    <li>Sobre</li>
+                    <li>Contatos</li>
+                    <li>Conta</li>
+                </ul>
+            </nav>
+            <div class="nav-icon">
+                <img src="images/cart.png">
+                <img class="menu-button" src="images/menu.png">
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div class="header-inner">
+            <div class="header-button-side">
+                <div class="header-button-side-left">
+                    <h2>Dê o novo estilo para o seu Setup!</h2>
+                    <p>"Impossível" é uma palavra que serve só de enfeite no dicionário.</p>
+                    <p>Acesse nossos produtos e descubra a melhor opção para você.</p>
+                    <button>Ver Agora &#8594;</button>
+                </div>
+
+                <div class="header-button-side-right">
+                    <img src="images/gaming-msi-header.png">
+                </div>
+                
+            </div>
+        </div>
+    </header>
+
+    <!-- Meio -->
+
+    <main>
+        <div class="green-background">
+            <div class="page-inner">
+                <div class="cols cols-3">
+                    <img src="images/products/product-2.png">
+                    <img src="images/products/product-3.png">
+                    <img src="images/products/product-1.png">
+                </div>
+            </div>
+        </div>
+
+        <div class="page-inner">
+            <h3 class="section-title">Produtos Mais Vendidos</h3>
+            <div class="subtitle-underline"></div>
+            <div class="cols cols-4">
+                <div class="product">
+                    <img src="images/products/product-4.png">
+                    <p class="product-name">Kit Gamer Meetion</p>
+                    <p class="rete">&#9733;&#9733;&#9733;&#9733;&#9734;</p>
+                    <p class="product-price"><span>R$</span> 4.765<sup>00</sup></p>
+                </div>
+                <div class="product">
+                    <img src="images/products/product-5.png">
+                    <p class="product-name">Msi GeFore Gtx 1650</p>
+                    <p class="rete">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+                    <p class="product-price"><span>R$</span> 20.495<sup>67</sup> </p>
+                </div>
+                <div class="product">
+                    <img src="images/products/product-6.png">
+                    <p class="product-name">Controle Sony DualSense PS5, Sem Fio, Branco - 3005767</p>
+                    <p class="rete">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+                    <p class="product-price"><span>R$</span> 1.993<sup>40</sup> </p>
+                </div>
+                <div class="product">
+                    <img src="images/products/product-7.png">
+                    <p class="product-name">Cadeira Gamer Vermelha Prizi - Jx-1039r</p>
+                    <p class="rete">&#9733;&#9733;&#9733;&#9734;&#9734;</p>
+                    <p class="product-price"><span>R$</span> 15.065<sup>99</sup> </p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        let navegador = document.querySelector('.navegador');
+        let menuButton = document.querySelector('.menu-button');
+
+        menuButton.addEventListener('click', () => {
+            navegador.classList.toggle("show-menu");
+        });
+    </script>
+
+</body>
+</html>

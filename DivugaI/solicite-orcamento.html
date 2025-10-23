@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Solicite seu Orçamento - Divulga-I</title>
+      <link rel="stylesheet" href="css/style.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+      <header>
+            <div class="container">
+                  <a href="index.html" class="logo">Divulga-<span>Í</span></a>
+                  <nav>
+                        <ul>
+                              <li><a href="index.html">Início</a></li>
+                              <li><a href="portfolio.html">Portfólio</a></li>
+                              <li><a href="services.html">Serviços</a></li>
+                              <li><a href="sobre-nos.html">Sobre Nós</a></li>
+                              <li><a href="solicite-orcamento.html">Contato</a></li>
+                        </ul>
+                  </nav>
+                  <a href="solicite-orcamento.html" class="cta-button">Solicite seu Orçamento</a>
+            </div>
+      </header>
+
+      <main class="form-container">
+            <div class="form-box animated fade-in-up">
+                  <h2>Solicite seu Orçamento Personalizado</h2>
+                  <p>Preencha o formulário abaixo e nossa equipe entrará em contato em breve para entender suas
+                        necessidades.</p>
+                  <form id="contact-form">
+                        <label for="name">Seu Nome:</label>
+                        <input type="text" id="name" name="name" required>
+
+                        <label for="email">Seu E-mail:</label>
+                        <input type="email" id="email" name="email" required>
+
+                        <label for="phone">Telefone (WhatsApp):</label>
+                        <input type="tel" id="phone" name="phone">
+
+                        <label for="company">Nome da Empresa (opcional):</label>
+                        <input type="text" id="company" name="company">
+
+                        <label for="service">Serviço de Interesse:</label>
+                        <select id="service" name="service" required>
+                              <option value="">Selecione um Serviço</option>
+                              <option value="Panfletagem">Panfletagem</option>
+                              <option value="Eventos">Organização de Eventos</option>
+                              <option value="Design Grafico">Design Gráfico / Criação de Peças</option>
+                              <option value="Marketing Digital">Marketing Digital / Mídias Sociais</option>
+                              <option value="Outros">Outros</option>
+                        </select>
+
+                        <label for="message">Sua Mensagem / Detalhes do Projeto:</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+
+                        <button type="submit">Enviar Solicitação</button>
+                  </form>
+                  <div id="form-message" class="message" style="display: none;"></div>
+            </div>
+      </main>
+
+      <footer>
+            <div class="container">
+                  <p>&copy; 2025 Divulga-I. Todos os direitos reservados.</p>
+                  <p>Seu Negócio em Destaque em Palmas, TO.</p>
+                  <div class="social-icons">
+                        <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                  </div>
+            </div>
+      </footer>
+
+      <script>
+            document.getElementById('contact-form').addEventListener('submit', async (e) => {
+                  e.preventDefault();
+                  const form = e.target;
+                  const formData = new FormData(form);
+                  const data = Object.fromEntries(formData.entries());
+                  const messageDiv = document.getElementById('form-message');
+
+                  // Aqui você idealmente enviaria esses dados para o seu backend.
+                  // Por enquanto, vamos simular um envio.
+                  console.log('Dados do formulário:', data);
+
+                  // Simulação de envio para um backend (você precisaria criar uma rota no server.js)
+                  // fetch('/send-contact', {
+                  //     method: 'POST',
+                  //     headers: {
+                  //         'Content-Type': 'application/json',
+                  //     },
+                  //     body: JSON.stringify(data),
+                  // })
+                  // .then(response => response.json())
+                  // .then(result => {
+                  //     if (result.success) {
+                  //         messageDiv.className = 'message success';
+                  //         messageDiv.textContent = 'Sua solicitação foi enviada com sucesso! Em breve entraremos em contato.';
+                  //         form.reset(); // Limpa o formulário
+                  //     } else {
+                  //         messageDiv.className = 'message error';
+                  //         messageDiv.textContent = 'Houve um erro ao enviar sua solicitação. Por favor, tente novamente.';
+                  //     }
+                  //     messageDiv.style.display = 'block';
+                  // })
+                  // .catch(error => {
+                  //     console.error('Erro ao enviar formulário:', error);
+                  //     messageDiv.className = 'message error';
+                  //     messageDiv.textContent = 'Erro ao conectar com o servidor. Por favor, tente novamente mais tarde.';
+                  //     messageDiv.style.display = 'block';
+                  // });
+
+                  // Simulação de sucesso imediato sem backend:
+                  messageDiv.className = 'message success';
+                  messageDiv.textContent = 'Sua solicitação foi enviada com sucesso! Em breve entraremos em contato.';
+                  messageDiv.style.display = 'block';
+                  form.reset(); // Limpa o formulário
+
+                  // Ocultar mensagem após alguns segundos
+                  setTimeout(() => {
+                        messageDiv.style.display = 'none';
+                  }, 5000);
+            });
+      </script>
+</body>
+
+</html>

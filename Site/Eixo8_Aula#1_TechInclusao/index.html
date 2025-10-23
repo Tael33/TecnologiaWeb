@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cartão de Visita Digital</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Navbar Responsiva -->
+  <header class="navbar">
+    <div class="container">
+      <h1>Meu Portfólio</h1>
+      <button class="menu-toggle">☰</button>
+      <nav class="menu">
+        <ul>
+          <li><a href="#about">Sobre</a></li>
+          <li><a href="#portfolio">Portfólio</a></li>
+          <li><a href="#contact">Contato</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Cartão de Visita -->
+  <section id="about" class="card">
+    <div class="card-content">
+      <h2>Seu Nome</h2>
+      <p>Desenvolvedor Web | Apaixonado por tecnologia</p>
+      <ul class="social-links">
+        <li><a href="https://linkedin.com">LinkedIn</a></li>
+        <li><a href="https://github.com">GitHub</a></li>
+        <li><a href="https://twitter.com">Twitter</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Portfólio -->
+  <section id="portfolio" class="portfolio">
+    <h2>Meus Projetos</h2>
+    <div class="grid">
+      <div class="portfolio-item">Projeto 1</div>
+      <div class="portfolio-item">Projeto 2</div>
+      <div class="portfolio-item">Projeto 3</div>
+    </div>
+  </section>
+
+  <!-- Formulário de Contato -->
+  <section id="contact" class="contact">
+    <h2>Fale Comigo</h2>
+    <form>
+      <input type="text" placeholder="Seu Nome" required>
+      <input type="email" placeholder="Seu Email" required>
+      <textarea placeholder="Sua Mensagem" required></textarea>
+      <button type="submit">Enviar</button>
+    </form>
+  </section>
+
+  <script src="scripts.js"></script>
+</body>
+</html>

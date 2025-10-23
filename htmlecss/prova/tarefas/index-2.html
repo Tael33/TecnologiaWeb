@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta id="autor" name="author" content="">
+    <title>Auto Correção - Nintendo Informações</title>
+    <link rel="stylesheet" href="estilos_auto_correcao.css">
+  </head>
+  <body>
+    <h2>Auto Correção da Atividade Nintendo e Validação da Nota de 1,5</h2>
+    <strong><p>Primeiramente, vamos fazer um quebra-gelo. Por gentileza, preencha o seguinte campo:</p>
+    <form id="form">
+      <label for="nome">Nome do aluno responsável pelo preenchimento:</label><p></p>
+      <input type="text" id="nome" name="nome">
+      <button type="submit">Preencher</button>
+    </form>
+    <p>Identificação do Aluno:</strong><br> <span id="nomeAluno"></span></p>
+    <p>Após clicar em "Preencher" e inspencionar o código, o usuário verá que o conteúdo dos 
+    metadados de autor foi automaticamente preenchido bem como a identificação do 
+    aluno no corpo do HTML. Tudo isso foi feito por meio de um programinha. 
+    em JavaScript.</p>
+    <p>A partir daqui o aluno deverá inspencionar o código e editar o seu html 
+    para preencher a seguinte tabela, conforme o modelo inicalmente preenchido logo abaixo:</p>
+    <div id="div-tabela">
+    
+    <table border="1">
+      <thead>
+        <tr>
+          <th colspan="6">Correção e Análise da Atividade Nintendo - Informações</th>
+        </tr>
+        <tr>
+          <th rowspan="3">Alunos:</th>
+          <!-- ... ou rowspan="n", sendo n o número de integrantes do grupo.
+          Portanto, muita atenção.
+          Neste caso lembre-se de colocar o número adequado de tr para cada 
+          integrante do grupo. O primeiro nome é preenchido com a primeira 
+          identificação realizada pelo clique do botão "Preencher".
+          Qualquer coisa desenhe a tabela.
+          -->
+          <td colspan="5" id="nomeA">Gabriel Oliveira Medeiros</td>
+        </tr>
+    
+        <tr>
+          <td colspan="5">Natanael Cardoso Brito</td>
+        </tr>
+        <tr>
+          <td colspan="5">Nicolas de Sousa Almeida Santos</td>
+        </tr>
+        <tr>
+          <th>Número da instrução</th>
+          <th>Instrução feita pelo professor</th>
+          <th>Conteúdo do gabarito</th>
+          <th>Explicação do gabarito</th>
+          <th>Conteúdo entregue pelo grupo</th>
+          <th>Explicação do código do grupo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>Instrução 0</th>
+          <td>
+            Utilize esse espaço para definir os seguintes metadas dos caracteres especiais para UTF-8.
+          </td>
+          <td><code>&lt;meta charset="UTF-8"&gt;</code></td>
+          <td>A tag meta por meio do atributo charset define as tratativa de caracteres especiais. O valor UTF-8 foi definido por ser amplamente utilizado.</td>
+          <td><code>&lt;meta charset="UTF-8"&gt;</code></td> <!--Coloque o código do seu grupo!-->
+          <td>A utilização da tag, atributos e valores está de acordo com o gabarito.</td> <!--Coloque a justificativa do seu grupo!-->
+        </tr>
+        <tr>
+          <th>Instrução 0.1</th>
+          <td>
+            Utilize esse espaço para definir os autores:
+            - O conteúdo dos autores deve ser obrigatoriamente o nomes completos dos integrantes do grupo. Dica: 
+            Para preencher os nomes, informações contidas no endereço https://developer.mozilla.org/pt-BR/docs/Learn_web_development/Core/Structuring_content/Webpage_metadata podem ajudar.
+          </td>
+          <td><code>sem informação</code></td>
+          <td>---</td>
+          <td><code>
+            &lt;meta name="author" content="Gabriel Oliveira Medeiros"/&gt;
+            &lt;meta name="author" content="Natanael Cardoso Brito"/&gt;
+            &lt;meta name="author" content="Nícolas de Sousa Almeida Santos"/&gt;
+          </code></td>
+          <td>name="author" vai dá entender que o nome que está no "content" é o autor do codigo</td>
+        </tr>
+        <tr>
+          <th>Instrução 0.2</th>
+          <td>
+            Utilize esse espaço para definir o título desta página para Nintendo - Informações
+          </td>
+          <td><code>
+            &lt;title&gt;Nintendo - Informações&lt;/title&gt;
+          </code></td>
+          <td>É o título que aparece na aba do navegador ou na lista de favoritos.
+          </td>
+          <td><code>
+            &lt;title&gt;Nintendo - Informações&lt;/title&gt;
+          </code></td>
+          <td>É o título que aparece na aba do navegador ou na lista de favoritos.</td>
+        </tr>
+        <tr>
+          <th>Instrução 1</th>
+          <td>
+            Utilize esse espaço para fazer a estilização. Ela poderá ser feita:
+            - Diretamente neste html OU
+            - Por meio da correta importação do arquivo estilos.css.
+          </td>
+          <td><code>
+            &lt;link rel="stylesheet" href="estilos.css"&gt;
+          </code></td>
+          <td>Chama um arquivo CSS externo chamado "estilos.css". CSS é o que dá estilo pra página (cores, fontes, posicionamento dos elementos).
+          </td>
+          <td><code>
+            &lt;link rel="stylesheet" href="estilos.css"&gt;
+          </code></td>
+          <td>Chama um arquivo CSS externo chamado "estilos.css". CSS é o que dá estilo pra página (cores, fontes, posicionamento dos elementos).
+          </td>
+        </tr>
+        <tr>
+          <th>Instrução 2</th>
+          <td>
+            Utilize esse espaço para fazer a importação da imagem constante no link: https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Nintendo.svg/1200px-Nintendo.svg.png .
+          </td>
+          <td> <code>
+            &lt;img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Nintendo.svg/1200px-Nintendo.svg.png"&gt;</code>
+          </td>
+          <td>Insere uma imagem. O caminho (URL) da imagem.</td>
+          <td><code>
+            &lt;img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Nintendo.svg/1200px-Nintendo.svg.png"&gt;
+          </code></td>
+          <td>Insere uma imagem.</td>
+        </tr>
+        <tr>
+          <th>Instrução 2.1</th>
+          <td>
+            A imagem deverá obrigatoriamente:
+            - Ser um link clicável;
+            - Levar ao site https://www.nintendo.com/pt-br/, o qual deverá ser aberto em uma nova guia;
+            - Exibir "Brazil Official Site" quando o mouse repousar sobre a imagem;
+            - A largura da imagem deve ser de 250px
+            - Deverá possuir um texto alternativo de "Logo Nintendo".</td>
+          <td><code>&lt;a href="https://www.nintendo.com" target="_blank" alt="Logo Nintendo" title="Official Site" target="_blank"&gt;
+            &lt;img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Nintendo.svg/1200px-Nintendo.svg.png" 
+                 width="250" 
+                 alt="Logo Nintendo"&gt;
+        &lt;/a&gt;
+</code></td>
+          <td><code>width="250"</code>: Define a largura da imagem em pixels.
+          <code>height="200px"</code>:Define a altura da imagem em pixels.
+          <code>alt="Logo Nintendo"</code>: Texto alternativo. Super importante! Aparece se a imagem não carregar e é lido por leitores de tela para pessoas com deficiência visual.
+          </td>
+          <td><code>
+            &lt;a href="https://www.nintendo.com/pt-br/" target="_blank"&gt;
+            &lt;img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Nintendo.svg/1200px-Nintendo.svg.png" alt="Logo Nintendo" height="250px" title="Brazil Offcial Site"&gt;
+        &lt;/a&gt;
+          </code></td>
+          <td><code>width="250"</code>: Define a largura da imagem em pixels.
+            <code>height="200px"</code>:Define a altura da imagem em pixels.
+            <code>alt="Logo Nintendo"</code>: Texto alternativo. Super importante! Aparece se a imagem não carregar e é lido por leitores de tela para pessoas com deficiência visual.</td>
+        </tr>
+        <tr>
+          <th>Instrução 3</th>
+          <td>
+            Utilize esse espaço para criar uma lista não-ordenada a qual deverá estilizar seus itens por meio de um circulo vazio. Os itens obrigatorizmente devem seguir exatamente a seguinte estrutura:
+            - Primeiro Item: 
+            <tag de criação de item><tag de criação de link (porta de saída) para o endereço exato #historia, entre aspas>História<fechamento da tag link(porta de saída)><fechamento da tag de criação de item> 
+            - Segundo Item:
+            <tag de criação de item><tag de criação de link (porta de saída) para o endereço exato #console, entre aspas>Consoles<fechamento da tag link(porta de saída)><fechamento da tag de criação de item> 
+            - Terceiro Item:
+            <tag de criação de item><tag de criação de link (porta de saída) para o endereço exato #jogos, entre aspas>Top Jogos (Entidade do & sozinho) Indicadores Econômicos<fechamento da tag link(porta de saída)><fechamento da tag de criação de item>.
+          </td>
+          <td><code>
+            &lt;nav&gt;
+              &lt;ul type="circle"&gt;
+                &lt;li&gt;&lt;a href="#historia"&gt;História&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#consoles"&gt;Consoles&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#jogos"&gt;Top Jogos &amp; Indicadores Econômicos&lt;/a&gt;&lt;/li&gt;
+              &lt;/ul&gt;
+            &lt;/nav&gt;
+      </code></td>
+        <td><code><nav></code> (Navegação):
+          O que é? Agrupa os links de navegação do site.
+          <code><ul></code> (Lista não ordenada):
+          O que é? Cria uma lista com marcadores (bolinhas, quadrados, etc.).
+          <code>type="circle"</code>: Define o marcador como um círculo vazado.
+          <code><li></code> (Item da lista):
+          O que é? Cada item dentro de uma lista (<ul> ou <ol>).</td>
+        <td><code>
+          &lt;nav&gt;
+            &lt;ul style="list-style-type:circle"&gt;
+                &lt;li&gt;&lt;a href="#historia"&gt;História&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#console"&gt;Consoles&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#jogos"&gt;Top jogos & Indicadores Econômicos&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/nav&gt;
+        </code></td>
+        <td><code><nav></code> (Navegação):
+          O que é? Agrupa os links de navegação do site.
+          <code><ul></code> (Lista não ordenada):
+          O que é? Cria uma lista com marcadores (bolinhas, quadrados, etc.).
+          <code>type="circle"</code>: Define o marcador como um círculo vazado.
+          <code><li></code> (Item da lista):
+          O que é? Cada item dentro de uma lista (<ul> ou <ol>).</td>
+        </tr>
+        <tr>
+          <th>Instrução 4</th>
+          <td>
+            Utilize esse espaço para, por meio da tag específica para isso, criar uma tabela que tenha:
+            - Um atributo de borta definido para "1";
+            - O conteúdo das três primeiras linhas definido como um cabeçalho;
+            - A correta utilização de colspan conforme o arquivo anexo a essa atividade;
+            - A correta utilização de rowspan conforme o arquivo anexo a essa atividade;
+            - Todos os dados preenchidos conforme o arquivo anexo a essa atividade.
+            Observação:
+            - O símbolo da barra vertical deverá ser representado por meio de sua entidade.
+          </td>
+          <td><code>
+            &lt;table border="1"&gt;
+            &lt;thead&gt;
+                &lt;tr&gt;
+                    &lt;th colspan="4"&gt;Evolução dos Sistemas Nintendo&lt;/th&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;th rowspan="2"&gt;Geração&lt;/th&gt;
+                    &lt;th colspan="3"&gt;Detalhes Técnicos&lt;/th&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;th&gt;Console&lt;/th&gt;
+                    &lt;th&gt;Ano&lt;/th&gt;
+                    &lt;th&gt;Vendas (mi)*&lt;/th&gt;
+                &lt;/tr&gt;
+            &lt;/thead&gt;
+            &lt;tbody&gt;
+
+                &lt;tr&gt;
+                    &lt;td rowspan="3"&gt;1ª-3ª Geração&lt;br&gt;(1977-1989)&lt;/td&gt;
+                    &lt;td&gt;Color TV-Game&lt;/td&gt;
+                    &lt;td&gt;1977&lt;/td&gt;
+                    &lt;td&gt;3,0&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;NES&lt;/td&gt;
+                    &lt;td&gt;1983&lt;/td&gt;
+                    &lt;td&gt;61,9&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;Game Boy&lt;/td&gt;
+                    &lt;td&gt;1989&lt;/td&gt;
+                    &lt;td&gt;118,7&lt;/td&gt;
+                &lt;/tr&gt;
+ 
+                &lt;tr&gt;
+                    &lt;td rowspan="2"&gt;4ª-5ª Geração&lt;br&gt;(1990-1996)&lt;/td&gt;
+                    &lt;td&gt;Super Nintendo&lt;/td&gt;
+                    &lt;td&gt;1990&lt;/td&gt;
+                    &lt;td&gt;49,1&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;Nintendo 64&lt;/td&gt;
+                    &lt;td&gt;1996&lt;/td&gt;
+                    &lt;td&gt;32,9&lt;/td&gt;
+                &lt;/tr&gt;
+    
+                &lt;tr&gt;
+                    &lt;td rowspan="2"&gt;6ª Geração&lt;br&gt;(2001-2004)&lt;/td&gt;
+                    &lt;td&gt;GameCube&lt;/td&gt;
+                    &lt;td&gt;2001&lt;/td&gt;
+                    &lt;td&gt;21,7&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;Game Boy Advance&lt;/td&gt;
+                    &lt;td&gt;2001&lt;/td&gt;
+                    &lt;td&gt;81,5&lt;/td&gt;
+                &lt;/tr&gt;
+    
+                &lt;tr&gt;
+                    &lt;td rowspan="3"&gt;7ª Geração&lt;br&gt;(2004-2011)&lt;/td&gt;
+                    &lt;td&gt;Nintendo DS&lt;/td&gt;
+                    &lt;td&gt;2004&lt;/td&gt;
+                    &lt;td&gt;154,02&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;Wii&lt;/td&gt;
+                    &lt;td&gt;2006&lt;/td&gt;
+                    &lt;td&gt;101,63&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;DSi&lt;/td&gt;
+                    &lt;td&gt;2008&lt;/td&gt;
+                    &lt;td&gt;41,0&lt;/td&gt;
+                &lt;/tr&gt;
+    
+                &lt;tr&gt;
+                    &lt;td rowspan="2"&gt;8ª Geração&lt;br&gt;(2011-2017)&lt;/td&gt;
+                    &lt;td&gt;Nintendo 3DS&lt;/td&gt;
+                    &lt;td&gt;2011&lt;/td&gt;
+                    &lt;td&gt;75,94&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;Wii U&lt;/td&gt;
+                    &lt;td&gt;2012&lt;/td&gt;
+                    &lt;td&gt;13,56&lt;/td&gt;
+                &lt;/tr&gt;
+    
+                &lt;tr&gt;
+                    &lt;td rowspan="2"&gt;9ª Geração&lt;br&gt;(2017-Presente)&lt;/td&gt;
+                    &lt;td&gt;Nintendo Switch&lt;/td&gt;
+                    &lt;td&gt;2017&lt;/td&gt;
+                    &lt;td&gt;152,0*&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;Switch 2&lt;/td&gt;
+                    &lt;td&gt;2025&lt;/td&gt;
+                    &lt;td&gt;15,0**&lt;/td&gt;
+                &lt;/tr&gt;
+            &lt;/tbody&gt;
+            &lt;tfoot&gt;
+                &lt;tr&gt;
+                    &lt;td colspan="4"&gt;
+                        *mi = milhões de unidades &vert; **Previsão inicial&lt;br&gt;
+                        Dados atualizados: Junho/2024 (Fonte: Relatórios Nintendo Co., Ltd)
+                    &lt;/td&gt;
+                &lt;/tr&gt;
+            &lt;/tfoot&gt;
+        &lt;/table&gt;
+      </code></td>
+      <td>
+          table (Tabela):
+          O que é? Cria uma tabela para organizar dados em linhas e colunas.
+          border: Adiciona uma borda simples à tabela. (Hoje em dia, o estilo de bordas é mais feito com CSS).
+          head: Cabeçalho da tabela.
+          tbody: Corpo principal da tabela.
+          tfoot: Rodapé da tabela.
+          tr: (Linha da tabela): Define uma linha na tabela.
+          th: (Célula de cabeçalho da tabela): Uma célula especial para títulos de coluna ou linha. O texto fica em negrito e centralizado por padrão.
+          colspan: Faz a célula ocupar 4 colunas.
+          rowspan: Faz a célula ocupar 2 linhas.
+          tr: (Célula de dados da tabela): Uma célula comum da tabela.
+          br:(Quebra de linha): Força uma quebra de linha, como se você apertasse "Enter" num editor de texto.
+          </td>
+          <td><code>
+            &lt;table border="1"&gt;
+                &lt;tr&gt;
+                    &lt;th colspan="10"&gt;Evolução dos sistemas da Nintendo&lt;/th&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;th colspan="1" rowspan="2"&gt;Geração&lt;/th&gt;
+                    &lt;th colspan="6"&gt;Detalhes tecnicos&lt;/th&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;th colspan="3"&gt;Console&lt;/th&gt;
+                    &lt;th colspan="2"&gt;Ano&lt;/th&gt;
+                    &lt;th colspan="3"&gt;Vendas(mi)*&lt;/th&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td rowspan="3"&gt;1&ordf;-3&ordf; Geração &lt;br&gt; (1977 - 1989)&lt;/td&gt;
+                    &lt;td colspan="3"&gt;Color TV-Game&lt;/td&gt;
+                    &lt;td colspan="2"&gt;1977&lt;/td&gt;
+                    &lt;td colspan="3"&gt;3.0&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td colspan="3"&gt;NES&lt;/td&gt;
+                    &lt;td colspan="2"&gt;1983&lt;/td&gt;
+                    &lt;td colspan="3"&gt;61,9&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td colspan="3"&gt;Game Boy&lt;/td&gt;
+                    &lt;td colspan="2"&gt;1989&lt;/td&gt;
+                    &lt;td colspan="3"&gt;118,7&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td rowspan="2"&gt;4&ordf;-5&ordf; Geração &lt;br&gt; (1990 - 1996)&lt;/td&gt;
+                    &lt;td colspan="3"&gt;Super Nintendo&lt;/td&gt;
+                    &lt;td colspan="2"&gt;1990&lt;/td&gt;
+                    &lt;td colspan="3"&gt;49,1&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td colspan="3"&gt;Nintendo 64&lt;/td&gt;
+                    &lt;td colspan="2"&gt;1996&lt;/td&gt;
+                    &lt;td colspan="3"&gt;32,9&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td rowspan="2"&gt;6&ordf; Geração &lt;br&gt; (2001 - 2004)&lt;/td&gt;
+                    &lt;td colspan="3"&gt;GameCube&lt;/td&gt;
+                    &lt;td colspan="2"&gt;2001&lt;/td&gt;
+                    &lt;td colspan="3"&gt;81,5&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td colspan="3"&gt;Game Boy Advance&lt;/td&gt;
+                    &lt;td colspan="2"&gt;2001&lt;/td&gt;
+                    &lt;td colspan="3"&gt;21,7&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td rowspan="3"&gt;7&ordf; Geração &lt;br&gt; (2004 - 2011)&lt;/td&gt;
+                    &lt;td colspan="3"&gt;Nintendo DS&lt;/td&gt;
+                    &lt;td colspan="2"&gt;2004&lt;/td&gt;
+                    &lt;td colspan="3"&gt;154,02&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td colspan="3"&gt;Wii&lt;/td&gt;
+                    &lt;td colspan="2"&gt;2006&lt;/td&gt;
+                    &lt;td colspan="3"&gt;101,63&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td colspan="3"&gt;DSi&lt;/td&gt;
+                    &lt;td colspan="2"&gt;2008&lt;/td&gt;
+                    &lt;td colspan="3"&gt;41,0&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td rowspan="2"&gt;8&ordf; Geração &lt;br&gt; (2011 - 2017)&lt;/td&gt;
+                    &lt;td colspan="3"&gt;Nintendo 3DS&lt;/td&gt;
+                    &lt;td colspan="2"&gt;2011&lt;/td&gt;
+                    &lt;td colspan="3"&gt;75,94&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td colspan="3"&gt;Wii U&lt;/td&gt;
+                    &lt;td colspan="2"&gt;2012&lt;/td&gt;
+                    &lt;td colspan="3"&gt;13,56&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td rowspan="2"&gt;9&ordf; Geração &lt;br&gt; (2017 - Presente)&lt;/td&gt;
+                    &lt;td colspan="3"&gt;Nintendo Switch&lt;/td&gt;
+                    &lt;td colspan="2"&gt;2017&lt;/td&gt;
+                    &lt;td colspan="3"&gt;752,0*&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td colspan="3"&gt;Switch 2&lt;/td&gt;
+                    &lt;td colspan="2"&gt;2025&lt;/td&gt;
+                    &lt;td colspan="3"&gt;15,0**&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td colspan="10"&gt;*mi = milhões de unidades | **Previsão inicial &lt;br&gt; Dados atualizados: Junho/2024 (Fonte: Relatórios Nintendo Co., Ltd)&lt;/td&gt;
+                &lt;/tr&gt;
+            &lt;/table&gt;
+          </code></td>
+          <td> table (Tabela):
+          O que é? Cria uma tabela para organizar dados em linhas e colunas.
+          border: Adiciona uma borda simples à tabela. (Hoje em dia, o estilo de bordas é mais feito com CSS).
+          head: Cabeçalho da tabela.
+          tbody: Corpo principal da tabela.
+          tfoot: Rodapé da tabela.
+          tr: (Linha da tabela): Define uma linha na tabela.
+          th: (Célula de cabeçalho da tabela): Uma célula especial para títulos de coluna ou linha. O texto fica em negrito e centralizado por padrão.
+          colspan: Faz a célula ocupar 4 colunas.
+          rowspan: Faz a célula ocupar 2 linhas.
+          tr: (Célula de dados da tabela): Uma célula comum da tabela.
+          br:(Quebra de linha): Força uma quebra de linha, como se você apertasse "Enter" num editor de texto.</td>
+        </tr>
+        <tr>
+          <th>Instrução 5</th>
+          <td>
+            Utilize esse espaço para fazer a importação da imagem constante no link: https://static.vecteezy.com/system/resources/thumbnails/013/007/615/small_2x/set-of-console-game-device-handheld-portable-free-png.png.
+          </td>
+          <td><code>
+            &lt;img src="https://static.vecteezy.com/system/resources/thumbnails/013/007/615/small_2x/set-of-console-game-device-handheld-portable-free-png.png"&gt;
+          </code></td>
+          <td>Insere uma imagem. O caminho (URL) da imagem.</td>
+          <td><code>
+            &lt;img src="https://static.vecteezy.com/system/resources/thumbnails/013/007/615/small_2x/set-of-console-game-device-handheld-portable-free-png.png" alt="Nintendo Switch" height="200px" title="Nintendo Switch Official Site"&gt;
+          </code></td>
+          <td>Insere uma imagem. O caminho (URL) da imagem.</td>
+        </tr>
+        <tr>
+          <th>Instrução 5.1</th>
+          <td>
+            A imagem deverá obrigatoriamente:
+            - Ser clicável;
+            - Levar ao site https://www.nintendo.com/pt-br/gaming-systems/switch/, o qual deverá ser aberto em uma nova guia;
+            - Exibir "Nintendo Switch Official Site" quando o mouse repousar sobre a imagem;
+            - A largura da imagem deve ser de 450px
+            - Deverá possuir um texto alternativo de "Nintendo Switch".
+          </td>
+          <td><code>&lt;a href="https://www.nintendo.com/switch/" title="Nintendo Switch Official Site" target="_blank"&gt;
+            &lt;img src="https://static.vecteezy.com/system/resources/thumbnails/013/007/615/small_2x/set-of-console-game-device-handheld-portable-free-png.png" 
+                 width="450" 
+                 alt="Nintendo Switch"&gt;
+            &lt;/a&gt; </code></td>
+          <td><code>width="250"</code>: Define a largura da imagem em pixels.
+            <code>height="200px"</code>:Define a altura da imagem em pixels.
+            <code>alt="Logo Nintendo"</code>: Texto alternativo. Super importante! Aparece se a imagem não carregar e é lido por leitores de tela para pessoas com deficiência visual.</td>
+          <td><code>
+            &lt;a href="https://www.nintendo.com/pt-br/gaming-systems/switch/" target="_blank"&gt;
+                &lt;img src="https://static.vecteezy.com/system/resources/thumbnails/013/007/615/small_2x/set-of-console-game-device-handheld-portable-free-png.png" alt="Nintendo Switch" height="200px" title="Nintendo Switch Official Site"&gt;
+            &lt;/a&gt;
+          </code></td>
+          <td><code>width="250"</code>: Define a largura da imagem em pixels.
+            <code>height="200px"</code>:Define a altura da imagem em pixels.
+            <code>alt="Logo Nintendo"</code>: Texto alternativo. Super importante! Aparece se a imagem não carregar e é lido por leitores de tela para pessoas com deficiência visual.</td>
+        </tr>
+        <tr>
+          <th>Instrução 6</th>
+          <td>
+            Utilize esse espaço para criar uma lista ordenada em que:
+            - Ela deverá possuir dois itens, sendo eles:
+            	- Mario Kart 8 Deluxe - 60(entidade nbsp - dê um google em caso de dúvidas)milhões
+              - Crossing: New Horizons - 42(entidade nbsp)milhões
+            - A lista deve iniciar na vigésima quarta letra do alfabéto em maísculo.
+          </td>
+          <td><code>
+            &lt;h2&gt;Jogos Mais Vendidos&lt;/h2&gt;
+            &lt;ol type="A" start="24"&gt;
+                &lt;li&gt;Mario Kart 8 Deluxe - 60&nbsp;milhões&lt;/li&gt;
+                &lt;li&gt;Animal Crossing: New Horizons - 42&nbsp;milhões&lt;/li&gt;
+            &lt;/ol&gt;
+          </code></td>
+          <td>Para a criação de uma lista ordenada, precisamos da tag &lt;ol&gt; para a criação dos topicos &lt;li&gt;</td>
+          <td><code>&lt;h1&gt;Jogos Mais Vendidos&lt;/h1&gt;
+            
+            &lt;p&gt;X. Mario Kart 8 Deluxe - 60 milhões&lt;/p&gt;
+            &lt;p&gt;Y. Animal Crossing: New Horizons - 42 milhões&lt;/p&gt;
+</code></td>
+          <td>Para a criação de uma lista ordenada, precisamos da tag &lt;ol&gt; para a criação dos topicos &lt;li&gt;</td>
+        </tr>
+        <tr>
+          <th>Instrução 7</th>
+          <td>
+            Utilize esse espaço para, por meio da tag específica para isso, criar uma tabela que tenha:
+            - Um atributo de borta definido para "1";
+            - O conteúdo das três primeiras linhas definido como um cabeçalho;
+            - A correta utilização de colspan conforme o arquivo anexo a essa atividade;
+            - A correta utilização de rowspan conforme o arquivo anexo a essa atividade;
+            - Todos os dados preenchidos conforme o arquivo anexo a essa atividade.
+            Observação:
+            - O símbolo da barra vertical deverá ser representado por meio de sua entidade.
+            - O símbolo da moeda YEN deve ser representado por meio de sua entidade.
+          </td>
+          <td><code>
+            &lt;table border="1"&gt;
+            &lt;thead&gt;
+                &lt;tr&gt;
+                    &lt;th colspan="6"&gt;Indicadores Econômicos (em US$ bilhões / &yen; bilhões)**&lt;/th&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;th rowspan="2"&gt;Ano&lt;/th&gt;
+                    &lt;th colspan="3"&gt;Vendas&lt;/th&gt;
+                    &lt;th colspan="2"&gt;Resultados&lt;/th&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;th&gt;Hardware&lt;br&gt;(US$ / &yen;)&lt;/th&gt;
+                    &lt;th&gt;Software&lt;br&gt;(US$ / &yen;)&lt;/th&gt;
+                    &lt;th&gt;Serviços&lt;br&gt;(US$ / &yen;)&lt;/th&gt;
+                    &lt;th&gt;Receita&lt;br&gt;(US$ / &yen;)&lt;/th&gt;
+                    &lt;th&gt;Lucro&lt;br&gt;(US$ / &yen;)&lt;/th&gt;
+                &lt;/tr&gt;
+            &lt;/thead&gt;
+            &lt;tbody&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;2024&lt;/td&gt;
+                    &lt;td&gt;7.45&nbsp;/&nbsp;1,042.3&lt;/td&gt;
+                    &lt;td&gt;11.93&nbsp;/&nbsp;1,670.0&lt;/td&gt;
+                    &lt;td&gt;3.78&nbsp;/&nbsp;528.9&lt;/td&gt;
+                    &lt;td&gt;23.15&nbsp;/&nbsp;3,241.2&lt;/td&gt;
+                    &lt;td&gt;6.93&nbsp;/&nbsp;970.5&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;2025&lt;/td&gt;
+                    &lt;td&gt;5.25&nbsp;/&nbsp;734.8&lt;/td&gt;
+                    &lt;td&gt;8.32&nbsp;/&nbsp;1,164.9&lt;/td&gt;
+                    &lt;td&gt;2.02&nbsp;/&nbsp;282.5&lt;/td&gt;
+                    &lt;td&gt;15.59&nbsp;/&nbsp;2,182.2&lt;/td&gt;
+                    &lt;td&gt;4.68&nbsp;/&nbsp;654.7&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;2026***&lt;/td&gt;
+                    &lt;td&gt;8.57&nbsp;/&nbsp;1,200.0&lt;/td&gt;
+                    &lt;td&gt;13.57&nbsp;/&nbsp;1,900.0&lt;/td&gt;
+                    &lt;td&gt;2.29&nbsp;/&nbsp;320.0&lt;/td&gt;
+                    &lt;td&gt;24.43&nbsp;/&nbsp;3,420.0&lt;/td&gt;
+                    &lt;td&gt;7.33&nbsp;/&nbsp;1,026.0&lt;/td&gt;
+                &lt;/tr&gt;
+            &lt;/tbody&gt;
+            &lt;tfoot&gt;
+                &lt;tr&gt;
+                    &lt;td colspan="6"&gt;
+                        **Cotação: 1&nbsp;USD&nbsp;=&nbsp;140&nbsp;&yen; (média 2023)&lt;br&gt;
+                        ***Previsão com o Lançamento do Switch 2&lt;br&gt;
+                        &dollar; = dólar americano &vert; &yen; = iene japonês &vert; Valores arredondados
+                    &lt;/td&gt;
+                &lt;/tr&gt;
+            &lt;/tfoot&gt;
+        &lt;/table&gt;
+      </code></td>
+          <td>table (Tabela):
+
+            O que é? Cria uma tabela para organizar dados em linhas e colunas.
+            border: Adiciona uma borda simples à tabela. (Hoje em dia, o estilo de bordas é mais feito com CSS).
+            head: Cabeçalho da tabela.
+            tbody: Corpo principal da tabela.
+            tfoot: Rodapé da tabela.
+            tr: (Linha da tabela): Define uma linha na tabela.
+            th: (Célula de cabeçalho da tabela): Uma célula especial para títulos de coluna ou linha. O texto fica em negrito e centralizado por padrão.
+            colspan: Faz a célula ocupar 4 colunas.
+            rowspan: Faz a célula ocupar 2 linhas.
+            tr: (Célula de dados da tabela): Uma célula comum da tabela.
+            br:(Quebra de linha): Força uma quebra de linha, como se você apertasse "Enter" num editor de texto.
+            <code>&yen;</code>: Símbolo do Iene (&yen;).
+            <code>&dollar;<code>: Símbolo do Dólar (&dollar;).
+            <code>&nbsp;</code>: Espaço não separável (evita que o navegador quebre a linha naquele ponto).
+
+          </td>
+          <td><code>
+            &lt;table border="1"&gt;
+                &lt;tr&gt;
+                    &lt;th colspan="6"&gt;Indicadores Econômicos (em US&#36 bilhões / &yen bilhões)**&lt;/th&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;th rowspan="2"&gt;Ano&lt;/th&gt;
+                    &lt;th colspan="3"&gt;Vendas&lt;/th&gt;
+                    &lt;th colspan="2"&gt;Resultados&lt;/th&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;th&gt;Hardware&lt;br&gt;(US&#36 / &yen)&lt;/th&gt;
+                    &lt;th&gt;Software&lt;br&gt;(US&#36 / &yen)&lt;/th&gt;
+                    &lt;th&gt;Serviços&lt;br&gt;(US&#36 / &yen)&lt;/th&gt;
+                    &lt;th&gt;Receita&lt;br&gt;(US&#36 / &yen)&lt;/th&gt;
+                    &lt;th&gt;Lucro&lt;br&gt;(US&#36 / &yen)&lt;/th&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;2024&lt;/td&gt;
+                    &lt;td&gt;7.45/1.0423&lt;/td&gt;
+                    &lt;td&gt;11.93/1,670.0&lt;/td&gt;
+                    &lt;td&gt;3.78/528.9&lt;/td&gt;
+                    &lt;td&gt;23.15/3,241.2&lt;/td&gt;
+                    &lt;td&gt;6.93/970.5&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;2025&lt;/td&gt;
+                    &lt;td&gt;5,25/734,8&lt;/td&gt;
+                    &lt;td&gt;8.32/1,16.4&lt;/td&gt;
+                    &lt;td&gt;2,02/282.5&lt;/td&gt;
+                    &lt;td&gt;15.59/2,182.2&lt;/td&gt;
+                    &lt;td&gt;4.86/654.7&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;2026***&lt;/td&gt;
+                    &lt;td&gt;8.57/1,200.0&lt;/td&gt;
+                    &lt;td&gt;13.57/1,900.0&lt;/td&gt;
+                    &lt;td&gt;2,29/320.0&lt;/td&gt;
+                    &lt;td&gt;24.43/3,420.0&lt;/td&gt;
+                    &lt;td&gt;7.33/1,026.0&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td colspan="6"&gt;**Cotação: 1 USD = 140 &yen; (média 2023) &lt;br&gt; *** Previsão com o Lançamento do Switch 2 &lt;br&gt; &dollar; = dólar americano | &yen; = iene japonês | Valores arredondados&lt;/td&gt;
+                &lt;/tr&gt;
+            &lt;/table&gt;
+          </code></td>
+          <td>table (Tabela):
+
+            O que é? Cria uma tabela para organizar dados em linhas e colunas.
+            border: Adiciona uma borda simples à tabela. (Hoje em dia, o estilo de bordas é mais feito com CSS).
+            head: Cabeçalho da tabela.
+            tbody: Corpo principal da tabela.
+            tfoot: Rodapé da tabela.
+            tr: (Linha da tabela): Define uma linha na tabela.
+            th: (Célula de cabeçalho da tabela): Uma célula especial para títulos de coluna ou linha. O texto fica em negrito e centralizado por padrão.
+            colspan: Faz a célula ocupar 4 colunas.
+            rowspan: Faz a célula ocupar 2 linhas.
+            tr: (Célula de dados da tabela): Uma célula comum da tabela.
+            br:(Quebra de linha): Força uma quebra de linha, como se você apertasse "Enter" num editor de texto.
+            <code>&yen;</code>: Símbolo do Iene (&yen;).
+            <code>&dollar;<code>: Símbolo do Dólar (&dollar;).
+            <code>&nbsp;</code>: Espaço não separável (evita que o navegador quebre a linha naquele ponto).</td>
+        </tr>
+        <tr>
+          <th>Instrução 8</th>
+          <td>
+            Utilize esse espaço para criar uma lista não-ordenada a qual deverá estilizar seus itens por meio de um quadrado preenchido. Os itens deverão estar preenchidos conforme o arquivo em anexo.
+          </td>
+          <td><code>&lt;h2&gt;Dados Corporativos&lt;/h2&gt;
+            &lt;ul type="square"&gt;
+                &lt;li&gt;Sede: Kyoto, *****ão&lt;/li&gt;
+                &lt;li&gt;Fundada: 23/09/1889&lt;/li&gt;
+                &lt;li&gt;Presidente: Shuntaro Furukawa&lt;/li&gt;
+            &lt;/ul&gt;
+            &lt;/a&gt;</code></td>
+          <td>Aqui será uma tabela não-ordenada de acordo com as informações autualizadas, utilizando a tag &lt;ul&gt; para isso, junto com o &lt;li&gt;.</td>
+          <td><code>
+            &lt;h1&gt;Dados Corperativos&lt;/h1&gt;
+            &lt;ul style="list-style-type:square"&gt;
+                &lt;li&gt;Sede: Kyoto, *****ão&lt;/li&gt;
+                &lt;li&gt;Fundada: 23/09/1889&lt;/li&gt;
+                &lt;li&gt;Presidente: Shuntaro Furukawa&lt;/li&gt;
+            &lt;/ul&gt;
+          </code></td>
+          <td>Aqui será uma tabela não-ordenada de acordo com as informações autualizadas, utilizando a tag &lt;ul&gt; para isso, junto com o &lt;li&gt;.</td>
+        </tr>
+        <tr>
+          <th>Instrução 9</th>
+          <td>
+            Utilize esse espaço para cirar um botão por meio da tag button (sim, temos uma novidade!).
+          </td>
+          <td><code>&lt;button&gt;&lt;/button&gt;</code></td>
+          <td>A tag "button" vai criar um botão</td>
+          <td><code>
+            &lt;button&gt;&lt;/button&gt;
+          </code></td>
+          <td>A tag em questão, permite uma criação de um botão no site</td>
+        </tr>
+        <tr>
+          <th>Instrução 9.1</th>
+          <td>
+            O botão deverá obrigatoriamente:
+            - Ser um link clicável;
+           - Levar ao site https://pt-americas-support.nintendo.com/, o qual deverá ser aberto em uma nova guia;
+           - Ter seu conteúdo definido para Suporte Oficial do Brasil.
+          </td>
+          <td><code> &lt;a href="https://www.nintendo.com/contact/" target="_blank"&gt;
+            &lt;button&gt;Suporte Oficial&lt;/button&gt; &lt;/a&gt;</code></td>
+          <td>O "href" vai direcionar o usuário após clicar no botão, ao um site. Já o "Suporte Oficial" vai ser o nome do botão</td>
+          <td><code>
+            &lt;a href="https://pt-americas-support.nintendo.com/" target="_blank" title="Suporte Oficial do Brasil"&gt;&lt;button type="button"&gt;Suporte Oficial&lt;/button&gt;&lt;/a&gt;
+          </code></td>
+          <td>O "href" vai direcionar o usuário após clicar no botão, ao um site. Já o "Suporte Oficial" vai ser o nome do botão</td>
+        </tr>
+        <tr>
+          <th>Instrução 10</th>
+           <td>
+            Utilize esse espaço para criar dois parágrafos os quais deverão seguir a seguinte estrutura:
+            (entidade de Copyright) 2024 Nintendo of America Inc. (entidade de marca registrada)
+            (entidade de estrelas) Dados históricos atualizados em 2024 (entidade de estrela)
+           </td>
+          <td><code>    &lt;footer&gt;
+            &lt;p&gt;&copy; 2024 Nintendo of America Inc. &reg;&lt;/p&gt;
+            &lt;p&gt;&star; Dados históricos atualizados em 2024 &star;&lt;/p&gt;
+            &lt;/footer&gt;</code></td>
+          <td>O footer irá servir como rodapé do site, onde dará todos os direitos a empresa, no caso a nintendo. o &amp;copy vai servir como simbolo do Copyright.</td>
+          <td><code>
+            &lt;footer&gt;
+            &lt;p&gt;2024 Nintendo of America Inc.&lt;p&gt;
+            &lt;p&gt;Dados históricos atualizados em 2024&lt;/p&gt;
+            &lt;/footer&gt;
+          </code></td>
+          <td>O footer irá servir como rodapé do site, onde dará todos os direitos a empresa, no caso a nintendo. o &amp;copy vai servir como simbolo do Copyright.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p><strong>Foco nos estudos:</strong></p>
+    
+    <p>Importante listar as tag e recursos já compreendidos bem como aqueles que precisam de maior atenção por parte do grupo:</p>
+    <table border="1" width="600">
+      <thead>
+        <tr>
+          <th colspan="2">Tags &amp; Recursos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th colspan="2">Tags</th>
+        </tr>
+        <tr>
+          <th>Compreendidas</th>
+          <th>Não Tão Compreendidas</th>
+        </tr>
+        <tr>
+           <td>...<!--Crie uma lista não-ordenada listando cada tag que você compreendeu claramente. 
+          Lembre-se de utilizar as entidades para escrever o maior-que e o menor-que--></td>   
+          <td>...<!--Crie uma lista não-ordenada listando cada tag que você não compreendeu claramente. 
+          Lembre-se de utilizar as entidades para escrever o maior-que e o menor-que--></td>
+        </tr>
+        <tr>
+          <th colspan="2">Recursos</th>
+        </tr>
+        <tr>
+          <th>Compreendidos</th>
+          <th>Não Tão Compreendidos</th>
+        </tr>
+        <tr>
+          <td>...<!--Crie uma lista não-ordenada listando cada tag que você compreendeu claramente. 
+          Lembre-se de utilizar as entidades para escrever o maior-que e o menor-que--></td>   
+          <td>...<!--Crie uma lista não-ordenada listando cada tag que você não compreendeu claramente. 
+          Lembre-se de utilizar as entidades para escrever o maior-que e o menor-que--></td>
+          <!--Uma pequena dica de como montar a lista:
+            <ul>
+              <li>Tags;</li>
+              <li>Organização do Html;</li>
+              <li>Atributos;</li>
+              <li>Listas;</li>
+              <li>Tabelas;</li>
+              <li>Imagens;</li>
+              <li>Tabelas;</li>
+              <li>Sintaxe.</li>
+            </ul>
+          -->
+        </tr>
+      </tbody>
+    </table>
+    <p><strong>Caso tenha salvado todos os arquivos em uma mesma pastas, <a href="index_gabarito.html" target="_blank">clique aqui para acesso ao gabarito</a></strong>.</p>
+    <p>Bom, espero que a Atividade Nintendo - Informações possam ser associadas ao termo Entendo - Informações. &#128517;</p>
+    </div>
+    <script>
+      document.getElementById('form').addEventListener('submit', function(event) {
+        event.preventDefault();
+  
+        const nome = document.getElementById('nome').value;
+  
+        document.getElementById('nomeAluno').textContent = `${nome}`; 
+        document.getElementById('autor').content = `${nome}`;
+        document.getElementById('nomeA').textContent = `${nome}`;
+        document.getElementById('nome').value = ``;
+      });
+    </script>
+  </body>
+</html>

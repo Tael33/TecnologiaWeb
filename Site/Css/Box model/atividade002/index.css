@@ -1,0 +1,83 @@
+* {
+    box-sizing: border-box;
+}
+.t1{
+    color: azure;
+    font-size:130px;
+    position: absolute;
+    top:-30px;
+    left:80px;
+
+}
+.t2{
+    color: azure;
+    font-size:130px;
+    position: absolute;
+    top:-30px;
+    left:300px;
+}
+.t3{
+    color: azure;
+    font-size:130px;
+    position: absolute;
+    top:-30px;
+    left:520px;
+}
+.t4{
+    color:black;
+    font-size: 20px
+}
+.a1 {
+    height:200px;
+    width:200px;
+    background-color:rgb(57, 57, 155);
+    padding-top: px;
+    margin:20px 5px 15px 10px;
+    display: inline-block;
+}
+.a2 {
+    height:200px;
+    width:200px;
+    background-color:rgb(214, 169, 43);
+    margin:20px 5px 15px 10px;
+    display: inline-block;
+}
+.a3 {
+    height:200px;
+    width:200px;
+    background-color:rgb(52, 112, 17);
+    margin:20px 5px 15px 10px;
+    display: inline-block;
+}
+.a4{
+    width:200px;
+    height:50px;
+    background-color: rgb(214, 247, 255);
+    position:absolute;
+    top:230px;
+    left:18px;
+}
+.a4{
+    width:200px;
+    height:50px;
+    background-color: rgb(214, 247, 255);
+    position:absolute;
+    top:230px;
+    left:18px;
+}
+.a5{
+    width:200px;
+    height:50px;
+    background-color: rgb(214, 247, 255);
+    position:absolute;
+    top:230px;
+    left:237px;
+}
+.a6{
+    width:200px;
+    height:50px;
+    background-color: rgb(214, 247, 255);
+    position:absolute;
+    top:230px;
+    left: 456px;
+}

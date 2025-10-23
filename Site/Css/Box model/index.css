@@ -1,0 +1,10 @@
+.boxmodel{
+    width: 250px;
+    height: 250px;
+    background-color: rgb(121, 121, 219);
+    margin: 10px;
+    padding:60px 60px;
+    border: 5px inset royalblue;
+    border-radius: 400px 400px;
+    
+}

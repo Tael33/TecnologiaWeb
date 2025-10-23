@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        
+        <h1>Converso de Moedas</h1>
+        <input type="number" id="dola" placeholder="Valor em Dóla">
+        <input type="number" id="converso" placeholder="Valor da Cotação">
+        <button onclick="calcular()">Converter</button>
+        <p><strong>Resultado: <p id="resultado"></p> </strong></p>
+
+        <script>
+            function calcular(){
+                let dol = document.getElementById('dola');
+                let cotacao = document.getElementById('converso');
+                let resultado = document.getElementById('resultado')
+                let n1 = Number(dol.value)
+                let n2 = Number(resultado.value)
+                let va = n1 * n2
+
+                va.innerHTML = ` Resultado: ${va}`
+            }
+        </script>
+    </div>
+</body>
+</html>

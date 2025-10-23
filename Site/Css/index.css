@@ -1,0 +1,46 @@
+h1 {
+    color:rgb(4, 0, 255);
+
+}
+h2{
+    color: rgb(255, 0, 0);
+}
+p{
+    color: darkorchid;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.Texto01 {
+    color: blueviolet;
+    font-size: 60px;
+    font-family: Arial;
+    text-align: center;
+}
+body {
+    text-align: center;
+    background-color: darkgreen;
+}
+.cor1{
+    color: pink;
+}
+.cor2{
+    color: purple;
+}
+.cor3{
+    color: grey;
+}
+.cor4{
+    color: greenyellow;
+}
+.cor5{
+     color: red;
+}
+.cor6{
+    color: yellow;
+}
+.cor8{
+    color: brown;
+}
+div{
+    width: 100%;
+    background-color: aqua;
+}

@@ -1,0 +1,33 @@
+div.principal{
+    width: 450;
+    height:500px;    
+}
+img{
+    width: 20px;
+    height:20px;
+}
+div.html{
+    background-color:red;
+    width: 150PX;
+    height: px;
+    display:inline-block;
+    text-align: ;
+    margin:0px;
+    
+}
+div.css{
+    background-color:blue;
+    width: 150PX;
+    height: 500px;
+    display:inline-block;
+    text-align: ;
+    margin:0px;
+}
+div.java{
+    background-color:yellow;
+    width: 150PX;
+    height: px;
+    display:inline-block;
+    text-align: ;
+    
+}

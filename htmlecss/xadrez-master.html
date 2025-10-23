@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Rivaldo Soares do Nascimento">
+    <title>Xadrez Completo: Curiosidades, Campeões e Tabuleiro</title>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2646/2646148.png" type="image/x-icon">
+    <style>
+        /* Reset & Global Settings */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #77e584);
+            color: #333;
+            padding: 20px;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(to right, #2c3e50, #4a6491);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 5px solid #d4af37;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            opacity: 0.9;
+        }
+
+        /* Content Sections */
+        .content {
+            display: flex;
+            padding: 30px;
+            gap: 30px;
+        }
+
+        .curiosidades,
+        .campeoes {
+            flex: 1;
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Headings */
+        h2 {
+            color: #2c3e50;
+            border-bottom: 3px solid #d4af37;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 2.2rem;
+        }
+
+        h3 {
+            color: #4a6491;
+            margin: 20px 0 10px;
+        }
+
+        /* Lists */
+
+        li {
+            margin-bottom: 10px;
+            padding-left: 5px;
+        }
+
+        ol, ul {
+            margin-top: 8px;
+            margin-bottom: 8px;
+            margin-left: 25px;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4a6491;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Images */
+        .champion-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #d4af37;
+        }
+
+        /* Symbols Section */
+        .symbols {
+            text-align: center;
+            padding: 20px;
+            background: #2c3e50;
+            color: white;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+
+        .symbols h3 {
+            color: #d4af37;
+            margin-bottom: 15px;
+        }
+
+        .chess-symbol {
+            font-size: 2.5rem;
+            margin: 0 15px;
+        }
+
+        /* Chessboard Section */
+        .tabuleiro-section {
+            padding: 30px;
+            text-align: center;
+            background: #f8f9fa;
+            border-top: 3px solid #d4af37;
+        }
+
+        .tabuleiro-container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Chess Board */
+        .chess-board {
+            margin: 0 auto;
+            display: inline-block;
+            border: 3px solid #2c3e50;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .chess-board table {
+            border-collapse: collapse;
+            margin: 0 auto;
+            font-size: 250%;
+            text-align: center;
+            min-width: 500px;
+            max-width: 100%;
+        }
+
+        .chess-board th,
+        .chess-board td {
+            width: 55.6px;
+            height: 86.6px;
+            border: 1px solid #999;
+            transition: all 0.3s ease;
+        }
+
+        .chess-board th {
+            font-size: 16px;
+            background: #4a6491;
+            color: white;
+            padding: 5px;
+            height: 30px;
+        }
+
+        .chess-board td:hover,
+        .chess-board th:hover {
+            background-color: #aab3ff;
+            transform: scale(1.1);
+            cursor: pointer;
+        }
+
+        .coordinate {
+            background: #4a6491;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            padding: 0 8px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #2c3e50;
+            color: white;
+            border-top: 5px solid #d4af37;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .chess-board {
+                transform: scale(0.9);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .chess-board {
+                transform: scale(0.8);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <a href="lista-moderna-topicos.html"><h1>Xadrez: O Jogo dos Reis</h1></a>
+            <p class="subtitle">Curiosidades, Campeões e Tabuleiro Interativo</p>
+        </header>
+
+        <div class="content">
+            <section class="curiosidades">
+                <h2>Curiosidades sobre o Xadrez</h2>
+
+                <h3>Origem e História</h3>
+                <ul type="square">
+                    <li>O xadrez originou-se na Índia por volta do século VI, com o nome de "Chaturanga"</li>
+                    <li>O jogo chegou à Europa através da Pérsia no século IX</li>
+                    <li>As regras modernas começaram a ser estabelecidas na Espanha no final do século XV</li>
+                    <li>Curiosidades sobre o nome:
+                        <ul type="circle">
+                            <li>A palavra "xeque-mate" vem do persa "Shah Mat", que significa "o rei está morto"</li>
+                            <li>Em russo, o jogo é chamado de "шахматы" (shakhmaty)</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3>Recordes e Fatos Interessantes</h3>
+                <ol type="I">
+                    <li>O jogo mais longo possível no xadrez tem 5.949 movimentos</li>
+                    <li>O Grande Mestre mais jovem da história é Abhimanyu Mishra (EUA) com 12 anos e 4 meses</li>
+                    <li>O computador Deep Blue derrotou Garry Kasparov em 1997, marcando um marco na história da IA</li>
+                    <li>Curiosidades matemáticas:
+                        <ol type="a">
+                            <li>O número de possíveis jogos de xadrez é maior que o número de átomos no universo
+                                observável</li>
+                            <li>O problema das 8 rainhas tem 92 soluções distintas</li>
+                            <li>O número de Shannon (estimativa de complexidade do xadrez) é 10<sup>120</sup></li>
+                        </ol>
+                    </li>
+                </ol>
+
+                <h3>Benefícios do Xadrez</h3>
+                <ul type="disc">
+                    <li>Desenvolve habilidades cognitivas:
+                        <ul type="circle">
+                            <li>Memória</li>
+                            <li>Concentração</li>
+                            <li>Raciocínio lógico</li>
+                            <li>Resolução de problemas</li>
+                        </ul>
+                    </li>
+                    <li>Melhora o desempenho acadêmico</li>
+                    <li>Ensina planejamento e antecipação</li>
+                    <li>Promove paciência e autocontrole</li>
+                </ul>
+            </section>
+
+            <section class="campeoes">
+                <h2>Campeões Mundiais de Xadrez</h2>
+
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Campeão</th>
+                            <th>Período</th>
+                            <th>País</th>
+                            <th>Foto</th>
+                            <th>Curiosidades</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Wilhelm Steinitz</td>
+                            <td>1886-1894</td>
+                            <td>Áustria-Hungria</td>
+                            <td><img src="https://cbin.b-cdn.net/img/ST/Steinitz_WQRW0_720x480.jpeg" alt="Steinitz"
+                                    class="champion-img"></td>
+                            <td>Primeiro campeão mundial oficial</td>
+                        </tr>
+                        <tr>
+                            <td>Emanuel Lasker</td>
+                            <td>1894-1921</td>
+                            <td>Alemanha</td>
+                            <td><img src="https://www.hall-of-fame-sport.de/fileadmin/Website_Hall_of_Fame/Mitglieder/Lasker_Emanuel/lasker_emanuel_gallery_30532306_1_960px.jpg"
+                                    alt="Lasker" class="champion-img"></td>
+                            <td>Reinado mais longo: 27 anos</td>
+                        </tr>
+                        <tr>
+                            <td>José Raúl Capablanca</td>
+                            <td>1921-1927</td>
+                            <td>Cuba</td>
+                            <td><img src="https://images.chesscomfiles.com/uploads/v1/blog/944501.d574f091.668x375o.3ebe8c658b48@2x.jpg"
+                                    alt="Capablanca" class="champion-img"></td>
+                            <td>Conhecido como "a máquina de jogar xadrez"</td>
+                        </tr>
+                        <tr>
+                            <td>Alexander Alekhine</td>
+                            <td>1927-1935<br>1937-1946</td>
+                            <td>Rússia/França</td>
+                            <td><img src="https://images.chesscomfiles.com/uploads/v1/blog/484156.7c8686a9.668x375o.ec1098262cbe@2x.jpeg"
+                                    alt="Alekhine" class="champion-img"></td>
+                            <td>Único campeão a morrer detendo o título</td>
+                        </tr>
+                        <tr>
+                            <td>Mikhail Botvinnik</td>
+                            <td>1948-1957<br>1958-1960<br>1961-1963</td>
+                            <td>URSS</td>
+                            <td><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Mikhail_Botvinnik_1962.jpg/1200px-Mikhail_Botvinnik_1962.jpg"
+                                    alt="Botvinnik" class="champion-img"></td>
+                            <td>Pai da escola soviética de xadrez</td>
+                        </tr>
+                        <tr>
+                            <td>Bobby Fischer</td>
+                            <td>1972-1975</td>
+                            <td>EUA</td>
+                            <td><img src="https://hips.hearstapps.com/hmg-prod/images/bobby-fischer-gettyimages-495892222.jpg?crop=1xw:0.75xh;center,top&resize=1200:*"
+                                    alt="Fischer" class="champion-img"></td>
+                            <td>Primeiro americano a vencer o título</td>
+                        </tr>
+                        <tr>
+                            <td>Garry Kasparov</td>
+                            <td>1985-2000</td>
+                            <td>Rússia</td>
+                            <td><img src="https://www.torneiosdexadrez.com.br/wp-content/uploads/2024/06/Garry-Kasparov-tabuleiro-xadrez.png"
+                                    alt="Kasparov" class="champion-img"></td>
+                            <td>Número 1 do ranking por 20 anos consecutivos</td>
+                        </tr>
+                        <tr>
+                            <td>Magnus Carlsen</td>
+                            <td>2013-2023</td>
+                            <td>Noruega</td>
+                            <td><img src="https://images.oxu.az/2024/12/19/O3QpetfFRpWD7IQHgB94lFjmt1oXWkZBrU6Z2M9l:1200.webp"
+                                    alt="Carlsen" class="champion-img"></td>
+                            <td>Maior rating da história: 2882</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="symbols">
+                    <h3>Símbolos do Xadrez</h3>
+                    <div>
+                        <span class="chess-symbol">&#9814;</span> <!-- Torre -->
+                        <span class="chess-symbol">&#9816;</span> <!-- Cavalo -->
+                        <span class="chess-symbol">&#9815;</span> <!-- Bispo -->
+                        <span class="chess-symbol">&#9813;</span> <!-- Rainha -->
+                        <span class="chess-symbol">&#9812;</span> <!-- Rei -->
+                        <span class="chess-symbol">&#9817;</span> <!-- Peão -->
+                    </div>
+                    <p>Entidades HTML: &amp;#9814; (Torre) até &amp;#9817; (Peão)</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- Seção do Tabuleiro de Xadrez -->
+        <section class="tabuleiro-section">
+            <h2>Tabuleiro de Xadrez Interativo</h2>
+            <p>Explore o tabuleiro abaixo - passe o mouse sobre as casas para ver o efeito hover do css sendo aplicado nos <b><code>td</code></b> e <b><code>th</code></b>!</p>
+
+            <div class="tabuleiro-container">
+                <div class="chess-board">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="coordinate"></th>
+                                <th>a</th>
+                                <th>b</th>
+                                <th>c</th>
+                                <th>d</th>
+                                <th>e</th>
+                                <th>f</th>
+                                <th>g</th>
+                                <th>h</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="coordinate">8</td>
+                                <td>&#9820;</td> <!-- Torre preta -->
+                                <td bgcolor="silver">&#9822;</td> <!-- Cavalo preto -->
+                                <td>&#9821;</td> <!-- Bispo preto -->
+                                <td bgcolor="silver">&#9819;</td> <!-- Rainha preta -->
+                                <td>&#9818;</td> <!-- Rei preto -->
+                                <td bgcolor="silver">&#9821;</td> <!-- Bispo preto -->
+                                <td>&#9822;</td> <!-- Cavalo preto -->
+                                <td bgcolor="silver">&#9820;</td> <!-- Torre preta -->
+                            </tr>
+                            <tr>
+                                <td class="coordinate">7</td>
+                                <td bgcolor="silver">&#9823;</td> <!-- Peão preto -->
+                                <td>&#9823;</td>
+                                <td bgcolor="silver">&#9823;</td>
+                                <td>&#9823;</td>
+                                <td bgcolor="silver">&#9823;</td>
+                                <td>&#9823;</td>
+                                <td bgcolor="silver">&#9823;</td>
+                                <td>&#9823;</td>
+                            </tr>
+                            <tr>
+                                <td class="coordinate">6</td>
+                                <td></td>
+                                <td bgcolor="silver"></td>
+                                <td></td>
+                                <td bgcolor="silver"></td>
+                                <td></td>
+                                <td bgcolor="silver"></td>
+                                <td></td>
+                                <td bgcolor="silver"></td>
+                            </tr>
+                            <tr>
+                                <td class="coordinate">5</td>
+                                <td bgcolor="silver"></td>
+                                <td></td>
+                                <td bgcolor="silver"></td>
+                                <td></td>
+                                <td bgcolor="silver"></td>
+                                <td></td>
+                                <td bgcolor="silver"></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="coordinate">4</td>
+                                <td></td>
+                                <td bgcolor="silver"></td>
+                                <td></td>
+                                <td bgcolor="silver"></td>
+                                <td></td>
+                                <td bgcolor="silver"></td>
+                                <td></td>
+                                <td bgcolor="silver"></td>
+                            </tr>
+                            <tr>
+                                <td class="coordinate">3</td>
+                                <td bgcolor="silver"></td>
+                                <td></td>
+                                <td bgcolor="silver"></td>
+                                <td></td>
+                                <td bgcolor="silver"></td>
+                                <td></td>
+                                <td bgcolor="silver"></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="coordinate">2</td>
+                                <td>&#9817;</td> <!-- Peão branco -->
+                                <td bgcolor="silver">&#9817;</td>
+                                <td>&#9817;</td>
+                                <td bgcolor="silver">&#9817;</td>
+                                <td>&#9817;</td>
+                                <td bgcolor="silver">&#9817;</td>
+                                <td>&#9817;</td>
+                                <td bgcolor="silver">&#9817;</td>
+                            </tr>
+                            <tr>
+                                <td class="coordinate">1</td>
+                                <td bgcolor="silver">&#9814;</td> <!-- Torre branca -->
+                                <td>&#9816;</td> <!-- Cavalo branco -->
+                                <td bgcolor="silver">&#9815;</td> <!-- Bispo branco -->
+                                <td>&#9813;</td> <!-- Rainha branca -->
+                                <td bgcolor="silver">&#9812;</td> <!-- Rei branco -->
+                                <td>&#9815;</td> <!-- Bispo branco -->
+                                <td bgcolor="silver">&#9816;</td> <!-- Cavalo branco -->
+                                <td>&#9814;</td> <!-- Torre branca -->
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <p style="margin-top: 20px; font-style: italic;">O xadrez é uma jornada de infinitas possibilidades - cada
+                movimento conta uma história!</p>
+        </section>
+
+        <footer>
+            <p>&copy; 2023 Mundo do Xadrez | Desenvolvido para fins educacionais</p>
+            <p>Fontes: Wikipedia, FIDE, Chess.com | Imagens: Domínio Público</p>
+        </footer>
+    </div>
+</body>
+
+</html>

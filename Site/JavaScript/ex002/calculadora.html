@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculadora Simples</title>
+</head>
+<style>
+    .a1{
+        background-color: rgb(25, 99, 99);
+        width: 600px;
+        height: 100px;
+        margin: auto;
+        padding: 40px;
+        border-radius: 20px;
+    }
+    #resultado {
+        color: chartreuse;
+    }
+    .a3{
+        width: 100px;
+        height: 70px;
+        border: 6px rgb(38, 38, 65)
+        
+    }
+</style>
+<body>
+    <div class="a1">
+        <div class="a2">
+            <input type="number" id="num1" placeholder="Digite o primeiro número" required>
+            <input type="number" id="num2" placeholder="Digite o segundo número" required>
+            <button onclick="calcularSoma()">+</button>
+            <button onclick="calcularSubtracao()">-</button>
+            <button onclick="calcularMultiplicacao()">*</button>
+            <button onclick="calcularDivisao()">/</button>
+        </div>
+        <div class="a3">
+            <p id="resultado"></p>
+        </div>
+    </div>
+
+    <script>
+        function calcularSoma() {
+            let num1 = parseFloat(document.getElementById('num1').value);
+            let num2 = parseFloat(document.getElementById('num2').value);
+            let resultado = num1 + num2;
+            document.getElementById('resultado').innerHTML = "Resultado: " + resultado;
+        }
+
+        function calcularSubtracao() {
+            let num1 = parseFloat(document.getElementById('num1').value);
+            let num2 = parseFloat(document.getElementById('num2').value);
+            let resultado = num1 - num2;
+            document.getElementById('resultado').innerHTML = "Resultado: " + resultado;
+        }
+
+        function calcularMultiplicacao() {
+            let num1 = parseFloat(document.getElementById('num1').value);
+            let num2 = parseFloat(document.getElementById('num2').value);
+            let resultado = num1 * num2;
+            document.getElementById('resultado').innerHTML = "Resultado: " + resultado;
+        }
+
+        function calcularDivisao() {
+            let num1 = parseFloat(document.getElementById('num1').value);
+            let num2 = parseFloat(document.getElementById('num2').value);
+            let resultado = num1 / num2;
+            document.getElementById('resultado').innerHTML = "Resultado: " + resultado;
+        }
+    </script>
+</body>
+</html>
