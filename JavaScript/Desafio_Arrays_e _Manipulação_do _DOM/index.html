@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrays e Manipulação do DOM</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Gerenciador de Lista de Produtos</h1>
+
+        <div>
+            <label for="produtoInput">Produto:</label>
+            <input type="text" id="produtoInput" placeholder="Digite o nome do produto">
+            <button id="btnAdicionar">Adicionar</button>
+            <button id="btnRemover">Remover</button>
+
+        </div>
+
+        <h2>Produtos Cadastrados:</h2>
+        <ul id="listaDeProdutos">
+
+        </ul>
+    </div>
+    <script>
+        const inputProduto = document.getElementById("produtoInput");
+        const btnAdicionar = document.getElementById("btnAdicionar");
+        const btnRemover = document.getElementById("btnRemover");
+        const listaProdutos = document.getElementById("listaDeProdutos");
+
+        function adicionarProduto() {
+            const nomeProduto = inputProduto.value;
+            
+        }
+    </script>
+</body>
+</html>
