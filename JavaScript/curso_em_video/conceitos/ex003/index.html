@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratório de Programação: JavaScript</title>
+    <style>
+        /* CSS Básico para legibilidade */
+        :root {
+            --cor-primaria: #2980b9;
+            --cor-secundaria: #2c3e50;
+            --cor-fundo: #f4f7f6;
+            --cor-fundo-bloco: #ffffff;
+            --cor-fundo-code: #ecf0f1;
+            --cor-texto: #333;
+            --cor-code-fundo-escuro: #272822;
+            --cor-code-texto-escuro: #f8f8f2;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: var(--cor-fundo-bloco);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        header, footer {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 2px solid var(--cor-fundo-code);
+        }
+        footer {
+            border-top: 2px solid var(--cor-fundo-code);
+            border-bottom: none;
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #777;
+        }
+        h1 {
+            color: var(--cor-secundaria);
+        }
+        h2 {
+            color: var(--cor-primaria);
+            border-bottom: 2px solid var(--cor-fundo-code);
+            padding-bottom: 5px;
+            margin-top: 40px;
+        }
+        h3 {
+            color: #34495e;
+            margin-top: 25px;
+        }
+        h4 {
+            color: #34495e;
+            margin-top: 30px;
+            border-bottom: 1px dotted #ccc;
+            padding-bottom: 3px;
+        }
+        h5 {
+            color: #555;
+            margin-top: 20px;
+        }
+        /* Estilo para navegação (Sumário) */
+        nav {
+            background-color: var(--cor-fundo-code);
+            padding: 15px 20px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        nav h2 {
+            margin-top: 0;
+            border: none;
+            color: var(--cor-secundaria);
+        }
+        nav ul {
+            list-style-type: none;
+            padding-left: 0;
+            column-count: 2; /* Divide a lista em colunas */
+        }
+        nav li {
+            margin-bottom: 8px;
+        }
+        nav a {
+            text-decoration: none;
+            color: var(--cor-primaria);
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+            color: #1a5276;
+        }
+        /* Estilo para blocos de código */
+        code {
+            font-family: "Courier New", Courier, monospace;
+            background-color: var(--cor-fundo-code);
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-size: 0.95em;
+        }
+        pre {
+            background-color: var(--cor-code-fundo-escuro);
+            color: var(--cor-code-texto-escuro);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 0.9em;
+        }
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            color: inherit;
+        }
+        /* Estilo para avisos/notas */
+        .nota {
+            background-color: #fffbe6;
+            border: 1px solid #ffe58f;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        .nota strong {
+            color: #d9a000;
+        }
+        
+        /* Estilos da lista de operadores */
+        article[id="operadores"] li > code {
+            font-size: 1.15em;
+            font-weight: bold;
+            color: #d9534f;
+            background-color: #f9f9f9;
+            padding: 2px 5px;
+            border-radius: 4px;
+        }
+        .descricao {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 10px;
+        }
+        article[id="operadores"] ul code {
+            background-color: #eee;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: "Courier New", Courier, monospace;
+            font-size: 0.95em;
+            color: #333;
+        }
+        article[id="operadores"] li > code {
+            font-size: 1.15em;
+            font-weight: bold;
+            color: #d9534f;
+            background-color: #f9f9f9;
+        }
+        article[id="operadores"] ul {
+            margin-top: 5px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Laboratório de Programação: JavaScript</h1>
+            <p>Uma adaptação das "Notas de Aula"[cite: 1191], trocando Python por JavaScript e incluindo conceitos da Web.</p>
+        </header>
+
+        <nav>
+            <h2>Sumário</h2>
+            <ul>
+                <li><a href="#o-que-e">1. O que é JavaScript?</a></li>
+                <li><a href="#como-adicionar">2. Como Adicionar JS</a></li>
+                <li><a href="#fundamentos">3. Fundamentos de Algoritmos</a>
+                    <ul>
+                        <li><a href="#io-dados">3.1. Saída e Entrada de Dados</a></li>
+                        <li><a href="#variaveis">3.2. Variáveis</a></li>
+                        <li><a href="#tipos-de-dados">3.3. Tipos de Dados</a></li>
+                        <li><a href="#operadores">3.4. Operadores</a></li>
+                        <li><a href="#escopo-hoisting">3.5. Escopo e Hoisting</a></li>
+                        <li><a href="#coercao">3.6. Coerção de Tipo</a></li>
+                        <li><a href="#template-literals">3.7. Template Literals</a></li>
+                    </ul>
+                </li>
+                <li><a href="#controle">4. Estruturas de Controle</a>
+                    <ul>
+                        <li><a href="#condicionais">4.1. Condicionais (if/else)</a></li>
+                        <li><a href="#loops">4.2. Laços de Repetição (while/for)</a></li>
+                    </ul>
+                </li>
+                <li><a href="#estruturas-dados">5. Estruturas de Dados</a>
+                    <ul>
+                        <li><a href="#arrays">5.1. Arrays (Listas)</a></li>
+                        <li><a href="#matrizes">5.2. Arrays Aninhados (Matrizes)</a></li>
+                        <li><a href="#array-methods">5.3. Métodos de Array</a></li>
+                        <li><a href="#objetos">5.4. Objetos (Dicionários)</a></li>
+                        <li><a href="#strings">5.5. Manipulação de Strings</a></li>
+                        <li><a href="#desestruturacao">5.6. Desestruturação e Spread</a></li>
+                    </ul>
+                </li>
+                <li><a href="#funcoes">6. Funções</a>
+                    <ul>
+                        <li><a href="#declarando-funcoes">6.1. Declarando Funções</a></li>
+                        <li><a href="#parametros">6.2. Parâmetros</a></li>
+                        <li><a href="#this-keyword">6.3. O 'this' Keyword</a></li>
+                    </ul>
+                </li>
+                <li><a href="#dom">7. JS no Navegador: O DOM</a>
+                    <ul>
+                        <li><a href="#selecionando">7.1. Selecionando Elementos</a></li>
+                        <li><a href="#manipulando">7.2. Manipulando Elementos</a></li>
+                    </ul>
+                </li>
+                <li><a href="#eventos">8. Eventos</a>
+                    <ul>
+                        <li><a href="#addeventlistener">8.1. addEventListener</a></li>
+                        <li><a href="#event-flow">8.2. Propagação e preventDefault</a></li>
+                    </ul>
+                </li>
+                <li><a href="#moderno">9. JavaScript Moderno (ES6+)</a>
+                    <ul>
+                        <li><a href="#arrow-functions">9.1. Arrow Functions</a></li>
+                        <li><a href="#async-await">9.2. Promises e Async/Await</a></li>
+                        <li><a href="#classes">9.3. Classes (OOP)</a></li>
+                        <li><a href="#modulos">9.4. Módulos (import/export)</a></li>
+                    </ul>
+                </li>
+                <li><a href="#topicos-extra">10. Tópicos Adicionais</a>
+                    <ul>
+                        <li><a href="#erros">10.1. Manipulação de Erros</a></li>
+                        <li><a href="#json">10.2. JSON</a></li>
+                        <li><a href="#web-storage">10.3. Web Storage</a></li>
+                    </ul>
+                </li>
+                <li><a href="#proximos-passos">11. Próximos Passos</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <section id="o-que-e">
+                <h2>1. O que é JavaScript?</h2>
+                <p>
+                    JavaScript (JS) é uma linguagem de programação de alto nível, interpretada e dinâmica. É uma das três principais tecnologias da World Wide Web:
+                </p>
+                <ul>
+                    <li><strong>HTML:</strong> Fornece a <strong>estrutura</strong> (o "esqueleto").</li>
+                    <li><strong>CSS:</strong> Cuida da <strong>apresentação e estilo</strong> (a "pele" e "roupas").</li>
+                    <li><strong>JavaScript:</strong> Adiciona <strong>comportamento e interatividade</strong> (os "músculos" e "cérebro").</li>
+                </ul>
+            </section>
+
+            <section id="como-adicionar">
+                <h2>2. Como Adicionar JS a uma Página</h2>
+                
+                <h3>2.1. Script Externo (Recomendado)</h3>
+                <p>Crie um arquivo <code>.js</code> e o vincule ao HTML. Isso mantém o código organizado e permite cache.</p>
+                <pre><code>&lt;!-- Colocado geralmente antes de fechar a tag &lt;/body&gt; --&gt;
+&lt;script src="meu-script.js"&gt;&lt;/script&gt;</code></pre>
+
+                <h3>2.2. Script Interno</h3>
+                <p>Código diretamente no HTML dentro da tag <code>&lt;script&gt;</code>.</p>
+                <pre><code>&lt;script&gt;
+    console.log("Olá, mundo!");
+&lt;/script&gt;</code></pre>
+            </section>
+
+            <section id="fundamentos">
+                <h2>3. Fundamentos de Algoritmos (Revisão)</h2>
+                <p>Esta seção cobre os conceitos básicos de algoritmos, adaptados do PDF  para JavaScript.</p>
+
+                <article id="io-dados">
+                    <h3>3.1. Saída e Entrada de Dados</h3>
+                    
+                    <h4>Saída de Dados (Impressão)</h4>
+                    <p>Em Python, usa-se <code>print()</code>[cite: 1209]. Em JavaScript, a forma mais comum de "imprimir" valores para depuração é usando o console do navegador.</p>
+                    <pre><code>console.log("Hello, World!");
+let nome = "Ana";
+console.log("Olá,", nome, "Silva"); // Imprime: Olá, Ana Silva
+</code></pre>
+                    <p>Para exibir dados na própria página, você usa a <a href="#dom">Manipulação do DOM</a>.</p>
+
+                    <h4>Entrada de Dados (Leitura)</h4>
+                    <p>Em Python, usa-se <code>input()</code>[cite: 1268]. Em JavaScript, a forma mais simples (e antiga) de pedir dados ao usuário é com <code>prompt()</code>.</p>
+                    <div class="nota">
+                        <strong>Nota:</strong> <code>prompt()</code> pausa todo o script e não é recomendado para aplicações reais. A forma moderna é usar campos de formulário HTML (<code>&lt;input&gt;</code>) e <a href="#eventos">Eventos</a>.
+                    </div>
+                    <pre><code>// 1. Entrada de String
+let nomeUsuario = prompt("Digite o nome: ");
+console.log("Nome: ", nomeUsuario);
+
+// 2. Entrada de Números
+// prompt() SEMPRE retorna uma string[cite: 1268]. É preciso converter.
+let idadeString = prompt("Digite a idade: ");
+let idade = Number(idadeString); // Converte string para número
+
+let base = Number(prompt("Digite o valor da base: "));
+let altura = Number(prompt("Digite o valor da altura: "));
+let area = (base * altura) / 2;
+console.log("Área:", area);
+</code></pre>
+                </article>
+
+                <article id="variaveis">
+                    <h3>3.2. Variáveis</h3>
+                    <p>Variáveis são "contêineres" para armazenar valores[cite: 1213].</p>
+                    <ul>
+                        <li><code>let</code>: Para valores que <strong>podem mudar</strong>. Tem escopo de bloco (<code>{}</code>).</li>
+                        <li><code>const</code>: Para valores que <strong>não podem mudar</strong> (constantes). Tem escopo de bloco.</li>
+                        <li><code>var</code>: A forma antiga. Tem escopo de função. <strong>Evite seu uso em código moderno.</strong></li>
+                    </ul>
+                    <pre><code>let idade = 30;
+idade = 31; // Válido
+
+const PI = 3.14159;
+// PI = 3.14; // Inválido! Gerará um erro.</code></pre>
+                </article>
+
+                <article id="tipos-de-dados">
+                    <h3>3.3. Tipos de Dados</h3>
+                    <p>O JavaScript tem tipos de dados primitivos e o tipo objeto.</p>
+                    <h4>Primitivos</h4>
+                    <ul>
+                        <li><strong>String:</strong> Texto. Ex: <code>"Olá"</code>, <code>'Mundo'</code>. (Equivalente ao <code>str</code> do Python [cite: 1216])</li>
+                        <li><strong>Number:</strong> Números, inteiros ou decimais. Ex: <code>10</code>, <code>2.5</code>. (Equivalente ao <code>int</code> [cite: 1214] e <code>float</code> [cite: 1215] do Python)</li>
+                        <li><strong>Boolean:</strong> Valor lógico. Ex: <code>true</code>, <code>false</code>. (Equivalente ao <code>bool</code> do Python [cite: 1217])</li>
+                        <li><strong>null:</strong> Representa a ausência intencional de um valor.</li>
+                        <li><strong>undefined:</strong> Uma variável que foi declarada mas ainda não teve um valor atribuído.</li>
+                    </ul>
+                    <h4>Não-Primitivo</h4>
+                    <ul>
+                        <li><strong>Object:</strong> Coleções complexas de dados. Arrays, Funções e Objetos literais são todos do tipo Objeto.</li>
+                    </ul>
+                </article>
+
+                <article id="operadores">
+                    <h3>3.4. Operadores</h3>
+                    <p>São símbolos que realizam operações. A precedência é similar à do Python (parênteses, exponencial, multiplicação/divisão, adição/subtração)[cite: 1263, 1264, 1265, 1266].</p>
+
+                    <h4>Operadores Aritméticos Puros</h4>
+                    <p class="descricao">Estes operadores realizam um cálculo e retornam um novo valor.</p>
+                    <ul>
+                        <li>
+                            <code>+</code> (Adição)
+                            <ul>
+                                <li>Soma dois números ou concatena duas strings.</li>
+                                <li><strong>Exemplo (Número):</strong> <code>5 + 3</code> resulta em <code>8</code>.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <code>-</code> (Subtração)
+                            <ul>
+                                <li>Subtrai o segundo número do primeiro.</li>
+                                <li><strong>Exemplo:</strong> <code>10 - 4</code> resulta em <code>6</code>.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <code>*</code> (Multiplicação)
+                            <ul>
+                                <li>Multiplica dois números.</li>
+                                <li><strong>Exemplo:</strong> <code>7 * 3</code> resulta em <code>21</code>.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <code>/</code> (Divisão)
+                            <ul>
+                                <li>Divide o primeiro número pelo segundo.</li>
+                                <li><strong>Exemplo:</strong> <code>10 / 2</code> resulta em <code>5</code>.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <code>%</code> (Módulo / Resto)
+                            <ul>
+                                <li>Retorna o resto da divisão.</li>
+                                <li><strong>Exemplo:</strong> <code>10 % 3</code> resulta em <code>1</code>.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <code>**</code> (Exponenciação - ES6)
+                            <ul>
+                                <li>Eleva o primeiro número à potência do segundo.</li>
+                                <li><strong>Exemplo:</strong> <code>2 ** 3</code> resulta em <code>8</code>.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                
+                    <h4>Operadores de Atribuição (Auto-atribuição)</h4>
+                    <p class="descricao">Modificam o valor da própria variável.</p>
+                    <h5>Incremento e Decremento</h5>
+                    <ul>
+                        <li>
+                            <code>++</code> (Incremento)
+                            <ul>
+                                <li>Adiciona 1 ao valor (<code>x = x + 1</code>).</li>
+                                <li><strong>Exemplo:</strong> <code>let x = 5; x++;</code> // <code>x</code> agora é 6.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <code>--</code> (Decremento)
+                            <ul>
+                                <li>Subtrai 1 do valor (<code>x = x - 1</code>).</li>
+                                 <li><strong>Exemplo:</strong> <code>let x = 5; x--;</code> // <code>x</code> agora é 4.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                
+                    <h5>Atribuição Composta</h5>
+                    <ul>
+                        <li><code>+=</code> (<code>x = x + y</code>)</li>
+                        <li><code>-=</code> (<code>x = x - y</code>)</li>
+                        <li><code>*=</code> (<code>x = x * y</code>)</li>
+                        <li><code>/=</code> (<code>x = x / y</code>)</li>
+                        <li><code>%=</code> (<code>x = x % y</code>)</li>
+                        <li><code>**=</code> (<code>x = x ** y</code>)</li>
+                    </ul>
+
+                    <h4>Operadores de Comparação (Relacionais)</h4>
+                    <p class="descricao">Comparam dois valores e retornam <code>true</code> ou <code>false</code>[cite: 1327].</p>
+                    <ul>
+                        <li>
+                            <code>===</code> (Igualdade Estrita)
+                            <ul>
+                                <li>Equivalente ao <code>==</code> do Python[cite: 1328]. Compara valor E tipo. (<strong>Recomendado</strong>).</li>
+                                <li><strong>Exemplo:</strong> <code>5 === "5"</code> resulta em <code>false</code>.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <code>!==</code> (Diferença Estrita)
+                            <ul>
+                                <li>Equivalente ao <code>!=</code> do Python[cite: 1329]. Compara valor E tipo. (<strong>Recomendado</strong>).</li>
+                                <li><strong>Exemplo:</strong> <code>5 !== "5"</code> resulta em <code>true</code>.</li>
+                            </ul>
+                        </li>
+                        <li><code>&gt;</code> (Maior que) [cite: 1330]</li>
+                        <li><code>&lt;</code> (Menor que) [cite: 1331]</li>
+                        <li><code>&gt;=</code> (Maior ou igual a) [cite: 1332]</li>
+                        <li><code>&lt;=</code> (Menor ou igual a) [cite: 1333]</li>
+                        <li>
+                            <code>==</code> (Igualdade Solta)
+                            <ul>
+                                <li>Compara só o valor, fazendo coerção. <strong>Evite este operador.</strong></li>
+                                <li><strong>Exemplo:</strong> <code>5 == "5"</code> resulta em <code>true</code>.</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h4>Operadores Lógicos</h4>
+                    <p class="descricao">Usados para combinar expressões.</p>
+                    <ul>
+                        <li>
+                            <code>&&</code> (E Lógico - AND)
+                            <ul>
+                                <li>Equivalente ao <code>and</code> do Python[cite: 1335]. Retorna <code>true</code> se AMBAS forem verdadeiras.</li>
+                                <li><strong>Exemplo:</strong> <code>(idade > 18) && (temCNH === true)</code></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <code>||</code> (OU Lógico - OR)
+                            <ul>
+                                <li>Equivalente ao <code>or</code> do Python[cite: 1336]. Retorna <code>true</code> se UMA for verdadeira.</li>
+                                <li><strong>Exemplo:</strong> <code>(deficiente === "sim") || (idade >= 65)</code> [cite: 1387]</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <code>!</code> (NÃO Lógico - NOT)
+                            <ul>
+                                <li>Equivalente ao <code>not</code> do Python[cite: 1337]. Inverte o valor.</li>
+                                <li><strong>Exemplo:</strong> <code>!isValid</code></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </article>
+
+                <article id="escopo-hoisting">
+                    <h3>3.5. Escopo (Scope) e Hoisting</h3>
+                    <h4>Escopo</h4>
+                    <p>Escopo define onde as variáveis e funções são acessíveis no seu código.</p>
+                    <ul>
+                        <li><strong>Escopo Global:</strong> Declarado fora de qualquer função. Acessível de qualquer lugar.</li>
+                        <li><strong>Escopo de Função:</strong> Variáveis declaradas com <code>var</code> são acessíveis apenas dentro da função.</li>
+                        <li><strong>Escopo de Bloco:</strong> Variáveis com <code>let</code> e <code>const</code> são acessíveis apenas dentro do bloco (<code>{}</code>) onde foram criadas.</li>
+                    </ul>
+                    
+                    <h4>Hoisting (Içamento)</h4>
+                    <p>
+                        Hoisting é o comportamento do JavaScript de mover <em>declarações</em> de variáveis (com <code>var</code>) e funções para o topo do seu escopo antes da execução. <code>let</code> e <code>const</code> também sofrem hoisting, mas não são inicializadas, causando um erro se acessadas antes.
+                    </p>
+                </article>
+
+                <article id="coercao">
+                    <h3>3.6. Coerção de Tipo (Type Coercion)</h3>
+                    <p>
+                        Coerção é a conversão automática de um tipo de dado para outro.
+                    </p>
+                    <pre><code>console.log(10 + "5");   // "105" (Número vira String)
+console.log(10 - "5");   // 5 (String vira Número)
+console.log("5" == 5);   // true (Coerção de tipo)
+console.log("5" === 5);  // false (Sem coerção)</code></pre>
+                </article>
+
+                <article id="template-literals">
+                    <h3>3.7. Template Literals (ES6)</h3>
+                    <p>Uma forma moderna de criar strings com variáveis (interpolação). Elas usam crases (<code>``</code>).</p>
+                    <pre><code>const nome = "Ana";
+const idade = 28;
+
+// Forma moderna (Template Literal)
+const saudacaoModerna = `Olá, meu nome é ${nome} e eu tenho ${idade} anos.`;
+</code></pre>
+                </article>
+            </section>
+
+            <section id="controle">
+                <h2>4. Estruturas de Controle</h2>
+                <article id="condicionais">
+                    <h3>4.1. Condicionais (if, else if, else)</h3>
+                    <p>Permite que o programa execute blocos de código com base em condições[cite: 1322]. Em JavaScript, o <code>elif</code> do Python [cite: 1325] é escrito como <code>else if</code>.</p>
+                    <pre><code>let num = -5;
+
+if (num > 0) {
+    console.log("O número é positivo.");
+} else if (num < 0) {
+    console.log("O número é negativo.");
+} else {
+    console.log("O número é zero.");
+}
+// Este código é o equivalente em JS do Código 1.12 do PDF[cite: 1339, 1340, 1341, 1342, 1343, 1344].
+</code></pre>
+                    <pre><code>// Exemplo do PDF [cite: 1372] traduzido para JS
+let idade = 18;
+
+if (idade <= 10) {
+    console.log("Categoria A");
+} else if (idade <= 20) {
+    console.log("Categoria B");
+} else {
+    console.log("Categoria C");
+}
+// Saída: Categoria B
+</code></pre>
+                </article>
+                <article id="loops">
+                    <h3>4.2. Laços de Repetição (for, while)</h3>
+                    
+                    <h4>Loop `while`</h4>
+                    <p>No <code>while</code>, enquanto a condição for verdadeira, os comandos serão executados[cite: 1422].</p>
+                    <pre><code>// Equivalente ao Código 1.18 do PDF [cite: 1427, 1428, 1429, 1430, 1431, 1432, 1433, 1434]
+let cont = 0;
+while (cont <= 5) {
+    console.log(cont);
+    cont = cont + 1; // Ou cont++;
+}
+// Saída: 0, 1, 2, 3, 4, 5
+</code></pre>
+                    <pre><code>// Loop com condição de parada (similar ao Código 1.21 do PDF [cite: 1490])
+let idade = Number(prompt('Digite a idade (ou 0 para sair):'));
+let somaIdades = 0;
+let qtPessoas = 0;
+
+while (idade > 0) {
+    somaIdades = somaIdades + idade;
+    qtPessoas = qtPessoas + 1;
+    idade = Number(prompt('Digite a idade (ou 0 para sair):'));
+}
+
+if (qtPessoas > 0) {
+    let media = somaIdades / qtPessoas;
+    console.log('Média das idades:', media);
+} else {
+    console.log('Nenhuma idade foi digitada.');
+}
+</code></pre>
+                    
+                    <h4>Loop `for`</h4>
+                    <p>O <code>for</code> clássico é usado para repetir um número específico de vezes. O <code>for...of</code> é usado para percorrer listas/arrays.</p>
+                    <pre><code>// Loop `for` clássico (contagem)
+for (let i = 0; i < 5; i++) {
+    console.log("O número é " + i);
+}
+
+// Loop `for...of` (para iterar sobre valores de arrays)
+// Equivalente a "Percorrendo listas com FOR" do PDF 
+const frutas = ["Maçã", "Banana", "Laranja"];
+for (const fruta of frutas) {
+    console.log(fruta);
+}
+</code></pre>
+                </article>
+            </section>
+
+            <section id="estruturas-dados">
+                <h2>5. Estruturas de Dados</h2>
+                
+                <article id="arrays">
+                    <h3>5.1. Arrays (Listas)</h3>
+                    <p>Em JavaScript, <strong>Arrays</strong> são o equivalente às <strong>Listas</strong> do Python. São listas ordenadas de valores, e os índices começam em 0.</p>
+                    <pre><code>// Em Python: lista = [10, 20, 30]
+const meuArray = [10, 20, 30];
+
+// Acessando valores
+console.log(meuArray[0]); // 10
+
+// Alterando um valor
+meuArray[1] = 25;
+console.log(meuArray); // [10, 25, 30]
+
+// Adicionando um item no final (similar ao .append())
+meuArray.push(40);
+console.log(meuArray); // [10, 25, 30, 40]
+
+// Removendo do final
+meuArray.pop();
+console.log(meuArray); // [10, 25, 30]
+
+// Tamanho da lista
+console.log(meuArray.length); // 3
+</code></pre>
+                </article>
+
+                <article id="matrizes">
+                    <h3>5.2. Arrays Aninhados (Matrizes)</h3>
+                    <p>Assim como em Python, matrizes são implementadas como "listas dentro de listas", ou, em JS, "arrays dentro de arrays".</p>
+                    <pre><code>// Em Python: matriz = [[1, 2], [3, 4]]
+const matriz = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+];
+
+// Acessando um elemento (linha 1, coluna 2)
+console.log(matriz[1][2]); // 6
+
+// Iterando sobre a matriz (similar ao PDF )
+for (let i = 0; i < matriz.length; i++) {
+    // i é o índice da linha
+    for (let j = 0; j < matriz[i].length; j++) {
+        // j é o índice da coluna
+        console.log(`Linha ${i}, Coluna ${j}: ${matriz[i][j]}`);
+    }
+}
+</code></pre>
+                </article>
+
+                <article id="array-methods">
+                    <h3>5.3. Métodos de Array (Métodos em Listas)</h3>
+                    <p>JavaScript tem métodos poderosos para manipular arrays, assim como Python tem métodos para listas.</p>
+                    
+                    <h4>.map()</h4>
+                    <p>Transforma cada item de um array e retorna um novo array.</p>
+                    <pre><code>const numeros = [1, 2, 3, 4];
+const dobrados = numeros.map(n => n * 2);
+// dobrados é [2, 4, 6, 8]
+</code></pre>
+                    
+                    <h4>.filter()</h4>
+                    <p>Cria um novo array contendo apenas os itens que passam em um teste.</p>
+                    <pre><code>const numeros = [1, 2, 3, 4, 5];
+const pares = numeros.filter(n => n % 2 === 0);
+// pares é [2, 4]
+</code></pre>
+                    
+                    <h4>.reduce()</h4>
+                    <p>Reduz o array a um único valor (ex: uma soma).</p>
+                    <pre><code>const numeros = [1, 2, 3, 4, 5];
+const soma = numeros.reduce((total, n) => total + n, 0);
+// soma é 15
+</code></pre>
+                </article>
+
+                <article id="objetos">
+                    <h3>5.4. Objetos (Dicionários)</h3>
+                    <p>Em JavaScript, <strong>Objetos</strong> são o equivalente principal aos <strong>Dicionários</strong> do Python. Eles armazenam coleções de pares chave-valor.</p>
+                    <pre><code>// Em Python: pessoa = { "nome": "Carlos", "idade": 42 } 
+const pessoa = {
+    nome: "Carlos",
+    idade: 42,
+    ativo: true,
+    endereco: { // Objetos podem ser aninhados
+        cidade: "São Paulo",
+        estado: "SP"
+    }
+};
+
+// Acessando valores (duas formas)
+console.log(pessoa.nome); // "Carlos"
+console.log(pessoa["idade"]); // 42
+
+// Alterando valores
+pessoa.idade = 43;
+pessoa["ativo"] = false;
+
+// Adicionando novas chaves
+pessoa.profissao = "Engenheiro";
+</code></pre>
+                </article>
+
+                <article id="strings">
+                    <h3>5.5. Manipulação de Strings</h3>
+                    <p>Assim como o Python, JavaScript oferece muitos métodos para manipular strings.</p>
+                    <ul>
+                        <li><code>.length</code>: Retorna o tamanho da string.</li>
+                        <li><code>.toUpperCase()</code>: Converte para maiúsculas (Equivalente ao <code>.upper()</code> [cite: 1005]).</li>
+                        <li><code>.toLowerCase()</code>: Converte para minúsculas (Equivalente ao <code>.lower()</code> [cite: 1006]).</li>
+                        <li><code>.trim()</code>: Remove espaços em branco do início e do fim (Equivalente ao <code>.strip()</code> [cite: 1007]).</li>
+                        <li><code>.includes(substr)</code>: Verifica se a string contém uma substring (retorna <code>true</code>/<code>false</code>).</li>
+                        <li><code>.slice(inicio, fim)</code>: Extrai uma parte da string (Fatiamento ).</li>
+                        <li><code>.split(separador)</code>: Divide a string em um array.</li>
+                    </ul>
+                    <pre><code>let frase = "  Olá Mundo!  ";
+console.log(frase.length); // 14
+console.log(frase.toUpperCase()); // "  OLÁ MUNDO!  "
+console.log(frase.trim()); // "Olá Mundo!"
+console.log(frase.trim().slice(0, 3)); // "Olá"
+
+let dados = "ana;silva;30";
+let partes = dados.split(";");
+console.log(partes); // ["ana", "silva", "30"]
+</code></pre>
+                </article>
+
+                <article id="desestruturacao">
+                    <h3>5.6. Desestruturação (Destructuring) e Spread</h3>
+                    <p>Sintaxes modernas (ES6) para facilitar a extração de dados de arrays e objetos, similar ao "desempacotamento" em Python.</p>
+                    <h4>Desestruturação de Objeto</h4>
+                    <pre><code>const usuario = { id: 1, nome: "Helena", email: "helena@email.com" };
+const { nome, email } = usuario;
+console.log(nome); // "Helena"
+</code></pre>
+                    <h4>Desestruturação de Array</h4>
+                    <pre><code>const [primeiro, segundo] = ["Ouro", "Prata", "Bronze"];
+console.log(primeiro); // "Ouro"
+</code></pre>
+                    <h4>Spread Operator (...)</h4>
+                    <p>Usado para "espalhar" os elementos de um array ou as propriedades de um objeto.</p>
+                    <pre><code>const arr1 = [1, 2, 3];
+const arrCombinado = [...arr1, 4, 5, 6]; // [1, 2, 3, 4, 5, 6]
+
+const obj1 = { a: 1, b: 2 };
+const objMesclado = { ...obj1, c: 3 }; // { a: 1, b: 2, c: 3 }
+</code></pre>
+                </article>
+            </section>
+
+            <section id="funcoes">
+                <h2>6. Funções (Functions)</h2>
+                <p>
+                    Funções são blocos de código reutilizáveis que executam uma tarefa específica. Elas podem receber dados (parâmetros) e retornar um valor.
+                </p>
+
+                <article id="declarando-funcoes">
+                    <h3>6.1. Declarando Funções</h3>
+                    <h4>Declaração de Função (Padrão)</h4>
+                    <pre><code>// Em Python: def saudar(nome):
+function saudar(nome) {
+    return `Olá, ${nome}!`;
+}
+let saudacao = saudar("Ana");
+console.log(saudacao);</code></pre>
+
+                    <h4>Expressão de Função (Anônima)</h4>
+                    <pre><code>const somar = function(a, b) {
+    return a + b;
+};
+let resultado = somar(5, 3);
+console.log(resultado);</code></pre>
+                </article>
+                
+                <article id="parametros">
+                    <h3>6.2. Parâmetros (Default e Rest)</h3>
+                    <h4>Parâmetros Padrão (ES6)</h4>
+                    <p>Você pode definir um valor padrão para um parâmetro caso ele não seja fornecido.</p>
+                    <pre><code>function registrar(nome, plano = "BÁSICO") {
+    console.log(`${nome} está no plano ${plano}.`);
+}
+registrar("Bia"); // "Bia está no plano BÁSICO."
+</code></pre>
+                    
+                    <h4>Parâmetros Rest (ES6)</h4>
+                    <p>Permite que uma função aceite um número indefinido de argumentos como um array.</p>
+                    <pre><code>function somarTudo(...numeros) {
+    // 'numeros' será um array
+    return numeros.reduce((total, num) => total + num, 0);
+}
+console.log(somarTudo(1, 2, 3, 4)); // 10
+</code></pre>
+                </article>
+
+                <article id="this-keyword">
+                    <h3>6.3. O 'this' Keyword</h3>
+                    <p>
+                        O <code>this</code> é um conceito complexo em JS, diferente do <code>self</code> do Python. Seu valor é determinado por como a função é <em>chamada</em>.
+                    </p>
+                    <ul>
+                        <li><strong>Em um método de objeto:</strong> <code>this</code> refere-se ao próprio objeto.</li>
+                        <li><strong>Em uma função normal:</strong> <code>this</code> refere-se ao objeto global (<code>window</code>).</li>
+                        <li><strong>Em Arrow Functions:</strong> <code>this</code> é "herdado" do escopo onde a arrow function foi criada.</li>
+                    </ul>
+                </article>
+            </section>
+
+            <section id="dom">
+                <h2>7. JS no Navegador: O DOM</h2>
+                <p>
+                    Esta é a maior diferença do Python: JavaScript pode interagir diretamente com o conteúdo de uma página web. O DOM (Document Object Model) é a representação em objeto do seu HTML.
+                </p>
+
+                <article id="selecionando">
+                    <h3>7.1. Selecionando Elementos</h3>
+                    <p>Para manipular um elemento, você primeiro precisa selecioná-lo.</p>
+                    <pre><code>// Seleciona o *primeiro* elemento que bate com um seletor CSS
+const titulo = document.querySelector("#meu-titulo");
+const primeiroBotao = document.querySelector(".btn-comprar");
+
+// Seleciona *todos* os elementos (retorna uma NodeList)
+const todosOsLinks = document.querySelectorAll("a");
+</code></pre>
+                </article>
+
+                <article id="manipulando">
+                    <h3>7.2. Manipulando Elementos</h3>
+                    <p>Uma vez selecionado, você pode mudar tudo.</p>
+                    <pre><code>const titulo = document.querySelector("#titulo-principal");
+
+// Mudar o texto
+titulo.textContent = "Bem-vindo ao JavaScript!";
+
+// Mudar o HTML interno
+titulo.innerHTML = "Bem-vindo ao &lt;i&gt;JavaScript&lt;/i&gt;!";
+
+// Mudar o estilo (CSS)
+titulo.style.color = "blue";
+titulo.style.backgroundColor = "#f0f0f0";
+
+// Adicionar/Remover classes CSS
+titulo.classList.add("destaque");
+titulo.classList.remove("antiga-classe");
+</code></pre>
+                </article>
+            </section>
+
+            <section id="eventos">
+                <h2>8. Eventos</h2>
+                <p>
+                    Eventos são ações que acontecem na página (clique, tecla pressionada, envio de formulário). O JavaScript pode "ouvir" (listen) esses eventos e executar uma função (callback).
+                </p>
+
+                <article id="addeventlistener">
+                    <h3>8.1. addEventListener</h3>
+                    <p>A forma moderna de "ouvir" eventos.</p>
+                    <pre><code>&lt;!-- No seu HTML --&gt;
+&lt;button id="meu-botao"&gt;Clique Aqui!&lt;/button&gt;
+
+&lt;!-- No seu JavaScript --&gt;
+const botao = document.querySelector("#meu-botao");
+
+botao.addEventListener("click", function(event) {
+    // Este código só roda quando o botão é clicado
+    console.log("O botão foi clicado!");
+    document.body.style.backgroundColor = "yellow";
+});
+</code></pre>
+                </article>
+                
+                <article id="event-flow">
+                    <h3>8.2. Propagação de Eventos e preventDefault</h3>
+                    <p><code>event.preventDefault()</code> impede o comportamento padrão de um elemento (como um link de navegar ou um formulário de recarregar a página).</p>
+                    <pre><code>const form = document.querySelector("#meu-form");
+form.addEventListener("submit", function(event) {
+    // Impede que o formulário recarregue a página
+    event.preventDefault(); 
+    console.log("Formulário enviado via JS!");
+});
+</code></pre>
+                </article>
+            </section>
+
+            <section id="moderno">
+                <h2>9. JavaScript Moderno (ES6+)</h2>
+
+                <article id="arrow-functions">
+                    <h3>9.1. Arrow Functions (Funções de Seta)</h3>
+                    <p>Uma sintaxe mais curta para escrever funções, que também herda o <code>this</code> do escopo pai.</p>
+                    <pre><code>// Função normal
+const somar = function(a, b) { return a + b; };
+
+// Arrow Function
+const somarArrow = (a, b) => a + b;
+</code></pre>
+                </article>
+
+                <article id="async-await">
+                    <h3>9.2. Promises e Async/Await</h3>
+                    <p>
+                        JavaScript é "assíncrono". <strong>Promises</strong> e a sintaxe <strong><code>async/await</code></strong> são usadas para lidar com operações que demoram, como buscar dados de um servidor (API), sem travar a página.
+                    </p>
+                    <pre><code>async function buscarDadosDaAPI() {
+    try {
+        const resposta = await fetch("https://api.github.com/users/google");
+        const dados = await resposta.json(); 
+        console.log(dados.name);
+    } catch (erro) {
+        console.error("Falha ao buscar dados:", erro);
+    }
+}
+buscarDadosDaAPI();
+</code></pre>
+                </article>
+
+                <article id="classes">
+                    <h3>9.3. Classes (ES6)</h3>
+                    <p>Uma sintaxe mais limpa para criar objetos e lidar com herança (Programação Orientada a Objetos), similar às classes do Python.</p>
+                    <pre><code>class Pessoa {
+    constructor(nome, idade) {
+        this.nome = nome;
+        this.idade = idade;
+    }
+    apresentar() {
+        console.log(`Olá, meu nome é ${this.nome}.`);
+    }
+}
+
+class Estudante extends Pessoa {
+    constructor(nome, idade, curso) {
+        super(nome, idade); // Chama o construtor da classe 'Pai'
+        this.curso = curso;
+    }
+}
+
+const e1 = new Estudante("João", 22, "Ciência da Computação");
+e1.apresentar(); // "Olá, meu nome é João."
+</code></pre>
+                </article>
+
+                <article id="modulos">
+                    <h3>9.4. Módulos (import/export)</h3>
+                    <p>Permitem dividir seu código em múltiplos arquivos para melhor organização, assim como <code>import</code> em Python.</p>
+                    <div class="nota">
+                        <strong>Nota:</strong> Para <code>import/export</code> funcionar no navegador, seu script HTML deve ter <code>type="module"</code>.
+                    </div>
+
+                    <h4><code>utils.js</code> (Exportando)</h4>
+                    <pre><code>export function somar(a, b) {
+    return a + b;
+}
+export default function subtrair(a, b) {
+    return a - b;
+}
+</code></pre>
+                    
+                    <h4><code>main.js</code> (Importando)</h4>
+                    <pre><code>import { somar } from './utils.js';
+import minhaSubtracao from './utils.js'; // Import default
+
+console.log(somar(10, 5)); // 15
+console.log(minhaSubtracao(10, 5)); // 5
+</code></pre>
+                </article>
+            </section>
+
+            <section id="topicos-extra">
+                <h2>10. Tópicos Adicionais</h2>
+            
+                <article id="erros">
+                    <h3>10.1. Manipulação de Erros (try...catch)</h3>
+                    <p>
+                        Permite que você "tente" (try) executar um bloco de código que pode falhar. Se falhar, o bloco <code>catch</code> é executado, impedindo que o script "quebre". Similar ao <code>try...except</code> do Python.
+                    </p>
+                    <pre><code>try {
+    let dados = JSON.parse("{ 'json_invalido': true }"); // Vai falhar
+    console.log(dados);
+} catch (erro) {
+    console.error("Ocorreu um erro:", erro.message);
+} finally {
+    console.log("Execução finalizada.");
+}
+</code></pre>
+                </article>
+
+                <article id="json">
+                    <h3>10.2. JSON (JavaScript Object Notation)</h3>
+                    <p>
+                        JSON é um formato de texto para troca de dados, muito usado em APIs. É nativo do JavaScript.
+                    </p>
+                    <pre><code>// 1. JSON.parse() (String → Objeto JS)
+const jsonString = '{ "nome": "Bruno", "id": 123 }';
+const objetoJS = JSON.parse(jsonString);
+console.log(objetoJS.nome); // "Bruno"
+
+// 2. JSON.stringify() (Objeto JS → String)
+const objetoJS = { nome: "Ana", ativa: true };
+const jsonString = JSON.stringify(objetoJS);
+console.log(jsonString); // "{\"nome\":\"Ana\",\"ativa\":true}"
+</code></pre>
+                </article>
+                
+                <article id="web-storage">
+                    <h3>10.3. Web Storage (localStorage)</h3>
+                    <p>
+                        Permite salvar dados simples (strings) no navegador do usuário de forma persistente. Diferente de manipulação de arquivos (como em Python ), isso é feito no lado do cliente.
+                    </p>
+                    <pre><code>// 1. Salvar dados
+localStorage.setItem("tema", "dark");
+
+// 2. Ler dados
+const temaSalvo = localStorage.getItem("tema");
+console.log(temaSalvo); // "dark"
+
+// 3. Remover um item
+localStorage.removeItem("tema");
+
+// Para salvar objetos, use JSON
+const config = { volume: 80 };
+localStorage.setItem("configuracoes", JSON.stringify(config));
+</code></pre>
+                </article>
+            </section>
+
+            <section id="proximos-passos">
+                <h2>11. Próximos Passos</h2>
+                <p>O universo JavaScript é vasto. A partir daqui, você pode explorar:</p>
+                <ul>
+                    <li><strong>Frameworks e Bibliotecas:</strong> React, Angular, Vue.js.</li>
+                    <li><strong>Node.js:</strong> Para usar JavaScript no back-end (criar servidores, APIs).</li>
+                    <li><strong>TypeScript:</strong> Um "superset" do JavaScript que adiciona tipos estáticos.</li>
+                </ul>
+            </section>
+        </main>
+
+        <footer>
+            <p>Página gerada como um guia de referência, combinando o conteúdo do PDF "Notas de Aula"  com o Guia de JavaScript.</p>
+        </footer>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta Rápida: HTML, CSS e JS</title>
+    
+    <style>
+        /* --- 1. ESTILOS GERAIS DA PÁGINA (Para o guia) --- */
+        :root {
+            --cor-primaria: #007bff;
+            --cor-secundaria: #333;
+            --cor-fundo: #f9f9f9;
+            --cor-bloco: #ffffff;
+            --cor-borda: #ddd;
+            --cor-code: #272822;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            background-color: var(--cor-fundo);
+            color: var(--cor-secundaria);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+
+        /* --- Barra de Navegação Lateral --- */
+        nav.sumario {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 240px;
+            height: 100vh;
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            overflow-y: auto;
+            border-right: 2px solid var(--cor-primaria);
+        }
+        nav.sumario h2 {
+            margin-top: 0;
+            color: var(--cor-primaria);
+        }
+        nav.sumario ul {
+            list-style: none;
+            padding: 0;
+        }
+        nav.sumario li {
+            margin-bottom: 8px;
+        }
+        nav.sumario a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            display: block;
+            padding: 5px;
+            border-radius: 4px;
+        }
+        nav.sumario a:hover {
+            background-color: var(--cor-primaria);
+        }
+
+        /* --- Conteúdo Principal --- */
+        main.conteudo {
+            margin-left: 250px; /* Deixa espaço para a NAV */
+            padding: 20px;
+        }
+
+        section {
+            background-color: var(--cor-bloco);
+            border: 1px solid var(--cor-borda);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: var(--cor-secundaria);
+            text-align: center;
+            border-bottom: 2px solid var(--cor-primaria);
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: var(--cor-primaria);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+            margin-top: 0;
+        }
+        h3 {
+            color: var(--cor-secundaria);
+            margin-top: 30px;
+        }
+
+        /* --- Estilo dos Blocos de Código --- */
+        pre {
+            background-color: var(--cor-code);
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: "Courier New", Courier, monospace;
+            font-size: 0.95em;
+        }
+        code {
+            font-family: "Courier New", Courier, monospace;
+            background-color: #eee;
+            padding: 2px 4px;
+            border-radius: 3px;
+            color: #d63384;
+        }
+        pre code {
+            background-color: transparent;
+            color: inherit;
+            padding: 0;
+        }
+        
+        /* --- Estilo das Notas/Avisos --- */
+        .nota {
+            background-color: #fffbe6;
+            border: 1px solid #ffe58f;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+
+        /* --- Estilo dos Exemplos Visuais --- */
+        .exemplo-container {
+            background-color: #f0f8ff;
+            border: 2px dashed var(--cor-primaria);
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 10px;
+            min-height: 100px;
+        }
+        .exemplo-item {
+            background-color: #b3d7ff;
+            border: 1px solid var(--cor-primaria);
+            color: var(--cor-secundaria);
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 4px;
+        }
+
+
+        /* --- 2. ESTILOS DOS COMPONENTES (Para os exemplos) --- */
+
+        /* --- Estilos para ALINHAMENTO --- */
+        .exemplo-margin-auto {
+            width: 70%;
+            margin: 0 auto; /* Centraliza horizontalmente */
+            background: #b3d7ff;
+            border: 1px solid var(--cor-primaria);
+            padding: 10px;
+        }
+        .exemplo-text-align {
+            text-align: center; /* Centraliza texto e itens inline */
+            background: #b3d7ff;
+            border: 1px solid var(--cor-primaria);
+            padding: 10px;
+        }
+        .exemplo-flex-center, .exemplo-grid-center {
+            display: flex;
+            justify-content: center; /* Alinha no eixo X */
+            align-items: center;   /* Alinha no eixo Y */
+            height: 150px;
+            width: 100%;
+        }
+        .exemplo-grid-center {
+            display: grid;
+            place-items: center; /* Atalho para justify-items e align-items */
+        }
+        .item-centralizado {
+            width: 80px;
+            height: 80px;
+            background-color: var(--cor-primaria);
+            color: white;
+            display: grid;
+            place-items: center;
+        }
+
+        /* --- Estilos para FLEXBOX --- */
+        .flex-container {
+            display: flex;
+            height: 200px;
+        }
+        .flex-item {
+            background-color: #b3d7ff;
+            border: 1px solid var(--cor-primaria);
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 4px;
+            color: #333;
+            margin: 5px;
+        }
+        /* Exemplos individuais */
+        .flex-direction-column { flex-direction: column; }
+        .justify-start { justify-content: flex-start; }
+        .justify-end { justify-content: flex-end; }
+        .justify-center { justify-content: center; }
+        .justify-between { justify-content: space-between; }
+        .justify-around { justify-content: space-around; }
+        .align-start { align-items: flex-start; }
+        .align-end { align-items: flex-end; }
+        .align-center { align-items: center; }
+        .align-stretch { align-items: stretch; }
+        .flex-wrap { flex-wrap: wrap; height: auto; }
+        
+        .flex-item-grow { flex-grow: 1; background-color: #ffb3b3; }
+        .flex-item-order-1 { order: 1; background-color: #d1ffb3; }
+        .flex-item-order-2 { order: -1; background-color: #ffd1b3; }
+
+        /* --- Estilos para GRID --- */
+        .grid-container {
+            display: grid;
+            gap: 10px;
+            background-color: #f0f8ff;
+            border: 2px dashed var(--cor-primaria);
+            padding: 10px;
+        }
+        .grid-item {
+            background-color: #b3d7ff;
+            border: 1px solid var(--cor-primaria);
+            padding: 20px;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 4px;
+            color: #333;
+        }
+        .grid-ex-1 { grid-template-columns: auto auto auto; }
+        .grid-ex-2 { grid-template-columns: 1fr 2fr 1fr; }
+        .grid-ex-3 { grid-template-rows: 50px 100px; }
+
+        .grid-item-span-col {
+            grid-column-start: 1;
+            grid-column-end: 4; /* Vai da linha 1 ATÉ a 4 (ou seja, 3 colunas) */
+            background-color: #ffb3b3;
+        }
+        .grid-item-span-row {
+            grid-row: 2 / 4; /* Vai da linha 2 ATÉ a 4 (ou seja, 2 linhas) */
+            background-color: #d1ffb3;
+        }
+        .grid-item-span-shorthand {
+            grid-column: 2 / span 2; /* Começa na 2 e expande por 2 colunas */
+            background-color: #ffd1b3;
+        }
+
+        /* Exemplo de Layout de Página (Grid Areas) */
+        .layout-grid {
+            display: grid;
+            height: 400px;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: auto 1fr auto;
+            grid-template-areas: 
+                "header header header"
+                "main main sidebar"
+                "footer footer footer";
+            gap: 10px;
+        }
+        .layout-grid .grid-item { padding: 10px; }
+        .layout-header { grid-area: header; background-color: #fbc2c2; }
+        .layout-main { grid-area: main; background-color: #c2fbc2; }
+        .layout-sidebar { grid-area: sidebar; background-color: #c2c2fb; }
+        .layout-footer { grid-area: footer; background-color: #fbfbc2; }
+
+        /* --- Estilos para CSS VARS (Exemplo Light/Dark) --- */
+        /* 1. Define as variáveis no :root (Modo Light por padrão) */
+        :root {
+            --cor-bg: #ffffff;
+            --cor-texto: #222222;
+            --cor-borda-exemplo: #007bff;
+            --cor-bg-exemplo: #f0f8ff;
+        }
+        /* 2. Define as variáveis para o tema dark */
+        body.dark-theme {
+            --cor-bg: #222222;
+            --cor-texto: #ffffff;
+            --cor-borda-exemplo: #ffa500;
+            --cor-bg-exemplo: #333;
+        }
+        /* 3. Usa as variáveis */
+        #exemplo-vars {
+            background-color: var(--cor-bg-exemplo);
+            border: 2px solid var(--cor-borda-exemplo);
+            color: var(--cor-texto);
+            padding: 20px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        #exemplo-vars h4 {
+            color: var(--cor-borda-exemplo);
+        }
+
+        /* --- Estilos para TABELAS --- */
+        table.tabela-exemplo {
+            width: 100%;
+            border-collapse: collapse; /* Tira bordas duplicadas */
+            margin-top: 15px;
+        }
+        .tabela-exemplo th, .tabela-exemplo td {
+            border: 1px solid #ccc;
+            padding: 12px;
+            text-align: left;
+        }
+        .tabela-exemplo th {
+            background-color: #f4f4f4;
+            color: var(--cor-primaria);
+        }
+        .tabela-exemplo tbody tr:nth-child(even) {
+            background-color: #f9f9f9; /* Linhas zebradas */
+        }
+
+        /* --- Estilos para FORMULÁRIOS --- */
+        .form-exemplo {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+        }
+        .form-exemplo div.form-group {
+            margin-bottom: 15px;
+        }
+        .form-exemplo label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-exemplo input[type="text"],
+        .form-exemplo input[type="email"],
+        .form-exemplo input[type="password"],
+        .form-exemplo input[type="number"],
+        .form-exemplo input[type="date"],
+        .form-exemplo textarea,
+        .form-exemplo select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-exemplo .radio-group,
+        .form-exemplo .checkbox-group {
+            display: flex;
+            gap: 15px;
+        }
+        .form-exemplo .radio-group label,
+        .form-exemplo .checkbox-group label {
+            font-weight: normal;
+        }
+        .form-exemplo button {
+            background-color: var(--cor-primaria);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .form-exemplo button:hover {
+            background-color: #0056b3;
+        }
+
+        /* --- Estilos para GALERIA DE IMAGENS (Grid) --- */
+        .galeria-grid {
+            display: grid;
+            /* * Cria colunas automáticas.
+             * auto-fit: Preenche o espaço com quantas colunas puder.
+             * minmax(250px, 1fr): Cada coluna deve ter no MÍNIMO 250px
+             * e no MÁXIMO 1fr (ocupa o espaço disponível igualmente).
+             * Este é o segredo da galeria responsiva.
+            */
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .galeria-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover; /* Garante que a imagem cubra a área sem distorcer */
+            border-radius: 5px;
+            border: 2px solid #ddd;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .galeria-item img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        
+        /* --- Estilos para CALCULADORA --- */
+        .calculadora {
+            width: 100%;
+            max-width: 320px;
+            margin: 15px auto;
+            border: 2px solid #333;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .calc-display {
+            background-color: #222;
+            color: white;
+            font-size: 2.5em;
+            padding: 20px;
+            text-align: right;
+            height: 80px;
+        }
+        .calc-teclado {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4 colunas iguais */
+        }
+        .calc-teclado button {
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            padding: 20px;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+        .calc-teclado button:hover {
+            background-color: #ddd;
+        }
+        .calc-teclado button.operador {
+            background-color: #ffa500;
+            color: white;
+        }
+        .calc-teclado button.operador:hover {
+            background-color: #e69500;
+        }
+        .calc-teclado button.zero {
+            grid-column: span 2; /* Botão 0 ocupa 2 colunas */
+        }
+        .calc-teclado button.igual {
+            grid-row: span 2; /* Botão = ocupa 2 linhas */
+            background-color: var(--cor-primaria);
+            color: white;
+        }
+        .calc-teclado button.igual:hover {
+            background-color: #0056b3;
+        }
+
+        /* --- Estilos para CARROSSEL DE IMAGENS --- */
+        .carrossel {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .carrossel-viewport {
+            overflow: hidden; /* O segredo do carrossel: esconde o que vaza */
+            width: 100%;
+            border-radius: 8px;
+        }
+        .carrossel-filmstrip {
+            display: flex;
+            /* A transição é que faz a mágica do slide */
+            transition: transform 0.4s ease-in-out;
+        }
+        .carrossel-slide {
+            flex: 0 0 100%; /* Cada slide ocupa 100% da largura do viewport */
+            width: 100%;
+        }
+        .carrossel-slide img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block; /* Remove espaço extra abaixo da imagem */
+        }
+        .carrossel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10;
+        }
+        .carrossel-btn:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        .carrossel-btn.prev {
+            left: 10px;
+        }
+        .carrossel-btn.next {
+            right: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav class="sumario">
+        <h2>Sumário</h2>
+        <ul>
+            <li><a href="#centralizacao">Alinhamento e Centralização</a></li>
+            <li><a href="#flexbox">Layout com Flexbox</a></li>
+            <li><a href="#grid">Layout com Grid</a></li>
+            <li><a href="#css-vars">Variáveis CSS</a></li>
+            <li><a href="#tabelas">Tabelas HTML</a></li>
+            <li><a href="#formularios">Formulários HTML</a></li>
+            <li><a href="#galeria">Galeria de Imagens</a></li>
+            <li><a href="#calculadora">Calculadora (JS)</a></li>
+            <li><a href="#carrossel">Carrossel de Imagens (JS)</a></li>
+        </ul>
+    </nav>
+
+    <main class="conteudo">
+        <h1>Guia de Consulta Rápida (Prova)</h1>
+
+        <section id="centralizacao">
+            <h2>Alinhamento e Centralização</h2>
+            <p>Formas mais comuns de centralizar elementos.</p>
+
+            <h3>1. Horizontal (Elementos de Bloco)</h3>
+            <p>Use <code>margin: 0 auto;</code> em um elemento que tenha uma <code>width</code> definida.</p>
+            <div class="exemplo-margin-auto">
+                Eu sou um bloco centralizado (width: 70%).
+            </div>
+            <pre><code><span style="color: #66d9ef;">.elemento-bloco</span> {
+    <span style="color: #f92672;">width</span>: <span style="color: #e6db74;">70%</span>;
+    <span style="color: #f92672;">margin</span>: <span style="color: #e6db74;">0 auto</span>; <span style="color: #75715e;">/* 0 para top/bottom, auto para left/right */</span>
+}</code></pre>
+
+            <h3>2. Horizontal (Texto e Itens Inline)</h3>
+            <p>Use <code>text-align: center;</code> no elemento PAI.</p>
+            <div class="exemplo-text-align">
+                Eu sou um texto centralizado. <img src="https://via.placeholder.com/50" alt="inline" style="vertical-align: middle;">
+            </div>
+            <pre><code><span style="color: #66d9ef;">.container-pai</span> {
+    <span style="color: #f92672;">text-align</span>: <span style="color: #e6db74;">center</span>;
+}</code></pre>
+
+            <h3>3. Horizontal e Vertical (Flexbox)</h3>
+            <p>Use <code>display: flex;</code>, <code>justify-content: center;</code> (horizontal) e <code>align-items: center;</code> (vertical) no PAI.</p>
+            <div class="exemplo-flex-center">
+                <div class="item-centralizado">Flexbox!</div>
+            </div>
+            <pre><code><span style="color: #66d9ef;">.container-pai</span> {
+    <span style="color: #f92672;">display</span>: <span style="color: #e6db74;">flex</span>;
+    <span style="color: #f92672;">justify-content</span>: <span style="color: #e6db74;">center</span>; <span style="color: #75715e;">/* Alinha no eixo X (principal) */</span>
+    <span style="color: #f92672;">align-items</span>: <span style="color: #e6db74;">center</span>;   <span style="color: #75715e;">/* Alinha no eixo Y (cruzado) */</span>
+    <span style="color: #f92672;">height</span>: <span style="color: #e6db74;">150px</span>; <span style="color: #75715e;">/* Precisa de uma altura para centralizar verticalmente */</span>
+}</code></pre>
+
+            <h3>4. Horizontal e Vertical (Grid)</h3>
+            <p>O método mais fácil. Use <code>display: grid;</code> e <code>place-items: center;</code> no PAI.</p>
+            <div class="exemplo-grid-center">
+                <div class="item-centralizado">Grid!</div>
+            </div>
+            <pre><code><span style="color: #66d9ef;">.container-pai</span> {
+    <span style="color: #f92672;">display</span>: <span style="color: #e6db74;">grid</span>;
+    <span style="color: #f92672;">place-items</span>: <span style="color: #e6db74;">center</span>; <span style="color: #75715e;">/* Atalho mágico para centralizar nos 2 eixos */</span>
+    <span style="color: #f92672;">height</span>: <span style="color: #e6db74;">150px</span>;
+}</code></pre>
+        </section>
+        
+        <section id="flexbox">
+            <h2>Layout com Flexbox (Passo a Passo)</h2>
+            <p>Flexbox é um modelo de layout para organizar itens em uma única dimensão (linha ou coluna).</p>
+            <pre><code><span style="color: #75715e;">&lt;!-- HTML Base --&gt;</span>
+&lt;div class="<span style="color: #e6db74;">flex-container</span>"&gt;
+    &lt;div class="<span style="color: #e6db74;">flex-item</span>"&gt;1&lt;/div&gt;
+    &lt;div class="<span style="color: #e6db74;">flex-item</span>"&gt;2&lt;/div&gt;
+    &lt;div class="<span style="color: #e6db74;">flex-item</span>"&gt;3&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+            <h3>1. Propriedades do Contêiner (PAI)</h3>
+            
+            <h4><code>display: flex;</code> (Obrigatório)</h4>
+            <p>Ativa o Flexbox no contêiner pai.</p>
+            <div class="exemplo-container flex-container">
+                <div class="flex-item">1</div>
+                <div class="flex-item">2</div>
+                <div class="flex-item">3</div>
+            </div>
+            <pre><code><span style="color: #66d9ef;">.flex-container</span> { <span style="color: #f92672;">display</span>: <span style="color: #e6db74;">flex</span>; }</code></pre>
+            
+            <h4><code>flex-direction:</code> (Direção)</h4>
+            <p>Define o eixo principal. O padrão é <code>row</code> (linha).</p>
+            <p><strong>Exemplo:</strong> <code>flex-direction: column;</code></p>
+            <div class="exemplo-container flex-container flex-direction-column">
+                <div class="flex-item">1</div>
+                <div class="flex-item">2</div>
+                <div class="flex-item">3</div>
+            </div>
+            <pre><code><span style="color: #66d9ef;">.flex-container</span> {
+    <span style="color: #f92672;">display</span>: <span style="color: #e6db74;">flex</span>;
+    <span style="color: #f92672;">flex-direction</span>: <span style="color: #e6db74;">column</span>; <span style="color: #75715e;">/* Outros: row, row-reverse, column-reverse */</span>
+}</code></pre>
+
+            <h4><code>justify-content:</code> (Alinhamento no Eixo Principal)</h4>
+            <p>Distribui os itens ao longo do eixo principal (horizontal se <code>flex-direction: row</code>).</p>
+            <p><strong>Exemplo:</strong> <code>justify-content: space-between;</code></p>
+            <div class="exemplo-container flex-container justify-between">
+                <div class="flex-item">1</div>
+                <div class="flex-item">2</div>
+                <div class="flex-item">3</div>
+            </div>
+            <pre><code><span style="color: #66d9ef;">.flex-container</span> {
+    <span style="color: #f92672;">display</span>: <span style="color: #e6db74;">flex</span>;
+    <span style="color: #f92672;">justify-content</span>: <span style="color: #e6db74;">space-between</span>;
+    <span style="color: #75715e;">/* Opções: flex-start, flex-end, center, space-between, space-around */</span>
+}</code></pre>
+
+            <h4><code>align-items:</code> (Alinhamento no Eixo Cruzado)</h4>
+            <p>Alinha os itens ao longo do eixo cruzado (vertical se <code>flex-direction: row</code>).</p>
+            <p><strong>Exemplo:</strong> <code>align-items: center;</code></p>
+            <div class="exemplo-container flex-container align-center">
+                <div class="flex-item">1</div>
+                <div class="flex-item" style="height: 50px;">2</div>
+                <div class="flex-item">3</div>
+            </div>
+            <pre><code><span style="color: #66d9ef;">.flex-container</span> {
+    <span style="color: #f92672;">display</span>: <span style="color: #e6db74;">flex</span>;
+    <span style="color: #f92672;">align-items</span>: <span style="color: #e6db74;">center</span>;
+    <span style="color: #75715e;">/* Opções: flex-start, flex-end, center, stretch (padrão), baseline */</span>
+}</code></pre>
+            
+            <h4><code>flex-wrap:</code> (Quebra de Linha)</h4>
+            <p>Permite que os itens quebrem para a linha seguinte se não couberem.</p>
+            <p><strong>Exemplo:</strong> <code>flex-wrap: wrap;</code></p>
+            <div class="exemplo-container flex-container flex-wrap">
+                <div class="flex-item" style="width: 40%">1</div>
+                <div class="flex-item" style="width: 40%">2</div>
+                <div class="flex-item" style="width: 40%">3</div>
+            </div>
+            <pre><code><span style="color: #66d9ef;">.flex-container</span> {
+    <span style="color: #f92672;">display</span>: <span style="color: #e6db74;">flex</span>;
+    <span style="color: #f92672;">flex-wrap</span>: <span style="color: #e6db74;">wrap</span>; <span style="color: #75715e;">/* Padrão é 'nowrap' */</span>
+}</code></pre>
+            
+            <h3>2. Propriedades dos Itens (FILHOS)</h3>
+            
+            <h4><code>flex-grow:</code> (Crescer)</h4>
+            <p>Define a capacidade de um item "crescer" para ocupar o espaço livre. O padrão é 0.</p>
+            <p><strong>Exemplo:</strong> Item 2 tem <code>flex-grow: 1;</code></p>
+            <div class="exemplo-container flex-container">
+                <div class="flex-item">1</div>
+                <div class="flex-item flex-item-grow">2 (eu cresço)</div>
+                <div class="flex-item">3</div>
+            </div>
+            <pre><code><span style="color: #66d9ef;">.item-2</span> { <span style="color: #f92672;">flex-grow</span>: <span style="color: #e6db74;">1</span>; }</code></pre>
+            
+            <h4><code>flex-shrink:</code> (Encolher)</h4>
+            <p>Define a capacidade de um item "encolher" se não houver espaço. O padrão é 1.</p>
+            
+            <h4><code>flex-basis:</code> (Tamanho Base)</h4>
+            <p>Define o tamanho inicial do item antes do espaço ser distribuído. (Ex: <code>200px</code>, <code>auto</code>).</p>
+            
+            <h4><code>flex:</code> (Atalho)</h4>
+            <p>Atalho para <code>flex-grow</code>, <code>flex-shrink</code> e <code>flex-basis</code>.</p>
+            <pre><code><span style="color: #75715e;">/* flex: [grow] [shrink] [basis]; */</span>
+<span style="color: #66d9ef;">.item</span> {
+    <span style="color: #f92672;">flex</span>: <span style="color: #e6db74;">0 1 auto</span>; <span style="color: #75715e;">/* Padrão */</span>
+    <span style="color: #f92672;">flex</span>: <span style="color: #e6db74;">1</span>; <span style="color: #75715e;">/* Atalho para: 1 1 0% (cresce e encolhe, tamanho base 0) */</span>
+    <span style="color: #f92672;">flex</span>: <span style="color: #e6db74;">auto</span>; <span style="color: #75715e;">/* Atalho para: 1 1 auto */</span>
+}</code></pre>
+            
+            <h4><code>order:</code> (Ordem)</h4>
+            <p>Muda a ordem visual dos itens. O padrão é 0.</p>
+            <p><strong>Exemplo:</strong> Item 1 tem <code>order: 1;</code>, Item 3 tem <code>order: -1;</code></p>
+            <div class="exemplo-container flex-container">
+                <div class="flex-item flex-item-order-1">1 (order: 1)</div>
+                <div class="flex-item">2 (order: 0)</div>
+                <div class="flex-item flex-item-order-2">3 (order: -1)</div>
+            </div>
+            <pre><code><span style="color: #66d9ef;">.item-1</span> { <span style="color: #f92672;">order</span>: <span style="color: #e6db74;">1</span>; } <span style="color: #75715e;">/* Vai para o fim */</span>
+<span style="color: #66d9ef;">.item-3</span> { <span style="color: #f92672;">order</span>: <span style="color: #e6db74;">-1</span>; } <span style="color: #75715e;">/* Vai para o início */</span>
+</code></pre>
+        </section>
+
+        <section id="grid">
+            <h2>Layout com Grid (Passo a Passo)</h2>
+            <p>Grid é um modelo de layout para organizar itens em duas dimensões (linhas E colunas).</p>
+            <pre><code><span style="color: #75715e;">&lt;!-- HTML Base --&gt;</span>
+&lt;div class="<span style="color: #e6db74;">grid-container</span>"&gt;
+    &lt;div class="<span style="color: #e6db74;">grid-item</span>"&gt;1&lt;/div&gt;
+    &lt;div class="<span style="color: #e6db74;">grid-item</span>"&gt;2&lt;/div&gt;
+    &lt;div class="<span style="color: #e6db74;">grid-item</span>"&gt;3&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+            <h3>1. Propriedades do Contêiner (PAI)</h3>
+            
+            <h4><code>display: grid;</code> (Obrigatório)</h4>
+            <p>Ativa o Grid no contêiner pai.</p>
+            
+            <h4><code>grid-template-columns:</code> e <code>grid-template-rows:</code></h4>
+            <p>Define o número e o tamanho das colunas e linhas. Esta é a propriedade mais importante.</p>
+            <p><strong>Exemplo:</strong> <code>grid-template-columns: 1fr 2fr 1fr;</code> (3 colunas, a do meio é 2x maior)</p>
+            <div class="grid-container grid-ex-2">
+                <div class="grid-item">1 (1fr)</div>
+                <div class="grid-item">2 (2fr)</div>
+                <div class="grid-item">3 (1fr)</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">5</div>
+                <div class="grid-item">6</div>
+            </div>
+            <pre><code><span style="color: #66d9ef;">.grid-container</span> {
+    <span style="color: #f92672;">display</span>: <span style="color: #e6db74;">grid</span>;
+    <span style="color: #f92672;">grid-template-columns</span>: <span style="color: #e6db74;">1fr 2fr 1fr</span>; <span style="color: #75715e;">/* 1fr = 1 fração do espaço */</span>
+    <span style="color: #f92672;">grid-template-rows</span>: <span style="color: #e6db74;">50px 100px</span>; <span style="color: #75715e;">/* 1ª linha 50px, 2ª linha 100px */</span>
+    <span style="color: #75715e;">/* Outras unidades: 100px, 50%, auto */</span>
+}</code></pre>
+            
+            <h4><code>gap:</code> (Espaçamento)</h4>
+            <p>Define o espaço ENTRE os itens do grid.</p>
+            <pre><code><span style="color: #66d9ef;">.grid-container</span> {
+    <span style="color: #f92672;">gap</span>: <span style="color: #e6db74;">10px</span>; <span style="color: #75715e;">/* Espaço de 10px nas linhas e colunas */</span>
+    
+    <span style="color: #f92672;">row-gap</span>: <span style="color: #e6db74;">20px</span>; <span style="color: #75715e;">/* Só nas linhas */</span>
+    <span style="color: #f92672;">column-gap</span>: <span style="color: #e6db74;">5px</span>; <span style="color: #75715e;">/* Só nas colunas */</span>
+}</code></pre>
+
+            <h3>2. Propriedades dos Itens (FILHOS)</h3>
+            <p>Permitem que um item ocupe mais de uma célula do grid.</p>
+            
+            <h4><code>grid-column:</code> e <code>grid-row:</code> (Atalhos)</h4>
+            <p>Define em qual linha/coluna o item começa e termina.</p>
+            <p><strong>Exemplo:</strong> Item 1 ocupa 3 colunas, Item 3 ocupa 2 linhas, Item 5 começa na coluna 2 e ocupa 2 colunas.</p>
+            <div class="grid-container grid-ex-1">
+                <div class="grid-item grid-item-span-col">1 (ocupa 3 colunas)</div>
+                <div class="grid-item">2</div>
+                <div class="grid-item grid-item-span-row">3 (ocupa 2 linhas)</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item grid-item-span-shorthand">5 (col: 2 / span 2)</div>
+            </div>
+            <pre><code><span style="color: #66d9ef;">.grid-container</span> {
+    <span style="color: #f92672;">display</span>: <span style="color: #e6db74;">grid</span>;
+    <span style="color: #f92672;">grid-template-columns</span>: <span style="color: #e6db74;">1fr 1fr 1fr</span>; <span style="color: #75715e;">/* 3 colunas */</span>
+    <span style="color: #f92672;">gap</span>: <span style="color: #e6db74;">10px</span>;
+}
+<span style="color: #66d9ef;">.item-1</span> {
+    <span style="color: #f92672;">grid-column</span>: <span style="color: #e6db74;">1 / 4</span>; <span style="color: #75715e;">/* Começa na linha 1, termina ANTES da 4 */</span>
+    <span style="color: #75715e;">/* Alternativa: grid-column: 1 / span 3; (Começa na 1, ocupa 3) */</span>
+}
+<span style="color: #66d9ef;">.item-3</span> {
+    <span style="color: #f92672;">grid-row</span>: <span style="color: #e6db74;">2 / 4</span>; <span style="color: #75715e;">/* Começa na linha 2, termina ANTES da 4 */</span>
+}
+<span style="color: #66d9ef;">.item-5</span> {
+    <span style="color: #f92672;">grid-column</span>: <span style="color: #e6db74;">2 / span 2</span>; <span style="color: #75715e;">/* Começa na linha 2, ocupa 2 */</span>
+}
+</code></pre>
+            
+            <h3>3. Exemplo Prático: Layout de Página com <code>grid-template-areas</code></h3>
+            <p>Permite "desenhar" o layout nomeando as áreas.</p>
+            <div class="layout-grid">
+                <div class="grid-item layout-header">Header</div>
+                <div class="grid-item layout-main">Main Content</div>
+                <div class="grid-item layout-sidebar">Sidebar</div>
+                <div class="grid-item layout-footer">Footer</div>
+            </div>
+            <pre><code><span style="color: #66d9ef;">.layout-container</span> {
+    <span style="color: #f92672;">display</span>: <span style="color: #e6db74;">grid</span>;
+    <span style="color: #f92672;">grid-template-columns</span>: <span style="color: #e6db74;">1fr 1fr 1fr</span>; <span style="color: #75715e;">/* 3 colunas */</span>
+    <span style="color: #f92672;">grid-template-rows</span>: <span style="color: #e6db74;">auto 1fr auto</span>; <span style="color: #75715e;">/* Header/Footer auto, Main 1fr */</span>
+    <span style="color: #f92672;">gap</span>: <span style="color: #e6db74;">10px</span>;
+    <span style="color: #f92672;">grid-template-areas</span>: 
+        <span style="color: #e6db74;">"header header header"</span>  <span style="color: #75715e;">/* Linha 1: Header ocupa tudo */</span>
+        <span style="color: #e6db74;">"main main sidebar"</span>   <span style="color: #75715e;">/* Linha 2: Main ocupa 2, Sidebar 1 */</span>
+        <span style="color: #e6db74;">"footer footer footer"</span>;  <span style="color: #75715e;">/* Linha 3: Footer ocupa tudo */</span>
+}
+<span style="color: #75715e;">/* Agora, atribua as áreas aos itens */</span>
+<span style="color: #66d9ef;">.header</span>  { <span style="color: #f92672;">grid-area</span>: <span style="color: #e6db74;">header</span>; }
+<span style="color: #66d9ef;">.main</span>    { <span style="color: #f92672;">grid-area</span>: <span style="color: #e6db74;">main</span>; }
+<span style="color: #66d9ef;">.sidebar</span> { <span style="color: #f92672;">grid-area</span>: <span style="color: #e6db74;">sidebar</span>; }
+<span style="color: #66d9ef;">.footer</span>  { <span style="color: #f92672;">grid-area</span>: <span style="color: #e6db74;">footer</span>; }
+</code></pre>
+        </section>
+
+        <section id="css-vars">
+            <h2>Variáveis CSS (Propriedades Customizadas)</h2>
+            <p>Permitem armazenar valores (como cores, fontes, tamanhos) para reutilizar em seu CSS.</p>
+
+            <h3>1. Declaração (Geralmente no <code>:root</code>)</h3>
+            <p>Variáveis são declaradas com dois traços <code>--</code>.</p>
+            <pre><code><span style="color: #66d9ef;">:root</span> {
+    <span style="color: #f92672;">--cor-primaria</span>: <span style="color: #e6db74;">#007bff</span>;
+    <span style="color: #f92672;">--tamanho-fonte-padrao</span>: <span style="color: #e6db74;">16px</span>;
+    <span style="color: #f92672;">--espacamento-medio</span>: <span style="color: #e6db74;">15px</span>;
+}</code></pre>
+            
+            <h3>2. Utilização (Com <code>var()</code>)</h3>
+            <p>Você usa a variável com a função <code>var()</code>.</p>
+            <pre><code><span style="color: #66d9ef;">.botao</span> {
+    <span style="color: #f92672;">background-color</span>: <span style="color: #e6db74;">var(--cor-primaria)</span>;
+    <span style="color: #f92672;">padding</span>: <span style="color: #e6db74;">var(--espacamento-medio)</span>;
+}
+<span style="color: #66d9ef;">p</span> {
+    <span style="color: #f92672;">font-size</span>: <span style="color: #e6db74;">var(--tamanho-fonte-padrao)</span>;
+    <span style="color: #f92672;">color</span>: <span style="color: #e6db74;">var(--cor-primaria)</span>;
+}</code></pre>
+
+            <h3>3. Exemplo Prático: Tema Light/Dark</h3>
+            <p>Variáveis CSS brilham quando usadas para trocar temas. O JS apenas troca uma classe no <code>&lt;body&gt;</code>, e as variáveis fazem o resto.</p>
+            
+            <button id="theme-toggle-btn">Trocar Tema</button>
+            <div id="exemplo-vars">
+                <h4>Caixa de Exemplo</h4>
+                <p>Este texto e fundo mudarão de cor.</p>
+                <a href="#">Este link também.</a>
+            </div>
+
+            <pre><code><span style="color: #75715e;">/* 1. Define as variáveis no :root (Modo Light) */</span>
+<span style="color: #66d9ef;">:root</span> {
+    <span style="color: #f92672;">--cor-bg</span>: <span style="color: #e6db74;">#ffffff</span>;
+    <span style="color: #f92672;">--cor-texto</span>: <span style="color: #e6db74;">#222222</span>;
+    <span style="color: #f92672;">--cor-link</span>: <span style="color: #e6db74;">#007bff</span>;
+}
+<span style="color: #75715e;">/* 2. Redefine as variáveis quando o body tiver a classe .dark-theme */</span>
+<span style="color: #66d9ef;">body.dark-theme</span> {
+    <span style="color: #f92672;">--cor-bg</span>: <span style="color: #e6db74;">#222222</span>;
+    <span style="color: #f92672;">--cor-texto</span>: <span style="color: #e6db74;">#ffffff</span>;
+    <span style="color: #f92672;">--cor-link</span>: <span style="color: #e6db74;">#ffa500</span>;
+}
+<span style="color: #75715e;">/* 3. Usa as variáveis */</span>
+<span style="color: #66d9ef;">body</span> {
+    <span style="color: #f92672;">background-color</span>: <span style="color: #e6db74;">var(--cor-bg)</span>;
+    <span style="color: #f92672;">color</span>: <span style="color: #e6db74;">var(--cor-texto)</span>;
+}
+<span style="color: #66d9ef;">a</span> {
+    <span style="color: #f92672;">color</span>: <span style="color: #e6db74;">var(--cor-link)</span>;
+}
+</code></pre>
+            <pre><code><span style="color: #75715e;">// JavaScript para o botão</span>
+document.getElementById(<span style="color: #e6db74;">'theme-toggle-btn'</span>).addEventListener(<span style="color: #e6db74;">'click'</span>, () => {
+    document.body.classList.toggle(<span style="color: #e6db74;">'dark-theme'</span>);
+});
+</code></pre>
+        </section>
+
+        <section id="tabelas">
+            <h2>Tabelas HTML</h2>
+            <p>Usadas para exibir dados tabulares (linhas e colunas).</p>
+
+            <h3>Estrutura Básica</h3>
+            <ul>
+                <li><code>&lt;table&gt;</code>: O contêiner da tabela.</li>
+                <li><code>&lt;thead&gt;</code>: O cabeçalho da tabela.</li>
+                <li><code>&lt;tbody&gt;</code>: O corpo da tabela.</li>
+                <li><code>&lt;tfoot&gt;</code>: O rodapé da tabela (opcional).</li>
+                <li><code>&lt;tr&gt;</code>: (Table Row) Define uma linha.</li>
+                <li><code>&lt;th&gt;</code>: (Table Header) Célula de cabeçalho (negrito e centralizado por padrão).</li>
+                <li><code>&lt;td&gt;</code>: (Table Data) Célula de dados.</li>
+            </ul>
+
+            <h3>Exemplo 1: Tabela Simples</h3>
+            <table class="tabela-exemplo">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Matrícula</th>
+                        <th>Nota</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Ana Silva</td>
+                        <td>202401</td>
+                        <td>9.5</td>
+                    </tr>
+                    <tr>
+                        <td>Bruno Costa</td>
+                        <td>202402</td>
+                        <td>8.0</td>
+                    </tr>
+                </tbody>
+            </table>
+            <pre><code>&lt;table class="<span style="color: #e6db74;">tabela-exemplo</span>"&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Nome&lt;/th&gt;
+            &lt;th&gt;Matrícula&lt;/th&gt;
+            &lt;th&gt;Nota&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Ana Silva&lt;/td&gt;
+            &lt;td&gt;202401&lt;/td&gt;
+            &lt;td&gt;9.5&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Bruno Costa&lt;/td&gt;
+            &lt;td&gt;202402&lt;/td&gt;
+            &lt;td&gt;8.0&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+            
+            <h3>Exemplo 2: Mesclagem de Células (<code>colspan</code> e <code>rowspan</code>)</h3>
+            <ul>
+                <li><code>colspan="2"</code>: Faz uma célula ocupar o espaço de 2 colunas.</li>
+                <li><code>rowspan="2"</code>: Faz uma célula ocupar o espaço de 2 linhas.</li>
+            </ul>
+            <table class="tabela-exemplo">
+                <thead>
+                    <tr>
+                        <th>Aluno</th>
+                        <th colspan="2">Provas</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th>Prova 1</th>
+                        <th>Prova 2</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="2">Maria</td>
+                        <td>8.0</td>
+                        <td>9.0</td>
+                    </tr>
+                     <tr>
+                        <td>7.5</td>
+                        <td>8.5</td>
+                    </tr>
+                    <tr>
+                        <td>João</td>
+                        <td>9.0</td>
+                        <td>10.0</td>
+                    </tr>
+                </tbody>
+            </table>
+            <pre><code>&lt;table class="<span style="color: #e6db74;">tabela-exemplo</span>"&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Aluno&lt;/th&gt;
+            &lt;th <span style="color: #a6e22e;">colspan</span>="<span style="color: #e6db74;">2</span>"&gt;Provas&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;th&gt;&lt;/th&gt; <span style="color: #75715e;">&lt;!-- Célula vazia para alinhar --&gt;</span>
+            &lt;th&gt;Prova 1&lt;/th&gt;
+            &lt;th&gt;Prova 2&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td <span style="color: #a6e22e;">rowspan</span>="<span style="color: #e6db74;">2</span>"&gt;Maria&lt;/td&gt;
+            &lt;td&gt;8.0&lt;/td&gt;
+            &lt;td&gt;9.0&lt;/td&gt;
+        &lt;/tr&gt;
+         &lt;tr&gt;
+            <span style="color: #75715e;">&lt;!-- Célula da Maria (rowspan) ainda está aqui --&gt;</span>
+            &lt;td&gt;7.5&lt;/td&gt;
+            &lt;td&gt;8.5&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+        </section>
+
+        <section id="formularios">
+            <h2>Formulários HTML</h2>
+            <p>Usados para coletar dados do usuário.</p>
+            
+            <form action="#" method="get" class="form-exemplo">
+                
+                <div class="form-group">
+                    <label for="nome">Nome (Texto):</label>
+                    <input type="text" id="nome" name="nome_usuario" placeholder="Digite seu nome">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email_usuario" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="senha">Senha:</label>
+                    <input type="password" id="senha" name="senha_usuario">
+                </div>
+                
+                <div class="form-group">
+                    <label for="idade">Idade (Número):</label>
+                    <input type="number" id="idade" name="idade_usuario" min="0" max="120">
+                </div>
+                
+                <div class="form-group">
+                    <label for="nascimento">Data de Nascimento:</label>
+                    <input type="date" id="nascimento" name="data_nascimento">
+                </div>
+                
+                <div class="form-group">
+                    <label for="curso">Curso (Dropdown):</label>
+                    <select id="curso" name="curso_usuario">
+                        <option value="">Selecione...</option>
+                        <option value="cc">Ciência da Computação</option>
+                        <option value="si">Sistemas de Informação</option>
+                        <option value="es">Engenharia de Software</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Período (Radio):</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="periodo" value="manha"> Manhã</label>
+                        <label><input type="radio" name="periodo" value="tarde"> Tarde</label>
+                        <label><input type="radio" name="periodo" value="noite"> Noite</label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Interesses (Checkbox):</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="interesses" value="frontend"> Front-end</label>
+                        <label><input type="checkbox" name="interesses" value="backend"> Back-end</label>
+                        <label><input type="checkbox" name="interesses" value="dados"> Banco de Dados</label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="obs">Observações (Área de Texto):</label>
+                    <textarea id="obs" name="observacoes" rows="4"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <button type="submit">Enviar</button>
+                    <button type="reset">Limpar</button>
+                </div>
+            
+            </form>
+            
+            <pre><code><span style="color: #75715e;">&lt;!-- O &lt;form&gt; agrupa todos os campos --&gt;</span>
+&lt;form action="<span style="color: #e6db74;">/url_para_onde_enviar</span>" method="<span style="color: #e6db74;">post</span>"&gt;
+
+    <span style="color: #75715e;">&lt;!-- É fundamental usar &lt;label&gt; com 'for' (que aponta para o 'id' do input) --&gt;</span>
+    &lt;div class="<span style="color: #e6db74;">form-group</span>"&gt;
+        &lt;label <span style="color: #a6e22e;">for</span>="<span style="color: #e6db74;">nome</span>"&gt;Nome (Texto):&lt;/label&gt;
+        &lt;input <span style="color: #a6e22e;">type</span>="<span style="color: #e6db74;">text</span>" <span style="color: #a6e22e;">id</span>="<span style="color: #e6db74;">nome</span>" <span style="color: #a6e22e;">name</span>="<span style="color: #e6db74;">nome_usuario</span>"&gt;
+    &lt;/div&gt;
+
+    <span style="color: #75715e;">&lt;!-- Dropdown (Select Box) --&gt;</span>
+    &lt;div class="<span style="color: #e6db74;">form-group</span>"&gt;
+        &lt;label <span style="color: #a6e22e;">for</span>="<span style="color: #e6db74;">curso</span>"&gt;Curso:&lt;/label&gt;
+        &lt;select <span style="color: #a6e22e;">id</span>="<span style="color: #e6db74;">curso</span>" <span style="color: #a6e22e;">name</span>="<span style="color: #e6db74;">curso_usuario</span>"&gt;
+            &lt;option <span style="color: #a6e22e;">value</span>=""&gt;Selecione...&lt;/option&gt;
+            &lt;option <span style="color: #a6e22e;">value</span>="<span style="color: #e6db74;">cc</span>"&gt;Ciência da Computação&lt;/option&gt;
+        &lt;/select&gt;
+    &lt;/div&gt;
+
+    <span style="color: #75715e;">&lt;!-- Botões de Rádio (Radio Buttons) - Só pode selecionar UM --&gt;</span>
+    <span style="color: #75715e;">&lt;!-- O atributo 'name' DEVE ser o mesmo para agrupar --&gt;</span>
+    &lt;div class="<span style="color: #e6db74;">form-group</span>"&gt;
+        &lt;label&gt;Período:&lt;/label&gt;
+        &lt;label&gt;&lt;input <span style="color: #a6e22e;">type</span>="<span style="color: #e6db74;">radio</span>" <span style="color: #a6e22e;">name</span>="<span style="color: #e6db74;">periodo</span>" <span style="color: #a6e22e;">value</span>="<span style="color: #e6db74;">manha</span>"&gt; Manhã&lt;/label&gt;
+        &lt;label&gt;&lt;input <span style="color: #a6e22e;">type</span>="<span style="color: #e6db74;">radio</span>" <span style="color: #a6e22e;">name</span>="<span style="color: #e6db74;">periodo</span>" <span style="color: #e6db74;">value</span>="<span style="color: #e6db74;">tarde</span>"&gt; Tarde&lt;/label&gt;
+    &lt;/div&gt;
+
+    <span style="color: #75715e;">&lt;!-- Caixas de Seleção (Checkboxes) - Pode selecionar VÁRIOS --&gt;</span>
+    &lt;div class="<span style="color: #e6db74;">form-group</span>"&gt;
+        &lt;label&gt;Interesses:&lt;/label&gt;
+        &lt;label&gt;&lt;input <span style="color: #a6e22e;">type</span>="<span style="color: #e6db74;">checkbox</span>" <span style="color: #a6e22e;">name</span>="<span style="color: #e6db74;">interesses</span>" <span style="color: #a6e22e;">value</span>="<span style="color: #e6db74;">frontend</span>"&gt; Front-end&lt;/label&gt;
+        &lt;label&gt;&lt;input <span style="color: #a6e22e;">type</span>="<span style="color: #e6db74;">checkbox</span>" <span style="color: #a6e22e;">name</span>="<span style="color: #e6db74;">interesses</span>" <span style="color: #a6e22e;">value</span>="<span style="color: #e6db74;">backend</span>"&gt; Back-end&lt;/label&gt;
+    &lt;/div&gt;
+
+    <span style="color: #75715e;">&lt;!-- Área de Texto --&gt;</span>
+    &lt;div class="<span style="color: #e6db74;">form-group</span>"&gt;
+        &lt;label <span style="color: #a6e22e;">for</span>="<span style="color: #e6db74;">obs</span>"&gt;Observações:&lt;/label&gt;
+        &lt;textarea <span style="color: #a6e22e;">id</span>="<span style="color: #e6db74;">obs</span>" <span style="color: #a6e22e;">name</span>="<span style="color: #e6db74;">observacoes</span>" <span style="color: #a6e22e;">rows</span>="<span style="color: #e6db74;">4</span>"&gt;&lt;/textarea&gt;
+    &lt;/div&gt;
+
+    <span style="color: #75715e;">&lt;!-- Botões --&gt;</span>
+    &lt;div class="<span style="color: #e6db74;">form-group</span>"&gt;
+        &lt;button <span style="color: #a6e22e;">type</span>="<span style="color: #e6db74;">submit</span>"&gt;Enviar&lt;/button&gt;
+        &lt;button <span style="color: #a6e22e;">type</span>="<span style="color: #e6db74;">reset</span>"&gt;Limpar&lt;/button&gt;
+    &lt;/div&gt;
+
+&lt;/form&gt;</code></pre>
+        </section>
+        
+        <section id="galeria">
+            <h2>Galeria de Imagens (Responsiva com Grid)</h2>
+            <p>Este método usa <code>grid-template-columns</code> com <code>auto-fit</code> e <code>minmax</code> para criar uma galeria perfeitamente responsiva sem precisar de Media Queries.</p>
+            
+            <div class="galeria-grid">
+                <div class="galeria-item"><img src="https://picsum.photos/id/1015/300/200" alt="Imagem"></div>
+                <div class="galeria-item"><img src="https://picsum.photos/id/1018/300/200" alt="Imagem"></div>
+                <div class="galeria-item"><img src="https://picsum.photos/id/1025/300/200" alt="Imagem"></div>
+                <div class="galeria-item"><img src="https://picsum.photos/id/1040/300/200" alt="Imagem"></div>
+                <div class="galeria-item"><img src="https://picsum.photos/id/1043/300/200" alt="Imagem"></div>
+                <div class="galeria-item"><img src="https://picsum.photos/id/1050/300/200" alt="Imagem"></div>
+            </div>
+            
+            <h3>HTML</h3>
+            <pre><code>&lt;div class="<span style="color: #e6db74;">galeria-grid</span>"&gt;
+    &lt;div class="<span style="color: #e6db74;">galeria-item</span>"&gt;&lt;img src="<span style="color: #e6db74;">...</span>"&gt;&lt;/div&gt;
+    &lt;div class="<span style="color: #e6db74;">galeria-item</span>"&gt;&lt;img src="<span style="color: #e6db74;">...</span>"&gt;&lt;/div&gt;
+    &lt;div class="<span style="color: #e6db74;">galeria-item</span>"&gt;&lt;img src="<span style="color: #e6db74;">...</span>"&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            
+            <h3>CSS</h3>
+            <pre><code><span style="color: #66d9ef;">.galeria-grid</span> {
+    <span style="color: #f92672;">display</span>: <span style="color: #e6db74;">grid</span>;
+    <span style="color: #75715e;">/* MÁGICA ACONTECE AQUI */</span>
+    <span style="color: #f92672;">grid-template-columns</span>: <span style="color: #e6db74;">repeat(auto-fit, minmax(250px, 1fr))</span>;
+    <span style="color: #f92672;">gap</span>: <span style="color: #e6db74;">15px</span>;
+}
+<span style="color: #66d9ef;">.galeria-item img</span> {
+    <span style="color: #f92672;">width</span>: <span style="color: #e6db74;">100%</span>;
+    <span style="color: #f92672;">height</span>: <span style="color: #e6db74;">200px</span>;
+    <span style="color: #f92672;">object-fit</span>: <span style="color: #e6db74;">cover</span>; <span style="color: #75715e;">/* Evita distorção da imagem */</span>
+    <span style="color: #f92672;">border-radius</span>: <span style="color: #e6db74;">5px</span>;
+}
+</code></pre>
+        </section>
+
+        <section id="calculadora">
+            <h2>Calculadora (HTML/CSS/JS)</h2>
+            <p>Exemplo de uma calculadora simples funcional.</p>
+
+            <div id="minha-calculadora" class="calculadora">
+                <div class="calc-display">0</div>
+                <div class="calc-teclado">
+                    <button data-action="clear">AC</button>
+                    <button data-action="sign">+/-</button>
+                    <button data-action="percent">%</button>
+                    <button data-action="operator" class="operador" data-op="divide">÷</button>
+                    
+                    <button data-action="number">7</button>
+                    <button data-action="number">8</button>
+                    <button data-action="number">9</button>
+                    <button data-action="operator" class="operador" data-op="multiply">×</button>
+                    
+                    <button data-action="number">4</button>
+                    <button data-action="number">5</button>
+                    <button data-action="number">6</button>
+                    <button data-action="operator" class="operador" data-op="subtract">−</button>
+                    
+                    <button data-action="number">1</button>
+                    <button data-action="number">2</button>
+                    <button data-action="number">3</button>
+                    <button data-action="operator" class="operador" data-op="add">+</button>
+                    
+                    <button data-action="number" class="zero">0</button>
+                    <button data-action="decimal">.</button>
+                    <button data-action="calculate" class="igual">=</button>
+                </div>
+            </div>
+
+            <h3>HTML</h3>
+            <pre><code>&lt;div id="<span style="color: #e6db74;">minha-calculadora</span>" class="<span style="color: #e6db74;">calculadora</span>"&gt;
+    &lt;div class="<span style="color: #e6db74;">calc-display</span>"&gt;0&lt;/div&gt;
+    &lt;div class="<span style="color: #e6db74;">calc-teclado</span>"&gt;
+        <span style="color: #75715e;">&lt;!-- Usamos 'data-action' para o JS saber o que fazer --&gt;</span>
+        &lt;button <span style="color: #a6e22e;">data-action</span>="<span style="color: #e6db74;">clear</span>"&gt;AC&lt;/button&gt;
+        &lt;button <span style="color: #a6e22e;">data-action</span>="<span style="color: #e6db74;">operator</span>" <span style="color: #a6e22e;">data-op</span>="<span style="color: #e6db74;">divide</span>"&gt;÷&lt;/button&gt;
+        &lt;button <span style="color: #a6e22e;">data-action</span>="<span style="color: #e6db74;">number</span>"&gt;7&lt;/button&gt;
+        &lt;!-- ... etc ... --&gt;
+        &lt;button <span style="color: #a6e22e;">data-action</span>="<span style="color: #e6db74;">calculate</span>" class="<span style="color: #e6db74;">igual</span>"&gt;=&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            
+            <h3>CSS</h3>
+            <pre><code><span style="color: #66d9ef;">.calculadora</span> {
+    <span style="color: #f92672;">width</span>: <span style="color: #e6db74;">320px</span>;
+    <span style="color: #f92672;">border</span>: <span style="color: #e6db74;">2px solid #333</span>;
+}
+<span style="color: #66d9ef;">.calc-display</span> {
+    <span style="color: #f92672;">background-color</span>: <span style="color: #e6db74;">#222</span>;
+    <span style="color: #f92672;">color</span>: <span style="color: #e6db74;">white</span>;
+    <span style="color: #f92672;">font-size</span>: <span style="color: #e6db74;">2.5em</span>;
+    <span style="color: #f92672;">padding</span>: <span style="color: #e6db74;">20px</span>;
+    <span style="color: #f92672;">text-align</span>: <span style="color: #e6db74;">right</span>;
+}
+<span style="color: #66d9ef;">.calc-teclado</span> {
+    <span style="color: #f92672;">display</span>: <span style="color: #e6db74;">grid</span>;
+    <span style="color: #f92672;">grid-template-columns</span>: <span style="color: #e6db74;">repeat(4, 1fr)</span>; <span style="color: #75715e;">/* Layout perfeito de 4 colunas */</span>
+}
+<span style="color: #66d9ef;">.calc-teclado button</span> {
+    <span style="color: #f92672;">padding</span>: <span style="color: #e6db74;">20px</span>;
+    <span style="color: #f92672;">font-size</span>: <span style="color: #e6db74;">1.5em</span>;
+}
+<span style="color: #66d9ef;">.calc-teclado .zero</span> {
+    <span style="color: #f92672;">grid-column</span>: <span style="color: #e6db74;">span 2</span>; <span style="color: #75715e;">/* Ocupa 2 colunas */</span>
+}
+<span style="color: #66d9ef;">.calc-teclado .igual</span> {
+    <span style="color: #f92672;">grid-row</span>: <span style="color: #e6db74;">span 2</span>; <span style="color: #75715e;">/* Ocupa 2 linhas */</span>
+}
+<span style="color: #66d9ef;">.operador</span> { <span style="color: #f92672;">background-color</span>: <span style="color: #e6db74;">#ffa500</span>; }
+</code></pre>
+
+            <h3>JavaScript (A Lógica)</h3>
+            <pre><code><span style="color: #75715e;">// NOTA: O script completo está no fim do &lt;body&gt;</span>
+<span style="color: #75715e;">// Esta é uma versão simplificada da lógica</span>
+document.addEventListener(<span style="color: #e6db74;">'DOMContentLoaded'</span>, () => {
+    
+    <span style="color: #75715e;">// ... (O código da calculadora está lá) ...</span>
+    
+    <span style="color: #75715e;">// Lógica principal:</span>
+    <span style="color: #75715e;">// 1. Pega o container da calculadora e o display</span>
+    <span style="color: #75715e;">// 2. Adiciona um 'click' listener no container do TECLADO</span>
+    
+    <span style="color: #75715e;">// 3. Dentro do listener, verifica o que foi clicado (data-action)</span>
+    <span style="color: #75715e;">//    - Se for 'number': adiciona ao display</span>
+    <span style="color: #75715e;">//    - Se for 'decimal': adiciona '.'</span>
+    <span style="color: #75715e;">//    - Se for 'operator': salva o 1º número, salva o operador</span>
+    <span style="color: #75715e;">//    - Se for 'calculate': pega o 2º número, calcula e mostra</span>
+    <span style="color: #75715e;">//    - Se for 'clear': limpa tudo</span>
+
+});
+</code></pre>
+        </section>
+
+        <section id="carrossel">
+            <h2>Carrossel de Imagens (HTML/CSS/JS)</h2>
+            <p>Um carrossel de slides simples e funcional.</p>
+
+            <div id="meu-carrossel" class="carrossel">
+                <div class="carrossel-viewport">
+                    <div class="carrossel-filmstrip">
+                        <div class="carrossel-slide">
+                            <img src="https://picsum.photos/id/1018/600/400" alt="Paisagem 1">
+                        </div>
+                        <div class="carrossel-slide">
+                            <img src="https://picsum.photos/id/1015/600/400" alt="Paisagem 2">
+                        </div>
+                        <div class="carrossel-slide">
+                            <img src="https://picsum.photos/id/1025/600/400" alt="Paisagem 3">
+                        </div>
+                    </div>
+                </div>
+                <button class="carrossel-btn prev">&lt;</button>
+                <button class="carrossel-btn next">&gt;</button>
+            </div>
+
+            <h3>HTML</h3>
+            <pre><code>&lt;div id="<span style="color: #e6db74;">meu-carrossel</span>" class="<span style="color: #e6db74;">carrossel</span>"&gt;
+    <span style="color: #75715e;">&lt;!-- A "janela" que esconde o resto --&gt;</span>
+    &lt;div class="<span style="color: #e6db74;">carrossel-viewport</span>"&gt;
+        <span style="color: #75715e;">&lt;!-- O "filme" que se move (um container flex) --&gt;</span>
+        &lt;div class="<span style="color: #e6db74;">carrossel-filmstrip</span>"&gt;
+            <span style="color: #75715e;">&lt;!-- Cada slide --&gt;</span>
+            &lt;div class="<span style="color: #e6db74;">carrossel-slide</span>"&gt;
+                &lt;img src="<span style="color: #e6db74;">imagem1.jpg</span>" alt="<span style="color: #e6db74;">...</span>"&gt;
+            &lt;/div&gt;
+            &lt;div class="<span style="color: #e6db74;">carrossel-slide</span>"&gt;
+                &lt;img src="<span style="color: #e6db74;">imagem2.jpg</span>" alt="<span style="color: #e6db74;">...</span>"&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    <span style="color: #75715e;">&lt;!-- Botões de navegação --&gt;</span>
+    &lt;button class="<span style="color: #e6db74;">carrossel-btn prev</span>"&gt;&lt;<span style="color: #e6db74;">/button&gt;
+    &lt;button class="<span style="color: #e6db74;">carrossel-btn next</span>"&gt;&gt;<span style="color: #e6db74;">/button&gt;
+&lt;/div&gt;</code></pre>
+            
+            <h3>CSS</h3>
+            <pre><code><span style="color: #66d9ef;">.carrossel</span> {
+    <span style="color: #f92672;">position</span>: <span style="color: #e6db74;">relative</span>; <span style="color: #75715e;">/* Ponto de referência para os botões */</span>
+    <span style="color: #f92672;">width</span>: <span style="color: #e6db74;">100%</span>;
+}
+<span style="color: #66d9ef;">.carrossel-viewport</span> {
+    <span style="color: #f92672;">overflow</span>: <span style="color: #e6db74;">hidden</span>; <span style="color: #75715e;">/* <-- A MÁGICA DE ESCONDER */</span>
+    <span style="color: #f92672;">width</span>: <span style="color: #e6db74;">100%</span>;
+}
+<span style="color: #66d9ef;">.carrossel-filmstrip</span> {
+    <span style="color: #f92672;">display</span>: <span style="color: #e6db74;">flex</span>;
+    <span style="color: #f92672;">transition</span>: <span style="color: #e6db74;">transform 0.4s ease-in-out</span>; <span style="color: #75715e;">/* A MÁGICA DA ANIMAÇÃO */</span>
+}
+<span style="color: #66d9ef;">.carrossel-slide</span> {
+    <span style="color: #f92672;">flex</span>: <span style="color: #e6db74;">0 0 100%</span>; <span style="color: #75715e;">/* Cada slide ocupa 100% do viewport */</span>
+    <span style="color: #f92672;">width</span>: <span style="color: #e6db74;">100%</span>;
+}
+<span style="color: #66d9ef;">.carrossel-slide img</span> {
+    <span style="color: #f92672;">width</span>: <span style="color: #e6db74;">100%</span>;
+    <span style="color: #f92672;">display</span>: <span style="color: #e6db74;">block</span>;
+}
+<span style="color: #66d9ef;">.carrossel-btn</span> {
+    <span style="color: #f92672;">position</span>: <span style="color: #e6db74;">absolute</span>; <span style="color: #75715e;">/* Fica por cima do carrossel */</span>
+    <span style="color: #f92672;">top</span>: <span style="color: #e6db74;">50%</span>;
+    <span style="color: #f92672;">transform</span>: <span style="color: #e6db74;">translateY(-50%)</span>;
+    <span style="color: #75715e;">/* ... (estilos de botão) ... */</span>
+}
+<span style="color: #66d9ef;">.carrossel-btn.prev</span> { <span style="color: #f92672;">left</span>: <span style="color: #e6db74;">10px</span>; }
+<span style="color: #66d9ef;">.carrossel-btn.next</span> { <span style="color: #f92672;">right</span>: <span style="color: #e6db74;">10px</span>; }
+</code></pre>
+
+            <h3>JavaScript (A Lógica)</h3>
+            <pre><code><span style="color: #75715e;">// NOTA: O script completo está no fim do &lt;body&gt;</span>
+<span style="color: #75715e;">// Lógica principal:</span>
+document.addEventListener(<span style="color: #e6db74;">'DOMContentLoaded'</span>, () => {
+    
+    <span style="color: #75715e;">// ... (O código do carrossel está lá) ...</span>
+    
+    <span style="color: #75715e;">// 1. Pega os elementos: filmstrip, prevBtn, nextBtn, slides</span>
+    <span style="color: #75715e;">// 2. Cria uma variável 'currentIndex' (começa em 0)</span>
+    <span style="color: #75715e;">// 3. Cria uma função 'goToSlide(index)'</span>
+    <span style="color: #75715e;">//    - Dentro dela: filmstrip.style.transform = `translateX(-${index * 100}%)`</span>
+    
+    <span style="color: #75715e;">// 4. No clique do 'nextBtn':</span>
+    <span style="color: #75715e;">//    - Aumenta 'currentIndex' (currentIndex++)</span>
+    <span style="color: #75715e;">//    - Se 'currentIndex' > (total de slides - 1), volta para 0</span>
+    <span style="color: #75715e;">//    - Chama goToSlide(currentIndex)</span>
+    
+    <span style="color: #75715e;">// 5. No clique do 'prevBtn':</span>
+    <span style="color: #75715e;">//    - Diminui 'currentIndex' (currentIndex--)</span>
+    <span style="color: #75715e;">//    - Se 'currentIndex' < 0, vai para o último slide</span>
+    <span style="color: #75715e;">//    - Chama goToSlide(currentIndex)</span>
+});
+</code></pre>
+        </section>
+
+    </main>
+
+    <script>
+    // Espera o HTML ser totalmente carregado para rodar o JS
+    document.addEventListener('DOMContentLoaded', () => {
+
+        /* --- LÓGICA DO BOTÃO DE TEMA (Variáveis CSS) --- */
+        const themeButton = document.getElementById('theme-toggle-btn');
+        if (themeButton) {
+            themeButton.addEventListener('click', () => {
+                // Adiciona ou remove a classe 'dark-theme' do <body>
+                document.body.classList.toggle('dark-theme');
+            });
+        }
+
+
+        /* --- LÓGICA DA CALCULADORA --- */
+        const calculadora = document.getElementById('minha-calculadora');
+        if (calculadora) {
+            const display = calculadora.querySelector('.calc-display');
+            const teclado = calculadora.querySelector('.calc-teclado');
+
+            let displayValue = '0';
+            let primeiroOperando = null;
+            let operador = null;
+            let esperandoSegundoOperando = false;
+
+            function atualizarDisplay() {
+                display.textContent = displayValue;
+            }
+
+            function inputDigito(digito) {
+                if (esperandoSegundoOperando) {
+                    displayValue = digito;
+                    esperandoSegundoOperando = false;
+                } else {
+                    displayValue = displayValue === '0' ? digito : displayValue + digito;
+                }
+            }
+
+            function inputDecimal() {
+                if (!displayValue.includes('.')) {
+                    displayValue += '.';
+                }
+            }
+            
+            function handleOperador(proxOperador) {
+                const valor = parseFloat(displayValue);
+
+                if (operador && esperandoSegundoOperando) {
+                    operador = proxOperador;
+                    return;
+                }
+
+                if (primeiroOperando === null) {
+                    primeiroOperando = valor;
+                } else if (operador) {
+                    const resultado = calcular(primeiroOperando, valor, operador);
+                    displayValue = String(resultado);
+                    primeiroOperando = resultado;
+                }
+
+                esperandoSegundoOperando = true;
+                operador = proxOperador;
+            }
+            
+            function calcular(n1, n2, op) {
+                if (op === 'add') return n1 + n2;
+                if (op === 'subtract') return n1 - n2;
+                if (op === 'multiply') return n1 * n2;
+                if (op === 'divide') return n1 / n2;
+                return n2;
+            }
+
+            function limpar() {
+                displayValue = '0';
+                primeiroOperando = null;
+                operador = null;
+                esperandoSegundoOperando = false;
+            }
+
+            teclado.addEventListener('click', (event) => {
+                const { target } = event;
+                if (!target.matches('button')) {
+                    return;
+                }
+
+                const { action, op } = target.dataset;
+
+                if (action === 'number') {
+                    inputDigito(target.textContent);
+                } else if (action === 'decimal') {
+                    inputDecimal();
+                } else if (action === 'operator') {
+                    handleOperador(op);
+                } else if (action === 'clear') {
+                    limpar();
+                } else if (action === 'calculate') {
+                    if (operador && primeiroOperando !== null) {
+                        handleOperador(operador); // Finaliza a operação pendente
+                        operador = null; // Reseta para não calcular de novo
+                    }
+                }
+                
+                // Ignorando +/- e % por simplicidade
+                
+                atualizarDisplay();
+            });
+
+            atualizarDisplay();
+        }
+        
+        /* --- LÓGICA DO CARROSSEL DE IMAGENS --- */
+        const carrossel = document.getElementById('meu-carrossel');
+        if (carrossel) {
+            const filmstrip = carrossel.querySelector('.carrossel-filmstrip');
+            const slides = Array.from(filmstrip.children);
+            const prevBtn = carrossel.querySelector('.carrossel-btn.prev');
+            const nextBtn = carrossel.querySelector('.carrossel-btn.next');
+            const totalSlides = slides.length;
+            let currentIndex = 0;
+
+            // Função para mover o filmstrip
+            function goToSlide(index) {
+                // Move o filmstrip horizontalmente
+                filmstrip.style.transform = `translateX(-${index * 100}%)`;
+                currentIndex = index;
+            }
+
+            // Evento do botão "Próximo"
+            nextBtn.addEventListener('click', () => {
+                let nextIndex = currentIndex + 1;
+                if (nextIndex >= totalSlides) {
+                    nextIndex = 0; // Volta para o primeiro slide
+                }
+                goToSlide(nextIndex);
+            });
+
+            // Evento do botão "Anterior"
+            prevBtn.addEventListener('click', () => {
+                let prevIndex = currentIndex - 1;
+                if (prevIndex < 0) {
+                    prevIndex = totalSlides - 1; // Vai para o último slide
+                }
+                goToSlide(prevIndex);
+            });
+
+            // Inicia no primeiro slide
+            goToSlide(0);
+        }
+
+    });
+    </script>
+    
+</body>
+</html>

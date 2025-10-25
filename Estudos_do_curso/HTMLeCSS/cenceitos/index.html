@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratório de Programação Web: HTML & CSS</title>
+    <style>
+        /* CSS Básico para legibilidade */
+        :root {
+            --cor-primaria: #007bff; /* Azul para HTML/CSS */
+            --cor-secundaria: #2c3e50;
+            --cor-fundo: #f4f7f6;
+            --cor-fundo-bloco: #ffffff;
+            --cor-fundo-code: #ecf0f1;
+            --cor-texto: #333;
+            --cor-code-fundo-escuro: #272822;
+            --cor-code-texto-escuro: #f8f8f2;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: var(--cor-fundo-bloco);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        header, footer {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 2px solid var(--cor-fundo-code);
+        }
+        footer {
+            border-top: 2px solid var(--cor-fundo-code);
+            border-bottom: none;
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #777;
+        }
+        h1 {
+            color: var(--cor-secundaria);
+        }
+        h2 {
+            color: var(--cor-primaria);
+            border-bottom: 2px solid var(--cor-fundo-code);
+            padding-bottom: 5px;
+            margin-top: 40px;
+        }
+        h3 {
+            color: #34495e;
+            margin-top: 25px;
+        }
+        h4 {
+            color: #34495e;
+            margin-top: 30px;
+            border-bottom: 1px dotted #ccc;
+            padding-bottom: 3px;
+        }
+        h5 {
+            color: #555;
+            margin-top: 20px;
+        }
+        /* Estilo para navegação (Sumário) */
+        nav {
+            background-color: var(--cor-fundo-code);
+            padding: 15px 20px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        nav h2 {
+            margin-top: 0;
+            border: none;
+            color: var(--cor-secundaria);
+        }
+        nav ul {
+            list-style-type: none;
+            padding-left: 0;
+            column-count: 2; /* Divide a lista em colunas */
+        }
+        nav li {
+            margin-bottom: 8px;
+        }
+        nav a {
+            text-decoration: none;
+            color: var(--cor-primaria);
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+            color: #0056b3;
+        }
+        /* Estilo para blocos de código */
+        code {
+            font-family: "Courier New", Courier, monospace;
+            background-color: var(--cor-fundo-code);
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-size: 0.95em;
+        }
+        pre {
+            background-color: var(--cor-code-fundo-escuro);
+            color: var(--cor-code-texto-escuro);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 0.9em;
+        }
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            color: inherit;
+        }
+        /* Estilo para avisos/notas */
+        .nota {
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        .nota strong {
+            color: #0056b3;
+        }
+         /* Estilo para exemplos de HTML */
+        pre.html-example code {
+            color: #e6db74; /* Amarelo para strings/valores */
+        }
+        pre.html-example .tag { color: #f92672; } /* Rosa para tags */
+        pre.html-example .attr { color: #a6e22e; } /* Verde para atributos */
+
+        /* Estilo para exemplos de CSS */
+        pre.css-example code {
+            color: #f92672; /* Rosa para seletores */
+        }
+        pre.css-example .prop { color: #66d9ef; } /* Ciano para propriedades */
+        pre.css-example .value { color: #e6db74; } /* Amarelo para valores */
+        pre.css-example .comment { color: #75715e; } /* Cinza para comentários */
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Laboratório de Programação Web: HTML & CSS</h1>
+            <p>Uma introdução à Estrutura (HTML) e Estilo (CSS) da web, seguindo a lógica de um curso de programação.</p>
+        </header>
+
+        <nav>
+            <h2>Sumário</h2>
+            <ul>
+                <li><a href="#introducao">1. Introdução: A Tríade da Web</a></li>
+                <li><a href="#html-fundamentos">2. HTML: Fundamentos (As "Variáveis")</a>
+                    <ul>
+                        <li><a href="#html-doc">2.1. Anatomia do Documento</a></li>
+                        <li><a href="#html-tags">2.2. Tags Essenciais</a></li>
+                        <li><a href="#html-atributos">2.3. Atributos</a></li>
+                    </ul>
+                </li>
+                <li><a href="#html-estruturas">3. HTML: Estruturas de Conteúdo</a>
+                    <ul>
+                        <li><a href="#html-listas">3.1. Listas (Arrays)</a></li>
+                        <li><a href="#html-tabelas">3.2. Tabelas (Matrizes)</a></li>
+                        <li><a href="#html-semantica">3.3. Layout Semântico</a></li>
+                        <li><a href="#html-formularios">3.4. Formulários (Entrada de Dados)</a></li>
+                    </ul>
+                </li>
+                <li><a href="#css-fundamentos">4. CSS: Fundamentos (Os "Operadores")</a>
+                    <ul>
+                        <li><a href="#css-adicionar">4.1. Como Adicionar CSS</a></li>
+                        <li><a href="#css-anatomia">4.2. Anatomia de uma Regra</a></li>
+                        <li><a href="#css-propriedades">4.3. Propriedades Essenciais</a></li>
+                    </ul>
+                </li>
+                <li><a href="#css-controle">5. CSS: Controle de Fluxo (Layout)</a>
+                    <ul>
+                        <li><a href="#css-seletores">5.1. Seletores (As "Condições")</a></li>
+                        <li><a href="#css-boxmodel">5.2. O Box Model</a></li>
+                        <li><a href="#css-flexbox">5.3. Layout com Flexbox</a></li>
+                        <li><a href="#css-grid">5.4. Layout com Grid</a></li>
+                    </ul>
+                </li>
+                <li><a href="#css-avancado">6. CSS: Tópicos Avançados</a>
+                    <ul>
+                        <li><a href="#css-variaveis">6.1. Variáveis CSS (As "Variáveis")</a></li>
+                        <li><a href="#css-media">6.2. Media Queries (O "if" do CSS)</a></li>
+                    </ul>
+                </li>
+                <li><a href="#exemplo-final">7. Exemplo Completo</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <section id="introducao">
+                <h2>1. Introdução: A Tríade da Web</h2>
+                <p>
+                    Diferente de Python ou JavaScript (que são linguagens de programação), HTML e CSS são linguagens de marcação e estilo. Elas formam a base de todas as páginas web.
+                </p>
+                <ul>
+                    <li><strong>HTML (HyperText Markup Language):</strong> Fornece a <strong>estrutura</strong> e o significado do conteúdo (o "esqueleto").</li>
+                    <li><strong>CSS (Cascading Style Sheets):</strong> Cuida da <strong>apresentação e estilo</strong> visual (a "pele" e "roupas").</li>
+                    <li><strong>JavaScript:</strong> Adiciona <strong>comportamento e interatividade</strong> (os "músculos" e "cérebro").</li>
+                </ul>
+            </section>
+
+            <section id="html-fundamentos">
+                <h2>2. HTML: Fundamentos (As "Variáveis" da Web)</h2>
+                <p>Em programação, variáveis armazenam dados. Em HTML, as <strong>tags</strong> (elementos) "armazenam" o conteúdo.</p>
+
+                <article id="html-doc">
+                    <h3>2.1. Anatomia de um Documento HTML</h3>
+                    <p>Todo arquivo <code>.html</code> segue esta estrutura básica:</p>
+                    <pre class="html-example"><code><span class="comment">&lt;!DOCTYPE html&gt;</span>
+&lt;<span class="tag">html</span> <span class="attr">lang</span>="<span class="value">pt-BR</span>"&gt;
+    &lt;<span class="tag">head</span>&gt;
+        &lt;<span class="tag">meta</span> <span class="attr">charset</span>="<span class="value">UTF-8</span>"&gt;
+        &lt;<span class="tag">title</span>&gt;Título da Página&lt;/<span class="tag">title</span>&gt;
+        &lt;!-- Metadados, links para CSS, etc. --&gt;
+    &lt;/<span class="tag">head</span>&gt;
+    &lt;<span class="tag">body</span>&gt;
+        &lt;!-- Conteúdo visível da página --&gt;
+    &lt;/<span class="tag">body</span>&gt;
+&lt;/<span class="tag">html</span>&gt;</code></pre>
+                </article>
+
+                <article id="html-tags">
+                    <h3>2.2. Tags Essenciais (Os "Tipos de Dados")</h3>
+                    <p>Assim como há tipos de dados (int, string, bool), há tipos de tags para diferentes conteúdos:</p>
+                    <ul>
+                        <li><code>&lt;h1&gt;</code> a <code>&lt;h6&gt;</code>: Cabeçalhos (Títulos e subtítulos).</li>
+                        <li><code>&lt;p&gt;</code>: Parágrafo (o "tipo string" principal).</li>
+                        <li><code>&lt;a&gt;</code>: Âncora (Link).</li>
+                        <li><code>&lt;img&gt;</code>: Imagem.</li>
+                        <li><code>&lt;div&gt;</code>: Divisor genérico (um "contêiner" sem significado).</li>
+                        <li><code>&lt;span&gt;</code>: Contêiner genérico para texto (inline).</li>
+                    </ul>
+                </article>
+                
+                <article id="html-atributos">
+                    <h3>2.3. Atributos</h3>
+                    <p>Atributos fornecem informações extras sobre uma tag. Eles ficam dentro da tag de abertura.</p>
+                    <pre class="html-example"><code>&lt;!-- 'href' é o atributo que define o destino do link --&gt;
+&lt;<span class="tag">a</span> <span class="attr">href</span>="<span class="value">https://www.google.com</span>"&gt;Ir para o Google&lt;/<span class="tag">a</span>&gt;
+
+&lt;!-- 'src' (source) define o caminho da imagem --&gt;
+&lt;<span class="tag">img</span> <span class="attr">src</span>="<span class="value">logo.png</span>" <span class="attr">alt</span>="<span class="value">Logo da empresa</span>"&gt;
+
+&lt;!-- 'class' e 'id' são atributos para o CSS --&gt;
+&lt;<span class="tag">p</span> <span class="attr">class</span>="<span class="value">destaque</span>" <span class="attr">id</span>="<span class="value">paragrafo-inicial</span>"&gt;...&lt;/<span class="tag">p</span>&gt;
+</code></pre>
+                </article>
+            </section>
+
+            <section id="html-estruturas">
+                <h2>3. HTML: Estruturas de Conteúdo</h2>
+                <p>Equivalente às estruturas de dados (listas, matrizes) em programação, o HTML possui tags para agrupar e estruturar informações.</p>
+
+                <article id="html-listas">
+                    <h3>3.1. Listas (O equivalente a Listas/Arrays)</h3>
+                    <h4>Listas Não Ordenadas (<code>&lt;ul&gt;</code>)</h4>
+                    <p>Para itens sem ordem específica (bullet points).</p>
+                    <pre class="html-example"><code>&lt;<span class="tag">ul</span>&gt;
+    &lt;<span class="tag">li</span>&gt;Maçã&lt;/<span class="tag">li</span>&gt;
+    &lt;<span class="tag">li</span>&gt;Banana&lt;/<span class="tag">li</span>&gt;
+    &lt;<span class="tag">li</span>&gt;Laranja&lt;/<span class="tag">li</span>&gt;
+&lt;/<span class="tag">ul</span>&gt;</code></pre>
+                    
+                    <h4>Listas Ordenadas (<code>&lt;ol&gt;</code>)</h4>
+                    <p>Para itens com ordem específica (1, 2, 3...).</p>
+                    <pre class="html-example"><code>&lt;<span class="tag">ol</span>&gt;
+    &lt;<span class="tag">li</span>&gt;Primeiro passo&lt;/<span class="tag">li</span>&gt;
+    &lt;<span class="tag">li</span>&gt;Segundo passo&lt;/<span class="tag">li</span>&gt;
+&lt;/<span class="tag">ol</span>&gt;</code></pre>
+                </article>
+                
+                <article id="html-tabelas">
+                    <h3>3.2. Tabelas (O equivalente a Matrizes)</h3>
+                    <p>Para exibir dados em formato de linhas e colunas (como uma matriz ou planilha).</p>
+                    <pre class="html-example"><code>&lt;<span class="tag">table</span>&gt;
+    &lt;<span class="tag">thead</span>&gt; &lt;!-- Cabeçalho da Tabela --&gt;
+        &lt;<span class="tag">tr</span>&gt; &lt;!-- Linha da Tabela (Table Row) --&gt;
+            &lt;<span class="tag">th</span>&gt;Nome&lt;/<span class="tag">th</span>&gt; &lt;!-- Célula de Cabeçalho (Table Header) --&gt;
+            &lt;<span class="tag">th</span>&gt;Idade&lt;/<span class="tag">th</span>&gt;
+        &lt;/<span class="tag">tr</span>&gt;
+    &lt;/<span class="tag">thead</span>&gt;
+    &lt;<span class="tag">tbody</span>&gt; &lt;!-- Corpo da Tabela --&gt;
+        &lt;<span class="tag">tr</span>&gt;
+            &lt;<span class="tag">td</span>&gt;Ana&lt;/<span class="tag">td</span>&gt; &lt;!-- Célula de Dado (Table Data) --&gt;
+            &lt;<span class="tag">td</span>&gt;25&lt;/<span class="tag">td</span>&gt;
+        &lt;/<span class="tag">tr</span>&gt;
+        &lt;<span class="tag">tr</span>&gt;
+            &lt;<span class="tag">td</span>&gt;Bruno&lt;/<span class="tag">td</span>&gt;
+            &lt;<span class="tag">td</span>&gt;30&lt;/<span class="tag">td</span>&gt;
+        &lt;/<span class="tag">tr</span>&gt;
+    &lt;/<span class="tag">tbody</span>&gt;
+&lt;/<span class="tag">table</span>&gt;</code></pre>
+                </article>
+
+                <article id="html-semantica">
+                    <h3>3.3. Layout Semântico (Estruturando o Algoritmo)</h3>
+                    <p>Em vez de usar apenas <code>&lt;div&gt;</code> para tudo, o HTML5 fornece tags que descrevem o *propósito* de cada bloco. Isso ajuda na acessibilidade e SEO.</p>
+                    <pre class="html-example"><code>&lt;<span class="tag">body</span>&gt;
+    &lt;<span class="tag">header</span>&gt; &lt;!-- Cabeçalho do site (logo, menu) --&gt;
+        &lt;<span class="tag">nav</span>&gt;...&lt;/<span class="tag">nav</span>&gt;
+    &lt;/<span class="tag">header</span>&gt;
+
+    &lt;<span class="tag">main</span>&gt; &lt;!-- Conteúdo principal da página --&gt;
+        &lt;<span class="tag">article</span>&gt;
+            &lt;<span class="tag">h1</span>&gt;Título do Artigo&lt;/<span class="tag">h1</span>&gt;
+            &lt;<span class="tag">p</span>&gt;...&lt;/<span class="tag">p</span>&gt;
+        &lt;/<span class="tag">article</span>&gt;
+
+        &lt;<span class="tag">aside</span>&gt; &lt;!-- Barra lateral (conteúdo relacionado) --&gt;
+            ...
+        &lt;/<span class="tag">aside</span>&gt;
+    &lt;/<span class="tag">main</span>&gt;
+
+    &lt;<span class="tag">footer</span>&gt; &lt;!-- Rodapé do site --&gt;
+        &lt;<span class="tag">p</span>&gt;&copy; 2025 Meu Site&lt;/<span class="tag">p</span>&gt;
+    &lt;/<span class="tag">footer</span>&gt;
+&lt;/<span class="tag">body</span>&gt;</code></pre>
+                </article>
+
+                <article id="html-formularios">
+                    <h3>3.4. Formulários (Entrada de Dados)</h3>
+                    <p>O equivalente ao <code>input()</code> do Python. Formulários são como o HTML coleta dados do usuário.</p>
+                    <pre class="html-example"><code>&lt;<span class="tag">form</span> <span class="attr">action</span>="<span class="value">/submit</span>" <span class="attr">method</span>="<span class="value">post</span>"&gt;
+    &lt;<span class="tag">div</span>&gt;
+        &lt;<span class="tag">label</span> <span class="attr">for</span>="<span class="value">nome</span>"&gt;Nome:&lt;/<span class="tag">label</span>&gt;
+        &lt;<span class="tag">input</span> <span class="attr">type</span>="<span class="value">text</span>" <span class="attr">id</span>="<span class="value">nome</span>" <span class="attr">name</span>="<span class="value">usuario_nome</span>"&gt;
+    &lt;/<span class="tag">div</span>&gt;
+
+    &lt;<span class="tag">div</span>&gt;
+        &lt;<span class="tag">label</span> <span class="attr">for</span>="<span class="value">senha</span>"&gt;Senha:&lt;/<span class="tag">label</span>&gt;
+        &lt;<span class="tag">input</span> <span class="attr">type</span>="<span class="value">password</span>" <span class="attr">id</span>="<span class="value">senha</span>" <span class="attr">name</span>="<span class="value">usuario_senha</span>"&gt;
+    &lt;/<span class="tag">div</span>&gt;
+
+    &lt;<span class="tag">button</span> <span class="attr">type</span>="<span class="value">submit</span>"&gt;Enviar&lt;/<span class="tag">button</span>&gt;
+&lt;/<span class="tag">form</span>&gt;</code></pre>
+                </article>
+            </section>
+
+            <section id="css-fundamentos">
+                <h2>4. CSS: Fundamentos (Os "Operadores")</h2>
+                <p>O CSS aplica "operações" (estilos) aos elementos HTML.</p>
+
+                <article id="css-adicionar">
+                    <h3>4.1. Como Adicionar CSS</h3>
+                    <ol>
+                        <li><strong>Externo (Recomendado):</strong> Em um arquivo <code>.css</code> separado, linkado no <code>&lt;head&gt;</code>.
+                            <pre class="html-example"><code>&lt;<span class="tag">link</span> <span class="attr">rel</span>="<span class="value">stylesheet</span>" <span class="attr">href</span>="<span class="value">estilos.css</span>"&gt;</code></pre>
+                        </li>
+                        <li><strong>Interno:</strong> Dentro da tag <code>&lt;style&gt;</code> no <code>&lt;head&gt;</code> do HTML.
+                            <pre class="html-example"><code>&lt;<span class="tag">style</span>&gt; <span class="tag">body</span> { <span class="attr">background-color</span>: <span class="value">blue</span>; } &lt;/<span class="tag">style</span>&gt;</code></pre>
+                        </li>
+                        <li><strong>Inline:</strong> Diretamente em uma tag HTML (Não recomendado).
+                            <pre class="html-example"><code>&lt;<span class="tag">p</span> <span class="attr">style</span>="<span class="value">color: red;</span>"&gt;Texto vermelho.&lt;/<span class="tag">p</span>&gt;</code></pre>
+                        </li>
+                    </ol>
+                </article>
+
+                <article id="css-anatomia">
+                    <h3>4.2. Anatomia de uma Regra CSS</h3>
+                    <p>Uma regra CSS é composta por um Seletor e um Bloco de Declaração.</p>
+                    <pre class="css-example"><code><span class="comment">/* Seletor     Propriedade   Valor
+     |             |           |       */</span>
+    <span class="selector">p</span> {
+        <span class="prop">color</span>: <span class="value">blue</span>;
+        <span class="prop">font-size</span>: <span class="value">16px</span>;
+    }</code></pre>
+                </article>
+
+                <article id="css-propriedades">
+                    <h3>4.3. Propriedades Essenciais (Manipulação)</h3>
+                    <ul>
+                        <li><code>color</code>: Muda a cor do texto.</li>
+                        <li><code>background-color</code>: Muda a cor do fundo.</li>
+                        <li><code>font-size</code>: Muda o tamanho do texto.</li>
+                        <li><code>font-family</code>: Muda a fonte do texto (ex: <code>Arial, sans-serif</code>).</li>
+                        <li><code>font-weight</code>: Muda o "peso" da fonte (ex: <code>bold</code> para negrito).</li>
+                        <li><code>text-align</code>: Alinha o texto (ex: <code>center</code>, <code>left</code>, <code>right</code>).</li>
+                    </ul>
+                </article>
+            </section>
+            
+            <section id="css-controle">
+                <h2>5. CSS: Controle de Fluxo (Layout)</h2>
+                <p>Em programação, você usa `if` e `loops` para controlar o fluxo. Em CSS, você usa **Seletores** para *decidir* quais elementos estilizar, e **Layout** para *controlar* onde eles aparecem.</p>
+
+                <article id="css-seletores">
+                    <h3>5.1. Seletores (As "Condições" <code>if</code>)</h3>
+                    <p>Seletores "decidem" SE uma regra de estilo será aplicada.</p>
+                    <ul>
+                        <li>
+                            <strong>Seletor de Tipo (Tag):</strong> Aplica a todas as tags daquele tipo.
+                            <pre class="css-example"><code><span class="comment">/* 'if (tag === p)' */</span>
+<span class="selector">p</span> { <span class="prop">color</span>: <span class="value">gray</span>; }</code></pre>
+                        </li>
+                        <li>
+                            <strong>Seletor de Classe (<code>.</code>):</strong> O mais comum. Aplica a qualquer elemento com <code>class="nome-da-classe"</code>. (Equivalente a uma "Função" reutilizável).
+                            <pre class="css-example"><code><span class="comment">/* 'if (elemento.class === "destaque")' */</span>
+<span class="selector">.destaque</span> { 
+    <span class="prop">background-color</span>: <span class="value">yellow</span>;
+    <span class="prop">font-weight</span>: <span class="value">bold</span>;
+}</code></pre>
+                            <pre class="html-example"><code>&lt;<span class="tag">p</span> <span class="attr">class</span>="<span class="value">destaque</span>"&gt;Este parágrafo é importante.&lt;/<span class="tag">p</span>&gt;
+&lt;<span class="tag">div</span> <span class="attr">class</span>="<span class="value">destaque</span>"&gt;Este box também é.&lt;/<span class="tag">div</span>&gt;</code></pre>
+                        </li>
+                        <li>
+                            <strong>Seletor de ID (<code>#</code>):</strong> Aplica a UM ÚNICO elemento com <code>id="nome-do-id"</code>. IDs devem ser únicos na página.
+                            <pre class="css-example"><code><span class="comment">/* 'if (elemento.id === "menu-principal")' */</span>
+<span class="selector">#menu-principal</span> { <span class="prop">width</span>: <span class="value">100%</span>; }</code></pre>
+                            <pre class="html-example"><code>&lt;<span class="tag">nav</span> <span class="attr">id</span>="<span class="value">menu-principal</span>"&gt;...&lt;/<span class="tag">nav</span>&gt;</code></pre>
+                        </li>
+                        <li>
+                            <strong>Pseudo-classes (<code>:</code>):</strong> Aplica estilo baseado em um *estado*.
+                            <pre class="css-example"><code><span class="comment">/* 'if (mouse está em cima do link)' */</span>
+<span class="selector">a:hover</span> { <span class="prop">text-decoration</span>: <span class="value">underline</span>; }</code></pre>
+                        </li>
+                    </ul>
+                </article>
+
+                <article id="css-boxmodel">
+                    <h3>5.2. O Box Model (O "Algoritmo" do Espaçamento)</h3>
+                    <p>Todo elemento em HTML é uma caixa retangular. O Box Model é o algoritmo que define o tamanho dessa caixa.</p>
+                    <img src="box_model.webp" alt="Diagrama do Box Model" style="width:100%; max-width:400px; display:block; margin:auto;">
+                    <ul>
+                        <li><code>content</code>: O conteúdo (texto, imagem).</li>
+                        <li><code>padding</code>: Espaçamento interno (entre o conteúdo e a borda).</li>
+                        <li><code>border</code>: A borda da caixa.</li>
+                        <li><code>margin</code>: Espaçamento externo (entre esta caixa e outras).</li>
+                    </ul>
+                    <pre class="css-example"><code><span class="selector">.meu-box</span> {
+    <span class="prop">width</span>: <span class="value">300px</span>;  <span class="comment">/* Largura do conteúdo */</span>
+    <span class="prop">padding</span>: <span class="value">20px</span>; <span class="comment">/* 20px de espaço interno em todos os lados */</span>
+    <span class="prop">border</span>: <span class="value">1px solid black</span>; <span class="comment">/* Borda preta */</span>
+    <span class="prop">margin</span>: <span class="value">10px</span>; <span class="comment">/* 10px de espaço fora da caixa */</span>
+}</code></pre>
+                </article>
+
+                <article id="css-flexbox">
+                    <h3>5.3. Layout com Flexbox</h3>
+                    <p>Flexbox é um modelo de layout para organizar itens em uma única dimensão (linha ou coluna). É a forma moderna de alinhar elementos, substituindo gambiarras antigas.</p>
+                    <p>Para usar, você declara um contêiner (pai) como <code>display: flex</code> e alinha os itens (filhos) dentro dele.</p>
+                    <pre class="html-example"><code>&lt;<span class="tag">div</span> <span class="attr">class</span>="<span class="value">container-flex</span>"&gt;
+    &lt;<span class="tag">div</span> <span class="attr">class</span>="<span class="value">item</span>"&gt;1&lt;/<span class="tag">div</span>&gt;
+    &lt;<span class="tag">div</span> <span class="attr">class</span>="<span class="value">item</span>"&gt;2&lt;/<span class="tag">div</span>&gt;
+    &lt;<span class="tag">div</span> <span class="attr">class</span>="<span class="value">item</span>"&gt;3&lt;/<span class="tag">div</span>&gt;
+&lt;/<span class="tag">div</span>&gt;</code></pre>
+                    <pre class="css-example"><code><span class="selector">.container-flex</span> {
+    <span class="prop">display</span>: <span class="value">flex</span>; <span class="comment">/* Ativa o Flexbox */</span>
+    <span class="prop">flex-direction</span>: <span class="value">row</span>; <span class="comment">/* (Opcional) Itens em linha */</span>
+    <span class="prop">justify-content</span>: <span class="value">space-around</span>; <span class="comment">/* Alinha horizontalmente */</span>
+    <span class="prop">align-items</span>: <span class="value">center</span>; <span class="comment">/* Alinha verticalmente */</span>
+    <span class="prop">border</span>: <span class="value">1px solid gray</span>;
+    <span class="prop">height</span>: <span class="value">100px</span>;
+}</code></pre>
+                </article>
+
+                <article id="css-grid">
+                    <h3>5.4. Layout com Grid</h3>
+                    <p>Grid é um modelo de layout para organizar itens em duas dimensões (linhas E colunas). É perfeito para layouts de página complexos (como matrizes).</p>
+                    <pre class="css-example"><code><span class="selector">.container-grid</span> {
+    <span class="prop">display</span>: <span class="value">grid</span>; <span class="comment">/* Ativa o Grid */</span>
+    <span class="comment">/* Cria 3 colunas de tamanho igual */</span>
+    <span class="prop">grid-template-columns</span>: <span class="value">1fr 1fr 1fr</span>; 
+    <span class="prop">gap</span>: <span class="value">10px</span>; <span class="comment">/* Espaçamento entre os itens */</span>
+}</code></pre>
+                </article>
+            </section>
+
+            <section id="css-avancado">
+                <h2>6. CSS: Tópicos Avançados (Programação em CSS)</h2>
+                
+                <article id="css-variaveis">
+                    <h3>6.1. Variáveis CSS (As "Variáveis" Reais)</h3>
+                    <p>Assim como em Python ou JS, você pode declarar variáveis (chamadas de Propriedades Customizadas) para reutilizar valores (como cores ou tamanhos) em todo o seu site.</p>
+                    <pre class="css-example"><code><span class="comment">/* 1. Declara a variável no seletor :root (global) */</span>
+<span class="selector">:root</span> {
+    <span class="prop">--cor-principal</span>: <span class="value">#007bff</span>;
+    <span class="prop">--tamanho-fonte</span>: <span class="value">16px</span>;
+}
+
+<span class="comment">/* 2. Usa a variável com a função var() */</span>
+<span class="selector">body</span> {
+    <span class="prop">font-size</span>: <span class="value">var(--tamanho-fonte)</span>;
+}
+<span class="selector">a</span> {
+    <span class="prop">color</span>: <span class="value">var(--cor-principal)</span>;
+}
+<span class="selector">button</span> {
+    <span class="prop">background-color</span>: <span class="value">var(--cor-principal)</span>;
+}</code></pre>
+                </article>
+
+                <article id="css-media">
+                    <h3>6.2. Media Queries (O "if" do CSS)</h3>
+                    <p>Media Queries são o equivalente a uma estrutura <code>if</code>. Elas aplicam estilos CSS *apenas se* uma condição (como o tamanho da tela) for verdadeira. Isso é a base do **Design Responsivo**.</p>
+                    <pre class="css-example"><code><span class="comment">/* Estilo padrão (para telas pequenas/mobile) */</span>
+<span class="selector">.container</span> {
+    <span class="prop">width</span>: <span class="value">90%</span>;
+    <span class="prop">flex-direction</span>: <span class="value">column</span>;
+}
+
+<span class="comment">/* 'if (largura da tela >= 768px)' */</span>
+<span class="selector">@media (min-width: 768px)</span> {
+    <span class="comment">/* Estilos para telas maiores (tablets/desktops) */</span>
+    <span class="selector">.container</span> {
+        <span class="prop">width</span>: <span class="value">750px</span>;
+        <span class="prop">flex-direction</span>: <span class="value">row</span>;
+    }
+}</code></pre>
+                </article>
+            </section>
+
+            <section id="exemplo-final">
+                <h2>7. Exemplo Completo: HTML + CSS</h2>
+                <p>Aqui está um exemplo simples que junta tudo: HTML semântico, classes, CSS externo (imaginário), Flexbox e Media Queries.</p>
+
+                <h4><code>index.html</code> (Arquivo HTML)</h4>
+                <pre class="html-example"><code>&lt;<span class="tag">!DOCTYPE</span> <span class="attr">html</span>&gt;
+&lt;<span class="tag">html</span> <span class="attr">lang</span>="<span class="value">pt-BR</span>"&gt;
+&lt;<span class="tag">head</span>&gt;
+    &lt;<span class="tag">meta</span> <span class="attr">charset</span>="<span class="value">UTF-8</span>"&gt;
+    &lt;<span class="tag">title</span>&gt;Meu Site&lt;/<span class="tag">title</span>&gt;
+    &lt;<span class="tag">link</span> <span class="attr">rel</span>="<span class="value">stylesheet</span>" <span class="attr">href</span>="<span class="value">style.css</span>"&gt;
+&lt;/<span class="tag">head</span>&gt;
+&lt;<span class="tag">body</span>&gt;
+    &lt;<span class="tag">header</span> <span class="attr">class</span>="<span class="value">site-header</span>"&gt;
+        &lt;<span class="tag">h1</span>&gt;Logo&lt;/<span class="tag">h1</span>&gt;
+        &lt;<span class="tag">nav</span>&gt;
+            &lt;<span class="tag">ul</span>&gt;
+                &lt;<span class="tag">li</span>&gt;&lt;<span class="tag">a</span> <span class="attr">href</span>="#"&gt;Home&lt;/<span class="tag">a</span>&gt;&lt;/<span class="tag">li</span>&gt;
+                &lt;<span class="tag">li</span>&gt;&lt;<span class="tag">a</span> <span class="attr">href</span>="#"&gt;Sobre&lt;/<span class="tag">a</span>&gt;&lt;/<span class="tag">li</span>&gt;
+            &lt;/<span class="tag">ul</span>&gt;
+        &lt;/<span class="tag">nav</span>&gt;
+    &lt;/<span class="tag">header</span>&gt;
+
+    &lt;<span class="tag">main</span> <span class="attr">class</span>="<span class="value">content-area</span>"&gt;
+        &lt;<span class="tag">article</span>&gt;
+            &lt;<span class="tag">h2</span>&gt;Artigo Principal&lt;/<span class="tag">h2</span>&gt;
+            &lt;<span class="tag">p</span>&gt;Este é o conteúdo principal.&lt;/<span class="tag">p</span>&gt;
+        &lt;/<span class="tag">article</span>&gt;
+        &lt;<span class="tag">aside</span> <span class="attr">class</span>="<span class="value">sidebar</span>"&gt;
+            &lt;<span class="tag">h3</span>&gt;Barra Lateral&lt;/<span class="tag">h3</span>&gt;
+            &lt;<span class="tag">p</span>&gt;Links e anúncios.&lt;/<span class="tag">p</span>&gt;
+        &lt;/<span class="tag">aside</span>&gt;
+    &lt;/<span class="tag">main</span>&gt;
+&lt;/<span class="tag">body</span>&gt;
+&lt;/<span class="tag">html</span>&gt;</code></pre>
+
+                <h4><code>style.css</code> (Arquivo CSS)</h4>
+                <pre class="css-example"><code><span class="comment">/* 1. Variáveis Globais */</span>
+<span class="selector">:root</span> {
+    <span class="prop">--cor-principal</span>: <span class="value">#333</span>;
+    <span class="prop">--cor-links</span>: <span class="value">#007bff</span>;
+}
+
+<span class="selector">body</span> {
+    <span class="prop">font-family</span>: <span class="value">Arial, sans-serif</span>;
+    <span class="prop">margin</span>: <span class="value">0</span>;
+    <span class="prop">color</span>: <span class="value">var(--cor-principal)</span>;
+}
+
+<span class="selector">.site-header</span> {
+    <span class="prop">display</span>: <span class="value">flex</span>;
+    <span class="prop">justify-content</span>: <span class="value">space-between</span>;
+    <span class="prop">align-items</span>: <span class="value">center</span>;
+    <span class="prop">padding</span>: <span class="value">10px</span>;
+    <span class="prop">background-color</span>: <span class="value">#f1f1f1</span>;
+}
+
+<span class="selector">.content-area</span> {
+    <span class="prop">display</span>: <span class="value">flex</span>;
+    <span class="prop">flex-direction</span>: <span class="value">column</span>; <span class="comment">/* Mobile-first: empilhado */</span>
+    <span class="prop">padding</span>: <span class="value">10px</span>;
+}
+
+<span class="comment">/* 2. Media Query (O "if") */</span>
+<span class="selector">@media (min-width: 800px)</span> {
+    <span class="selector">.content-area</span> {
+        <span class="prop">flex-direction</span>: <span class="value">row</span>; <span class="comment">/* Desktop: lado a lado */</span>
+    }
+    <span class="selector">.sidebar</span> {
+        <span class="prop">width</span>: <span class="value">30%</span>;
+        <span class="prop">margin-left</span>: <span class="value">20px</span>;
+    }
+}
+</code></pre>
+            </section>
+        </main>
+
+        <footer>
+            <p>Página gerada como um guia de referência, adaptando a estrutura do "Notas de Aula" para HTML e CSS.</p>
+        </footer>
+    </div>
+
+</body>
+</html>
