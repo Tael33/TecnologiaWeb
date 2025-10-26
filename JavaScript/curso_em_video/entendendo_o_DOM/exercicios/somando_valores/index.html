@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+</head>
+<body>
+    <div class="container">
+        <h1> Calculadora </h1>
+        <div id="calculadora">
+
+            <input type="number" name="txtn1" id="txtn1"> +
+            <input type="number" name="txtn2" id="txtn2">
+
+            <input type="button" value="Somar" onclick="Somar()">
+
+            <div id="result">Resultado: </div>
+
+        </div>
+    </div>
+
+
+    <script>
+        function Somar(){
+            let txtn1 = document.getElementById('txtn1');
+            let txtn2 = document.getElementById('txtn2');
+            let result = document.getElementById('result')
+
+            const n1 = Number(txtn1.value)
+            const n2 = Number(txtn2.value)
+            
+            let soma = n1 + n2
+
+            result.innerHTML = `A soma entre ${n1} e ${n2} Resulta em: ${soma}`
+
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Completo: A Árvore DOM</title>
+    
+    <style>
+        /* --- ESTILOS GERAIS DA PÁGINA --- */
+        :root {
+            --cor-primaria: #f0db4f; /* Amarelo JS */
+            --cor-secundaria: #323330;
+            --cor-fundo: #f9f9f9;
+            --cor-bloco: #ffffff;
+            --cor-borda: #ddd;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            background-color: var(--cor-fundo);
+            color: var(--cor-secundaria);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+
+        /* --- Barra de Navegação Lateral (Sumário) --- */
+        nav.sumario {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 260px;
+            height: 100vh;
+            background-color: var(--cor-secundaria);
+            color: white;
+            padding: 15px;
+            overflow-y: auto;
+            border-right: 3px solid var(--cor-primaria);
+        }
+        nav.sumario h2 {
+            margin-top: 0;
+            color: var(--cor-primaria);
+            text-shadow: 1px 1px #000;
+        }
+        nav.sumario ul {
+            list-style: none;
+            padding: 0;
+        }
+        nav.sumario li {
+            margin-bottom: 8px;
+        }
+        nav.sumario a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            display: block;
+            padding: 5px 8px;
+            border-radius: 4px;
+        }
+        nav.sumario a:hover, nav.sumario a.active {
+            background-color: var(--cor-primaria);
+            color: var(--cor-secundaria);
+        }
+
+        /* --- Conteúdo Principal --- */
+        main.conteudo {
+            margin-left: 270px; /* Deixa espaço para a NAV */
+            padding: 20px;
+        }
+
+        section {
+            background-color: var(--cor-bloco);
+            border: 1px solid var(--cor-borda);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: var(--cor-secundaria);
+            text-align: center;
+            border-bottom: 2px solid var(--cor-primaria);
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: var(--cor-secundaria);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+            margin-top: 0;
+        }
+        h3 {
+            color: #555;
+            margin-top: 30px;
+            font-weight: 600;
+        }
+
+        /* --- Estilo dos Blocos de Código --- */
+        pre {
+            background-color: #272822;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: "Courier New", Courier, monospace;
+            font-size: 0.95em;
+        }
+        code {
+            font-family: "Courier New", Courier, monospace;
+            background-color: #eee;
+            padding: 2px 4px;
+            border-radius: 3px;
+            color: #d63384;
+        }
+        pre code {
+            background-color: transparent;
+            color: inherit;
+            padding: 0;
+        }
+        .code-comment {
+            color: #75715e;
+            font-style: italic;
+        }
+        
+        /* --- Estilo dos Exemplos Visuais --- */
+        .exemplo-dom-area {
+            background-color: #fdfdfd;
+            border: 2px dashed #ccc;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 10px;
+        }
+        .exemplo-dom-area h4 {
+            margin-top: 0;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #eee;
+        }
+        .exemplo-dom-area button {
+            background-color: var(--cor-primaria);
+            color: var(--cor-secundaria);
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-right: 5px;
+            margin-top: 5px;
+        }
+        .exemplo-dom-area button:hover {
+            filter: brightness(0.9);
+        }
+        
+        /* Estilos para os itens dos exemplos */
+        #item-alvo {
+            font-weight: bold;
+            color: #c0392b;
+            transition: all 0.3s ease;
+        }
+        #item-alvo.destaque {
+            background-color: yellow;
+            padding: 5px;
+        }
+        .box-verde {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 4px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav class="sumario">
+        <h2>Árvore DOM</h2>
+        <ul>
+            <li><a href="#o-que-e">1. O que é o DOM?</a></li>
+            <li><a href="#selecao">2. Seleção de Elementos</a>
+                <ul>
+                    <li><a href="#querySelector">2.1 querySelector (Recomendado)</a></li>
+                    <li><a href="#querySelectorAll">2.2 querySelectorAll (Recomendado)</a></li>
+                    <li><a href="#getElementById">2.3 getElementById</a></li>
+                    <li><a href="#getElementsByClassName">2.4 getElementsByClassName</a></li>
+                    <li><a href="#getElementsByTagName">2.5 getElementsByTagName</a></li>
+                </ul>
+            </li>
+            <li><a href="#manipulacao">3. Manipulação de Elementos</a>
+                <ul>
+                    <li><a href="#conteudo">3.1 Alterar Conteúdo (textContent, innerHTML)</a></li>
+                    <li><a href="#estilos">3.2 Alterar Estilos (style)</a></li>
+                    <li><a href="#atributos">3.3 Alterar Atributos (setAttribute)</a></li>
+                    <li><a href="#classes">3.4 Alterar Classes (classList)</a></li>
+                </ul>
+            </li>
+            <li><a href="#criacao">4. Criação e Remoção</a>
+                <ul>
+                    <li><a href="#createElement">4.1 createElement e appendChild</a></li>
+                    <li><a href="#remove">4.2 remove e removeChild</a></li>
+                </ul>
+            </li>
+            <li><a href="#navegacao">5. Navegação na Árvore</a></li>
+            <li><a href="#eventos">6. Eventos (Interatividade)</a>
+                 <ul>
+                    <li><a href="#addEventListener">6.1 addEventListener</a></li>
+                    <li><a href="#eventObject">6.2 O Objeto 'event'</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <main class="conteudo">
+        <h1>Guia Completo: A Árvore DOM</h1>
+
+        <section id="o-que-e">
+            <h2>1. O que é o DOM?</h2>
+            <p>
+                O <strong>DOM (Document Object Model)</strong> é uma representação em forma de árvore do seu arquivo HTML. O navegador cria essa "árvore de objetos" para que o JavaScript possa entender e interagir com o conteúdo da página.
+            </p>
+            <p>
+                Cada tag HTML (<code>&lt;body&gt;</code>, <code>&lt;div&gt;</code>, <code>&lt;p&gt;</code>), cada atributo (<code>class</code>, <code>id</code>) e cada pedaço de texto é um <strong>nó</strong> (node) nessa árvore.
+            </p>
+            <p>O JavaScript <strong>não lê o arquivo HTML</strong>. Ele lê o <strong>DOM</strong>.</p>
+            
+            <h3>Visualização da Árvore</h3>
+            <p>Para este HTML:</p>
+            <pre><code>&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Meu Título&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Olá, Mundo!&lt;/h1&gt;
+    &lt;p id="<span style="color: #e6db74;">intro</span>"&gt;Meu parágrafo.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+            <p>O navegador cria uma árvore parecida com esta:</p>
+            <pre><code class="code-comment">
+(window)
+  └── document
+      └── &lt;html&gt;
+          ├── &lt;head&gt;
+          |   └── &lt;title&gt;
+          |       └── (nó de texto: "Meu Título")
+          |
+          └── &lt;body&gt;
+              ├── &lt;h1&gt;
+              |   └── (nó de texto: "Olá, Mundo!")
+              |
+              └── &lt;p&gt; (com id "intro")
+                  └── (nó de texto: "Meu parágrafo.")
+            </code></pre>
+            <p>O objetivo do JavaScript é encontrar um nó (ex: o <code>&lt;p&gt;</code> com id "intro") e fazer algo com ele (mudar seu texto, cor, etc.).</p>
+        </section>
+        
+        <section id="selecao">
+            <h2>2. Seleção de Elementos (Encontrando Nós)</h2>
+            <p>O primeiro passo é sempre selecionar o elemento que você quer manipular. O <code>document</code> é o ponto de entrada para todas as seleções.</p>
+            
+            <h3 id="querySelector">2.1 <code>document.querySelector(seletorCSS)</code> (Recomendado)</h3>
+            <p>O método mais moderno e versátil. Ele usa seletores CSS (os mesmos que você usa no seu arquivo <code>.css</code>) e retorna <strong>o primeiro elemento</strong> que combinar.</p>
+            <pre><code><span class="code-comment">// Seleciona o primeiro elemento com o id 'intro'</span>
+const p_intro = document.querySelector(<span style="color: #e6db74;">'#intro'</span>);
+
+<span class="code-comment">// Seleciona o primeiro elemento com a classe 'destaque'</span>
+const item = document.querySelector(<span style="color: #e6db74;">'.destaque'</span>);
+
+<span class="code-comment">// Seleciona a primeira tag &lt;h1&gt;</span>
+const titulo = document.querySelector(<span style="color: #e6db74;">'h1'</span>);
+
+<span class="code-comment">// Seletores complexos também funcionam</span>
+const primeiroLink = document.querySelector(<span style="color: #e6db74;">'nav ul li a'</span>);
+</code></pre>
+            
+            <h3 id="querySelectorAll">2.2 <code>document.querySelectorAll(seletorCSS)</code> (Recomendado)</h3>
+            <p>Igual ao <code>querySelector</code>, mas retorna <strong>TODOS</strong> os elementos que combinam, em forma de uma <strong>NodeList</strong> (que parece um array).</p>
+            <pre><code><span class="code-comment">// Seleciona TODOS os elementos com a classe 'item-lista'</span>
+const todosItens = document.querySelectorAll(<span style="color: #e6db74;">'.item-lista'</span>);
+
+<span class="code-comment">// Você pode então iterar sobre eles com forEach</span>
+todosItens.forEach((item) => {
+  item.style.color = <span style="color: #e6db74;">'blue'</span>;
+});
+</code></pre>
+            
+            <h3 id="getElementById">2.3 <code>document.getElementById(id)</code></h3>
+            <p>O método clássico para pegar um elemento pelo seu <code>id</code>. É muito rápido.</p>
+            <div class="nota">Nota: Você passa <strong>apenas o nome do id</strong>, sem o <code>#</code>.</div>
+            <pre><code><span class="code-comment">// Seleciona o elemento &lt;div id="menu-principal"&gt;...&lt;/div&gt;</span>
+const menu = document.getElementById(<span style="color: #e6db74;">'menu-principal'</span>);
+</code></pre>
+            
+            <h3 id="getElementsByClassName">2.4 <code>document.getElementsByClassName(classe)</code></h3>
+            <p>Retorna <strong>TODOS</strong> os elementos com uma classe, em forma de uma <strong>HTMLCollection</strong> (parecido com array, mas um pouco mais antigo).</p>
+            <div class="nota">Nota: Você passa <strong>apenas o nome da classe</strong>, sem o <code>.</code>.</div>
+            <pre><code><span class="code-comment">// Seleciona todos os &lt;p class="aviso"&gt;...&lt;/p&gt;</span>
+const avisos = document.getElementsByClassName(<span style="color: #e6db74;">'aviso'</span>);
+
+<span class="code-comment">// HTMLCollection não tem forEach. Use um loop 'for' clássico.</span>
+for (let i = 0; i < avisos.length; i++) {
+  avisos[i].style.fontWeight = <span style="color: #e6db74;">'bold'</span>;
+}
+</code></pre>
+            
+            <h3 id="getElementsByTagName">2.5 <code>document.getElementsByTagName(tag)</code></h3>
+            <p>Retorna <strong>TODOS</strong> os elementos de uma certa tag (ex: todos os <code>&lt;li&gt;</code>).</p>
+            <pre><code><span class="code-comment">// Seleciona todas as tags &lt;li&gt; da página</span>
+const todosOsLinks = document.getElementsByTagName(<span style="color: #e6db74;">'li'</span>);
+</code></pre>
+        </section>
+
+        <section id="manipulacao">
+            <h2>3. Manipulação de Elementos (Alterando Nós)</h2>
+            <p>Depois de selecionar um elemento e guardá-lo em uma variável, você pode fazer qualquer coisa com ele.</p>
+
+            <div class="exemplo-dom-area">
+                <h4>Área de Teste Interativa</h4>
+                <p>Este é o elemento que vamos manipular: <strong id="item-alvo">Eu sou o alvo!</strong></p>
+                <button id="btn-texto">Mudar Texto</button>
+                <button id="btn-html">Mudar HTML</button>
+                <button id="btn-estilo">Mudar Cor</button>
+                <button id="btn-atributo">Add Atributo</button>
+                <button id="btn-classe">Add/Rem Classe</button>
+                <button id="btn-reset">Resetar</button>
+            </div>
+            
+            <h3 id="conteudo">3.1 Alterar Conteúdo (<code>textContent</code> e <code>innerHTML</code>)</h3>
+            <p><code>.textContent</code>: Muda <strong>apenas o texto</strong>. É mais seguro e rápido.</p>
+            <pre><code>const titulo = document.querySelector(<span style="color: #e6db74;">'h1'</span>);
+titulo.textContent = <span style="color: #e6db74;">'Novo Título da Página'</span>;
+</code></pre>
+            <p><code>.innerHTML</code>: Muda o <strong>HTML interno</strong>. Permite inserir novas tags, mas é um risco de segurança (XSS) se você inserir dados de um usuário.</p>
+            <pre><code>const aviso = document.getElementById(<span style="color: #e6db74;">'aviso'</span>);
+aviso.innerHTML = <span style="color: #e6db74;">'&lt;strong&gt;Atenção!&lt;/strong&gt; Você foi avisado.'</span>;
+</code></pre>
+            
+            <h3 id="estilos">3.2 Alterar Estilos (<code>.style</code>)</h3>
+            <p>Você pode alterar qualquer propriedade CSS diretamente pelo atributo <code>style</code>. Propriedades com hífen (<code>background-color</code>) viram camelCase (<code>backgroundColor</code>).</p>
+            <pre><code>const alvo = document.querySelector(<span style="color: #e6db74;">'#item-alvo'</span>);
+alvo.style.color = <span style="color: #e6db74;">'red'</span>;
+alvo.style.backgroundColor = <span style="color: #e6db74;">'yellow'</span>;
+alvo.style.fontSize = <span style="color: #e6db74;">'24px'</span>;
+</code></pre>
+
+            <h3 id="atributos">3.3 Alterar Atributos (<code>setAttribute</code>, <code>getAttribute</code>)</h3>
+            <p>Usado para ler ou definir atributos HTML, como <code>href</code> de um link, <code>src</code> de uma imagem ou <code>disabled</code> de um botão.</p>
+            <pre><code>const link = document.querySelector(<span style="color: #e6db74;">'a'</span>);
+link.setAttribute(<span style="color: #e6db74;">'href'</span>, <span style="color: #e6db74;">'https://www.google.com'</span>);
+link.setAttribute(<span style="color: #e6db74;">'target'</span>, <span style="color: #e6db74;">'_blank'</span>);
+
+const imagem = document.querySelector(<span style="color: #e6db74;">'img'</span>);
+const urlAntiga = imagem.getAttribute(<span style="color: #e6db74;">'src'</span>);
+</code></pre>
+            
+            <h3 id="classes">3.4 Alterar Classes (<code>.classList</code>) (Recomendado)</h3>
+            <p>Esta é a <strong>forma correta</strong> de alterar a aparência de um elemento. Em vez de mudar o <code>.style</code> direto no JS, você deve criar classes no seu CSS e apenas adicionar ou remover essas classes com JS.</p>
+            <ul>
+                <li><code>.classList.add('nome-da-classe')</code>: Adiciona a classe.</li>
+                <li><code>.classList.remove('nome-da-classe')</code>: Remove a classe.</li>
+                <li><code>.classList.toggle('nome-da-classe')</code>: Adiciona se não tiver, remove se tiver.</li>
+            </ul>
+            <pre><code><span class="code-comment">// CSS:</span>
+<span style="color: #66d9ef;">.destaque</span> {
+  <span style="color: #f92672;">background-color</span>: <span style="color: #e6db74;">yellow</span>;
+  <span style="color: #f92672;">font-weight</span>: <span style="color: #e6db74;">bold</span>;
+}
+
+<span class="code-comment">// JS:</span>
+const alvo = document.querySelector(<span style="color: #e6db74;">'#item-alvo'</span>);
+alvo.classList.add(<span style="color: #e6db74;">'destaque'</span>); <span class="code-comment">// Adiciona a classe .destaque</span>
+alvo.classList.remove(<span style="color: #e6db74;">'classe-antiga'</span>); <span class="code-comment">// Remove a classe .classe-antiga</span>
+alvo.classList.toggle(<span style="color: #e6db74;">'ativo'</span>); <span class="code-comment">// Liga/Desliga a classe .ativo</span>
+</code></pre>
+        </section>
+
+        <section id="criacao">
+            <h2>4. Criação e Remoção de Nós</h2>
+
+            <div class="exemplo-dom-area">
+                <h4>Área de Teste Interativa</h4>
+                <ul id="lista-alvo">
+                    <li>Item 1</li>
+                    <li>Item 2</li>
+                </ul>
+                <button id="btn-adicionar">Adicionar Novo Item</button>
+                <button id="btn-remover">Remover Primeiro Item</button>
+            </div>
+            
+            <h3 id="createElement">4.1 <code>createElement</code> e <code>appendChild</code></h3>
+            <p>Você pode criar novos elementos do zero e adicioná-los à árvore.</p>
+            <pre><code><span class="code-comment">// 1. Seleciona o PAI onde o novo elemento vai entrar</span>
+const lista = document.querySelector(<span style="color: #e6db74;">'#lista-alvo'</span>);
+
+<span class="code-comment">// 2. Cria o novo elemento (ele ainda não está na página)</span>
+const novoItem = document.createElement(<span style="color: #e6db74;">'li'</span>);
+
+<span class="code-comment">// 3. Configura o novo elemento</span>
+novoItem.textContent = <span style="color: #e6db74;">'Novo Item Adicionado via JS'</span>;
+novoItem.classList.add(<span style="color: #e6db74;">'box-verde'</span>);
+
+<span class="code-comment">// 4. Adiciona o novo elemento ao PAI (agora ele aparece na página)</span>
+lista.appendChild(novoItem);
+</code></pre>
+            
+            <h3 id="remove">4.2 <code>.remove()</code> e <code>.removeChild()</code></h3>
+            <p>A forma moderna de remover um elemento é simplesmente chamar <code>.remove()</code> no próprio elemento.</p>
+            <pre><code><span class="code-comment">// 1. Encontra o elemento que você quer remover</span>
+const itemParaRemover = document.querySelector(<span style="color: #e6db74;">'#lista-alvo li'</span>); <span class="code-comment">// Pega o primeiro <li></span>
+
+<span class="code-comment">// 2. Remove o elemento</span>
+if (itemParaRemover) {
+  itemParaRemover.remove();
+}
+</code></pre>
+            <p>A forma clássica (ainda útil) é dizer ao PAI para remover um FILHO:</p>
+            <pre><code><span class="code-comment">// 1. Pega o PAI</span>
+const pai = document.querySelector(<span style="color: #e6db74;">'#lista-alvo'</span>);
+
+<span class="code-comment">// 2. Pega o FILHO para remover</span>
+const filho = document.querySelector(<span style="color: #e6db74;">'#lista-alvo li'</span>);
+
+<span class="code-comment">// 3. O PAI remove o FILHO</span>
+if (pai && filho) {
+  pai.removeChild(filho);
+}
+</code></pre>
+        </section>
+
+        <section id="navegacao">
+            <h2>5. Navegação na Árvore</h2>
+            <p>Depois de selecionar um nó, você pode "andar" pela árvore a partir dele.</p>
+            <pre><code><span class="code-comment">// &lt;div id="container"&gt;</span>
+<span class="code-comment">//   &lt;p&gt;Irmão anterior&lt;/p&gt;</span>
+<span class="code-comment">//   &lt;h2 id="meu-h2"&gt;Meu Título&lt;/h2&gt; &lt;-- Estamos aqui</span>
+<span class="code-comment">//   &lt;p&gt;Irmão seguinte&lt;/p&gt;</span>
+<span class="code-comment">// &lt;/div&gt;</span>
+
+const h2 = document.querySelector(<span style="color: #e6db74;">'#meu-h2'</span>);
+
+<span class="code-comment">// 1. Acessar o PAI</span>
+const container = h2.parentElement; <span class="code-comment">// Pega o &lt;div id="container"&gt;</span>
+container.style.border = <span style="color: #e6db74;">'1px solid red'</span>;
+
+<span class="code-comment">// 2. Acessar os FILHOS (de um pai)</span>
+const todosFilhosDoContainer = container.children; <span class="code-comment">// Retorna uma HTMLCollection [&lt;p&gt;, &lt;h2&gt;, &lt;p&gt;]</span>
+
+<span class="code-comment">// 3. Acessar o IRMÃO SEGUINTE</span>
+const irmaoSeguinte = h2.nextElementSibling; <span class="code-comment">// Pega o &lt;p&gt; "Irmão seguinte"</span>
+
+<span class="code-comment">// 4. Acessar o IRMÃO ANTERIOR</span>
+const irmaoAnterior = h2.previousElementSibling; <span class="code-comment">// Pega o &lt;p&gt; "Irmão anterior"</span>
+</code></pre>
+        </section>
+
+        <section id="eventos">
+            <h2>6. Eventos (Interatividade)</h2>
+            <p>Eventos são como o DOM reage a ações do usuário (cliques, teclado, mouse, etc.).</p>
+            
+            <h3 id="addEventListener">6.1 <code>.addEventListener()</code> (Recomendado)</h3>
+            <p>Esta é a forma moderna de "ouvir" um evento. Você diz a um elemento para "escutar" por uma ação (ex: 'click') e executar uma função (callback) quando ela acontecer.</p>
+            
+            <div class="exemplo-dom-area">
+                <button id="btn-evento">Clique em Mim!</button>
+                <p id="resultado-evento">...</p>
+            </div>
+            
+            <pre><code><span class="code-comment">// 1. Seleciona o elemento</span>
+const botao = document.querySelector(<span style="color: #e6db74;">'#btn-evento'</span>);
+const resultado = document.querySelector(<span style="color: #e6db74;">'#resultado-evento'</span>);
+
+<span class="code-comment">// 2. Adiciona o "ouvidor de evento"</span>
+botao.addEventListener(<span style="color: #e6db74;">'click'</span>, function() {
+  <span class="code-comment">// 3. Este código só roda QUANDO o botão é clicado</span>
+  resultado.textContent = <span style="color: #e6db74;">'O botão foi clicado!'</span>;
+  resultado.classList.add(<span style="color: #e6db74;">'box-verde'</span>);
+});
+</code></pre>
+            <p><strong>Outros eventos comuns:</strong></p>
+            <ul>
+                <li><code>'click'</code>: Clique do mouse.</li>
+                <li><code>'mouseover'</code> / <code>'mouseout'</code>: Mouse entra / sai do elemento.</li>
+                <li><code>'input'</code>: Usuário digita algo em um <code>&lt;input&gt;</code> ou <code>&lt;textarea&gt;</code>.</li>
+                <li><code>'submit'</code>: Um formulário (<code>&lt;form&gt;</code>) é enviado.</li>
+                <li><code>'keydown'</code>: Uma tecla é pressionada.</li>
+                <li><code>'scroll'</code>: O usuário rola a página.</li>
+            </ul>
+            
+            <h3 id="eventObject">6.2 O Objeto 'event'</h3>
+            <p>A função do callback sempre recebe um parâmetro especial, geralmente chamado de <code>event</code> (ou <code>e</code>), que contém informações sobre a ação.</p>
+            <ul>
+                <li><code>event.target</code>: Diz <strong>qual elemento</strong> disparou o evento.</li>
+                <li><code>event.preventDefault()</code>: <strong>Impede o comportamento padrão</strong>. Essencial para formulários (impede a página de recarregar) e links (impede de navegar).</li>
+            </ul>
+            
+            <pre><code>const form = document.querySelector(<span style="color: #e6db74;">'form'</span>);
+
+form.addEventListener(<span style="color: #e6db74;">'submit'</span>, function(event) {
+  <span class="code-comment">// Impede o formulário de recarregar a página</span>
+  event.preventDefault(); 
+  
+  console.log(<span style="color: #e6db74;">'Formulário enviado via JS!'</span>);
+});
+
+
+const input = document.querySelector(<span style="color: #e6db74;">'input'</span>);
+
+input.addEventListener(<span style="color: #e6db74;">'input'</span>, function(event) {
+  <span class="code-comment">// event.target é o próprio &lt;input&gt;</span>
+  console.log(<span style="color: #e6db74;">'Valor atual: '</span>, event.target.value);
+});
+</code></pre>
+        </section>
+
+    </main>
+
+    <script>
+    // Espera o HTML ser totalmente carregado
+    document.addEventListener('DOMContentLoaded', () => {
+        
+        // --- Lógica da Seção 3: Manipulação ---
+        const itemAlvo = document.getElementById('item-alvo');
+        const textoOriginal = itemAlvo.textContent;
+        const htmlOriginal = itemAlvo.innerHTML;
+        
+        document.getElementById('btn-texto').addEventListener('click', () => {
+            itemAlvo.textContent = 'Texto alterado com .textContent!';
+        });
+        
+        document.getElementById('btn-html').addEventListener('click', () => {
+            itemAlvo.innerHTML = 'HTML alterado com <strong>.innerHTML</strong>!';
+        });
+        
+        document.getElementById('btn-estilo').addEventListener('click', () => {
+            itemAlvo.style.color = '#007bff';
+            itemAlvo.style.backgroundColor = '#f0f8ff';
+            itemAlvo.style.padding = '5px';
+            itemAlvo.style.borderRadius = '4px';
+        });
+        
+        document.getElementById('btn-atributo').addEventListener('click', () => {
+            itemAlvo.setAttribute('title', 'Este é um novo atributo title!');
+            itemAlvo.textContent = 'Passe o mouse aqui!';
+        });
+        
+        document.getElementById('btn-classe').addEventListener('click', () => {
+            itemAlvo.classList.toggle('destaque');
+        });
+        
+        document.getElementById('btn-reset').addEventListener('click', () => {
+            itemAlvo.innerHTML = htmlOriginal;
+            itemAlvo.style.color = '#c0392b';
+            itemAlvo.style.backgroundColor = 'transparent';
+            itemAlvo.style.padding = '0';
+            itemAlvo.removeAttribute('title');
+            itemAlvo.classList.remove('destaque');
+        });
+        
+        // --- Lógica da Seção 4: Criação e Remoção ---
+        const listaAlvo = document.getElementById('lista-alvo');
+        
+        document.getElementById('btn-adicionar').addEventListener('click', () => {
+            // 1. Cria o elemento
+            const novoLi = document.createElement('li');
+            // 2. Configura
+            novoLi.textContent = `Novo Item #${listaAlvo.children.length + 1}`;
+            novoLi.classList.add('box-verde');
+            // 3. Adiciona
+            listaAlvo.appendChild(novoLi);
+        });
+        
+        document.getElementById('btn-remover').addEventListener('click', () => {
+            // 1. Encontra o primeiro filho
+            const primeiroFilho = listaAlvo.querySelector('li');
+            // 2. Remove
+            if (primeiroFilho) {
+                primeiroFilho.remove();
+            } else {
+                alert('Não há mais itens para remover!');
+            }
+        });
+        
+        // --- Lógica da Seção 6: Eventos ---
+        const btnEvento = document.getElementById('btn-evento');
+        const resultadoEvento = document.getElementById('resultado-evento');
+        
+        btnEvento.addEventListener('click', function() {
+            resultadoEvento.textContent = 'O botão foi clicado às ' + new Date().toLocaleTimeString();
+            resultadoEvento.classList.add('box-verde');
+        });
+        
+    });
+    </script>
+    
+</body>
+</html>

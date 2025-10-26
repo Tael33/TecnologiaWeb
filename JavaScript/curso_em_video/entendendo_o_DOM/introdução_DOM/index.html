@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudos DOM</title>
+    <style>
+        body{
+            background-color: rgb(20, 136, 97);
+            color: antiquewhite;
+            font-size: 18pt;
+            margin: 40px;
+            display: grid;
+            flex-direction: column;
+            row-gap: 20px;
+        }
+
+        #muvMouse, img{
+            width: 400px;
+            height: auto;
+        }
+
+        #area{
+
+            background-color: azure;
+            color: black;
+            width: 200px;
+            height: 200px;
+            line-height: 200px;
+            text-align: center
+        }
+
+
+
+    </style>
+</head>
+<body>
+
+    <h1>Seletor de Elementos DOM</h1>
+
+    <ul>
+        <li>Por Marca/Tag</li>
+            <ul>
+                <li><code>getElementsByTagName()</code></li>
+            </ul>
+        
+        <li>Por ID</li>
+            <ul>
+                <li><code>getElementById()</code></li>
+            </ul>
+        <li>Por Nome</li>
+            <ul>
+                <li><code>getElementsByName()</code></li>
+            </ul>
+        <li>Por Classe</li>
+            <ul>
+                <li>getElementsByClassName()</li>
+            </ul>
+        <li>Ror Seletor/CSS</li>
+            <ul>
+                <li><code>querySelector()</code></li>
+                <li><code>querySelectorAll()</code></li>
+            </ul>
+    </ul>
+
+    <h2>Iniciando estudos em DOM</h2>
+    <p>Aqui vai o resultado</p>
+    <div id="msg" onclick="clicar()">Clique em mim!</div>
+    <div id="text">
+        <p>Olá, Mundo!</p>
+    </div>
+    <p>Aprendendo a usar <strong>DOM</strong> em JavaScript</p>
+
+    <h3> <a href="https://udn.realityripple.com/docs/Web/Events">Acesse esse site para eventos do JavaScript</a></h3>
+    
+
+    <div id="movMouse">
+        <img src="image.png" alt="Movimentos do Mouse">
+    </div>
+
+    <div id="area">
+        Interaja...
+    </div>
+
+    <script>
+        // window.document.write('\nOlá, Mundo!')
+        // window.document.write('\n',window.document.charset )
+        // window.document.write('\nURL: ', document.URL)
+
+        let area = document.querySelector('div#area')
+        area.addEventListener('click', clicar)
+        area.addEventListener('mouseenter', entrar)
+        area.addEventListener('mouseout', sair)
+
+        function clicar(){
+        
+            area.innerText = 'Clicou!'
+            area.style.background = 'red'
+
+        }
+        function entrar(){
+
+            area.innerText = 'Entrou!'
+            area.style.background = 'grey'
+        }
+        function sair(){
+
+            area.innerText = 'Saiu!'
+            area.style.background = 'azure'
+        }
+
+        let corpo = document.body
+        let p1 = window.document.getElementsByTagName('p')[0]
+        let p2 = document.getElementsByTagName('p')[1]
+        let Msg = document.getElementById('msg')
+        let text = document.querySelector('div#text')
+        
+
+        p1.style.color = 'orange'
+        corpo.style.background = '#155724'
+
+        // document.write(`Está escrito assim: ${p1.innerText}\n`)
+        
+        // document.write(p2.innerHTML)
+
+        Msg.style.background = 'green'
+        Msg.innerText = 'Estou Arrumando...'
+
+        text.style.background = 'grey'
+        text.style.width = '200px'
+        text.style.height = '200px'
+
+
+        
+
+    </script>
+</body>
+</html>

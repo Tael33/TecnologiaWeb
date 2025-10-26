@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia: Eventos JS & Animações CSS</title>
+    
+    <style>
+        /* --- 1. ESTILOS GERAIS DA PÁGINA (Para o guia) --- */
+        :root {
+            --cor-js: #f0db4f; /* Amarelo JS */
+            --cor-css: #2965f1; /* Azul CSS */
+            --cor-secundaria: #323330;
+            --cor-fundo: #f9f9f9;
+            --cor-bloco: #ffffff;
+            --cor-borda: #ddd;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            background-color: var(--cor-fundo);
+            color: var(--cor-secundaria);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+
+        /* --- Barra de Navegação Lateral --- */
+        nav.sumario {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 260px;
+            height: 100vh;
+            background-color: var(--cor-secundaria);
+            color: white;
+            padding: 15px;
+            overflow-y: auto;
+            border-right: 3px solid #555;
+        }
+        nav.sumario h2 {
+            margin-top: 0;
+            color: white;
+        }
+        nav.sumario h3 {
+            margin-top: 15px;
+            color: var(--cor-js);
+            font-size: 1.2em;
+        }
+        nav.sumario h3.css {
+            color: var(--cor-css);
+        }
+        nav.sumario ul {
+            list-style: none;
+            padding: 0;
+        }
+        nav.sumario li {
+            margin-bottom: 8px;
+        }
+        nav.sumario a {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            display: block;
+            padding: 5px 8px;
+            border-radius: 4px;
+        }
+        nav.sumario a:hover {
+            background-color: #555;
+        }
+
+        /* --- Conteúdo Principal --- */
+        main.conteudo {
+            margin-left: 270px; /* Deixa espaço para a NAV */
+            padding: 20px;
+        }
+
+        section {
+            background-color: var(--cor-bloco);
+            border: 1px solid var(--cor-borda);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        /* Estilos dos cabeçalhos de seção */
+        h1 {
+            color: var(--cor-secundaria);
+            text-align: center;
+            border-bottom: 2px solid var(--cor-borda);
+            padding-bottom: 10px;
+        }
+        section h2 {
+            border-bottom: 2px solid;
+            padding-bottom: 5px;
+            margin-top: 0;
+        }
+        h2.js { color: var(--cor-js); border-color: var(--cor-js); }
+        h2.css { color: var(--cor-css); border-color: var(--cor-css); }
+        h2.combo { color: #8a2be2; border-color: #8a2be2; } /* Roxo para a combinação */
+
+        h3 {
+            color: #555;
+            margin-top: 30px;
+            font-weight: 600;
+        }
+
+        /* --- Estilo dos Blocos de Código --- */
+        pre {
+            background-color: #272822;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: "Courier New", Courier, monospace;
+            font-size: 0.95em;
+        }
+        code {
+            font-family: "Courier New", Courier, monospace;
+            background-color: #eee;
+            padding: 2px 4px;
+            border-radius: 3px;
+            color: #d63384;
+        }
+        pre code {
+            background-color: transparent;
+            color: inherit;
+            padding: 0;
+        }
+        .code-comment { color: #75715e; font-style: italic; }
+        
+        /* --- Estilo dos Blocos de Explicação --- */
+        .explicacao {
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            border-left: 5px solid #555;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 15px 0;
+        }
+        
+        /* --- Estilo dos Exemplos Interativos --- */
+        .exemplo-container {
+            background-color: #fdfdfd;
+            border: 2px dashed #ccc;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 10px;
+        }
+        .exemplo-container button, .btn-exemplo {
+            background-color: var(--cor-css);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-right: 5px;
+            margin-top: 5px;
+        }
+        .exemplo-container button:hover, .btn-exemplo:hover {
+            filter: brightness(1.2);
+        }
+        .exemplo-container input[type="text"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-top: 5px;
+            width: 100%;
+        }
+        
+        /* --- 2. ESTILOS DOS EXEMPLOS DE ANIMAÇÃO --- */
+        
+        /* Exemplo de Transition */
+        #box-transition {
+            width: 100px;
+            height: 100px;
+            background-color: var(--cor-css);
+            margin-top: 10px;
+            color: white;
+            display: grid;
+            place-items: center;
+            font-weight: bold;
+            
+            /* 1. A MÁGICA DA TRANSIÇÃO ACONTECE AQUI */
+            transition-property: background-color, transform, border-radius;
+            transition-duration: 0.5s;
+            transition-timing-function: ease-in-out;
+        }
+        /* 2. O ESTADO FINAL (ativado por :hover ou por classe JS) */
+        #box-transition:hover,
+        #box-transition.ativo {
+            background-color: #c0392b; /* Vermelho */
+            transform: rotate(45deg) scale(1.2);
+            border-radius: 50%;
+        }
+
+        /* Exemplo de Keyframes (Spinner) */
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3; /* Borda cinza claro */
+            border-top: 5px solid var(--cor-css); /* Borda azul */
+            border-radius: 50%;
+            
+            /* 2. A MÁGICA DA ANIMAÇÃO ACONTECE AQUI */
+            animation-name: spin;
+            animation-duration: 1s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+        /* 1. DEFINIÇÃO DA ANIMAÇÃO */
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Exemplo de Keyframes (Pulsar) */
+        .btn-pulse {
+            animation-name: pulse;
+            animation-duration: 1.5s;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+        }
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 5px rgba(0,0,0,0.2);
+            }
+            100% {
+                transform: scale(1.1);
+                box-shadow: 0 0 15px rgba(0,0,255,0.5);
+            }
+        }
+
+        /* Exemplo de JS + CSS (Popup/Modal) */
+        .modal-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            
+            /* 1. Começa escondido */
+            visibility: hidden;
+            opacity: 0;
+            
+            /* 2. Define a transição */
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            
+            display: grid;
+            place-items: center;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            /* Animação extra no conteúdo */
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        /* 3. ESTADO ATIVO (adicionado via JS) */
+        .modal-container.ativo {
+            visibility: visible;
+            opacity: 1;
+        }
+        .modal-container.ativo .modal-content {
+            transform: scale(1);
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav class="sumario">
+        <h2>Eventos & Animações</h2>
+        
+        <h3 class="js">Eventos (JavaScript)</h3>
+        <ul>
+            <li><a href="#o-que-e-evento">1. O que é um Evento?</a></li>
+            <li><a href="#addEventListener">2. O Ouvinte: addEventListener</a></li>
+            <li><a href="#eventos-comuns">3. Eventos Comuns (Exemplos)</a></li>
+            <li><a href="#objeto-event">4. O Objeto 'event'</a></li>
+            <li><a href="#preventDefault">5. event.preventDefault()</a></li>
+        </ul>
+        
+        <h3 class="css">Animações (CSS)</h3>
+        <ul>
+            <li><a href="#o-que-e-animacao">6. O que é Animação CSS?</a></li>
+            <li><a href="#transition">7. `transition` (Animação A-B)</a></li>
+            <li><a href="#keyframes">8. `@keyframes` e `animation`</a></li>
+        </ul>
+        
+        <h3>JS + CSS</h3>
+        <ul>
+            <li><a href="#js-css">9. A Prática Correta</a></li>
+            <li><a href="#exemplo-popup">10. Exemplo: Modal/Popup</a></li>
+        </ul>
+    </nav>
+
+    <main class="conteudo">
+        <h1>Guia de Consulta: Eventos e Animações</h1>
+
+        <section id="eventos-js">
+            <h2 class="js">Parte 1: Eventos (JavaScript)</h2>
+            
+            <article id="o-que-e-evento">
+                <h3>1. O que é um Evento?</h3>
+                <div class="explicacao">
+                    <p><strong>Detalhe:</strong> Um <strong>Evento</strong> é um "sinal" que o navegador emite para o seu código JavaScript, informando que algo aconteceu na página.</p>
+                    <p>O JavaScript não fica "olhando" para o botão o tempo todo. Em vez disso, ele "assina" uma lista e pede ao navegador: "Me avise quando este botão for clicado".</p>
+                    <ul>
+                        <li>O <strong>Evento</strong> é o sinal (ex: 'click', 'scroll', 'keydown').</li>
+                        <li>O <strong>"Ouvinte" (Listener)</strong> é a função que fica esperando esse sinal.</li>
+                        <li>O <strong>"Callback"</strong> é a função que o JavaScript executa *depois* que o sinal é recebido.</li>
+                    </ul>
+                </div>
+            </article>
+            
+            <article id="addEventListener">
+                <h3>2. O Ouvinte: <code>addEventListener</code></h3>
+                <div class="explicacao">
+                    <p><strong>Detalhe:</strong> Este é o método moderno e preferido para "ouvir" eventos. A sintaxe sempre tem 3 partes:</p>
+                    <ol>
+                        <li>O <strong>Elemento Alvo</strong> (o botão, o input, a página inteira).</li>
+                        <li>O <strong>Nome do Evento</strong> (uma string, ex: <code>'click'</code>).</li>
+                        <li>A <strong>Função de Callback</strong> (o que fazer quando o evento acontecer).</li>
+                    </ol>
+                </div>
+                <pre><code><span class="code-comment">// 1. Seleciona o elemento</span>
+const meuBotao = document.querySelector(<span style="color: #e6db74;">'#btn-exemplo'</span>);
+
+<span class="code-comment">// 2. Adiciona o "ouvinte"</span>
+meuBotao.addEventListener(<span style="color: #e6db74;">'click'</span>, function() {
+  <span class="code-comment">// 3. O código aqui dentro (o callback) só roda QUANDO o botão é clicado.</span>
+  console.log(<span style="color: #e6db74;">'Botão foi clicado!'</span>);
+});
+</code></pre>
+            </article>
+
+            <article id="eventos-comuns">
+                <h3>3. Eventos Comuns (Exemplos Interativos)</h3>
+                
+                <h4>Evento: <code>click</code></h4>
+                <div class="exemplo-container">
+                    <button id="ex-btn-click">Clique em mim</button>
+                    <p id="ex-resultado-click">...</p>
+                </div>
+                <pre><code><span class="code-comment">// HTML: &lt;button id="ex-btn-click"&gt;...&lt;/button&gt;</span>
+const btnClick = document.querySelector(<span style="color: #e6db74;">'#ex-btn-click'</span>);
+const resClick = document.querySelector(<span style="color: #e6db74;">'#ex-resultado-click'</span>);
+
+btnClick.addEventListener(<span style="color: #e6db74;">'click'</span>, function() {
+  resClick.textContent = <span style="color: #e6db74;">'Você clicou! '</span> + new Date().toLocaleTimeString();
+});
+</code></pre>
+                
+                <h4>Eventos: <code>mouseover</code> e <code>mouseout</code></h4>
+                <div class="exemplo-container">
+                    <div id="ex-box-mouse" style="width:100%; height:80px; background-color: #eee; border: 1px solid #ccc; display:grid; place-items:center;">
+                        Passe o mouse aqui por cima
+                    </div>
+                </div>
+                <pre><code>const boxMouse = document.querySelector(<span style="color: #e6db74;">'#ex-box-mouse'</span>);
+
+<span class="code-comment">// Quando o mouse ENTRA no elemento</span>
+boxMouse.addEventListener(<span style="color: #e6db74;">'mouseover'</span>, function() {
+  boxMouse.textContent = <span style="color: #e6db74;">'Mouse ENTROU!'</span>;
+  boxMouse.style.backgroundColor = <span style="color: #e6db74;">'#d4edda'</span>; <span style="color: #75715e;">// Verde</span>
+});
+
+<span class="code-comment">// Quando o mouse SAI do elemento</span>
+boxMouse.addEventListener(<span style="color: #e6db74;">'mouseout'</span>, function() {
+  boxMouse.textContent = <span style="color: #e6db74;">'Mouse SAIU!'</span>;
+  boxMouse.style.backgroundColor = <span style="color: #e6db74;">'#f8d7da'</span>; <span style="color: #75715e;">// Vermelho</span>
+});
+</code></pre>
+
+                <h4>Evento: <code>input</code></h4>
+                <div class="exemplo-container">
+                    <label for="ex-input-texto">Digite algo:</label>
+                    <input type="text" id="ex-input-texto" placeholder="O texto aparecerá abaixo...">
+                    <p>Você digitou: <strong id="ex-resultado-input"></strong></p>
+                </div>
+                <pre><code><span class="code-comment">// Usado para &lt;input&gt;, &lt;textarea&gt;, &lt;select&gt;. Dispara a CADA letra digitada.</span>
+const inputTexto = document.querySelector(<span style="color: #e6db74;">'#ex-input-texto'</span>);
+const resInput = document.querySelector(<span style="color: #e6db74;">'#ex-resultado-input'</span>);
+
+inputTexto.addEventListener(<span style="color: #e6db74;">'input'</span>, function(event) {
+  <span style="color: #code-comment">// O 'event.target.value' contém o texto atual do input</span>
+  resInput.textContent = event.target.value;
+});
+</code></pre>
+                
+                <h4>Evento: <code>keydown</code></h4>
+                <div class="exemplo-container">
+                    <p id="ex-resultado-key">Pressione qualquer tecla...</p>
+                </div>
+                <pre><code><span style="color: #code-comment">// Para "ouvir" o teclado, geralmente adicionamos o listener no 'document' (a página inteira)</span>
+const resKey = document.querySelector(<span style="color: #e6db74;">'#ex-resultado-key'</span>);
+
+document.addEventListener(<span style="color: #e6db74;">'keydown'</span>, function(event) {
+  <span style="color: #code-comment">// O 'event.key' contém o nome da tecla pressionada</span>
+  resKey.textContent = <span style="color: #e6db74;">`Você pressionou: ${event.key}`</span>;
+});
+</code></pre>
+            </article>
+            
+            <article id="objeto-event">
+                <h3>4. O Objeto 'event'</h3>
+                <div class="explicacao">
+                    <p><strong>Detalhe:</strong> A função de callback (o 3º parâmetro do <code>addEventListener</code>) pode, opcionalmente, receber um argumento. Por convenção, chamamos esse argumento de <code>event</code> ou apenas <code>e</code>.</p>
+                    <p>Este objeto <code>event</code> é crucial, pois contém todos os detalhes sobre o que acabou de acontecer.</p>
+                    <p>A propriedade mais importante é <strong><code>event.target</code></strong>.</p>
+                    
+                    <h4>O que é <code>event.target</code>?</h4>
+                    <p><code>event.target</code> é o <strong>elemento DOM exato que originou o evento</strong>.</p>
+                    <p>Isso é útil quando você tem vários elementos filhos, mas colocou o "ouvinte" no elemento pai (uma técnica chamada "Delegação de Eventos").</p>
+                </div>
+                <div class="exemplo-container">
+                    <ul id="lista-delegacao">
+                        <li>Item 1</li>
+                        <li>Item 2</li>
+                        <li>Item 3</li>
+                    </ul>
+                </div>
+                <pre><code><span style="color: #code-comment">// 1. Ouvinte é colocado na &lt;ul&gt; (o PAI)</span>
+const lista = document.querySelector(<span style="color: #e6db74;">'#lista-delegacao'</span>);
+
+lista.addEventListener(<span style="color: #e6db74;">'click'</span>, function(event) {
+  <span style="color: #code-comment">// event.target será o &lt;li&gt; específico que foi clicado!</span>
+  console.log(<span style="color: #e6db74;">'Você clicou no: '</span>, event.target.textContent);
+  
+  <span style="color: #code-comment">// Evita aplicar o estilo na &lt;ul&gt; caso clique entre os itens</span>
+  if (event.target.tagName === <span style="color: #e6db74;">'LI'</span>) {
+    event.target.style.backgroundColor = <span style="color: #e6db74;">'yellow'</span>;
+  }
+});
+</code></pre>
+            </article>
+
+            <article id="preventDefault">
+                <h3>5. <code>event.preventDefault()</code></h3>
+                <div class="explicacao">
+                    <p><strong>Detalhe:</strong> Alguns elementos HTML têm um "comportamento padrão" quando clicados.</p>
+                    <ul>
+                        <li>Clicar em um link (<code>&lt;a&gt;</code>) navega para outra página.</li>
+                        <li>Clicar em um botão <code>type="submit"</code> (<code>&lt;button&gt;</code>) dentro de um <code>&lt;form&gt;</code> recarrega a página.</li>
+                    </ul>
+                    <p>O <code>event.preventDefault()</code> é um método que <strong>impede esse comportamento padrão</strong>, permitindo que o seu JavaScript assuma o controle.</p>
+                </div>
+                <div class="exemplo-container">
+                    <form id="ex-form" action="/pagina-inexistente">
+                        <input type="text" placeholder="Tente enviar">
+                        <button type="submit">Enviar Formulário</button>
+                    </form>
+                    <p id="ex-form-resultado">...</p>
+                </div>
+                <pre><code>const form = document.querySelector(<span style="color: #e6db74;">'#ex-form'</span>);
+const resForm = document.querySelector(<span style="color: #e6db74;">'#ex-form-resultado'</span>);
+
+form.addEventListener(<span style="color: #e6db74;">'submit'</span>, function(event) {
+  <span style="color: #code-comment">// A MÁGICA ACONTECE AQUI:</span>
+  event.preventDefault(); <span style="color: #code-comment">// Impede a página de recarregar</span>
+  
+  resForm.textContent = <span style="color: #e6db74;">'Formulário enviado via JS! A página não recarregou.'</span>;
+});
+</code></pre>
+            </article>
+        </section>
+
+        <section id="animacoes-css">
+            <h2 class="css">Parte 2: Animações (CSS)</h2>
+
+            <article id="o-que-e-animacao">
+                <h3>6. O que é Animação CSS?</h3>
+                <div class="explicacao">
+                    <p>Animação CSS é a capacidade de mudar o valor de uma propriedade CSS (como <code>background-color</code>, <code>width</code>, <code>opacity</code>, <code>transform</code>) suavemente ao longo do tempo, em vez de instantaneamente.</p>
+                    <p>Existem <strong>duas maneiras</strong> de fazer isso:</p>
+                    <ol>
+                        <li><strong><code>transition</code> (Transição):</strong> Para animações simples, de "Estado A" para "Estado B", geralmente disparadas por uma ação (<code>:hover</code>) ou uma classe JS.</li>
+                        <li><strong><code>@keyframes</code> (Animação):</strong> Para animações complexas, com múltiplos passos (A -> B -> C), que podem rodar em loop (ex: um spinner).</li>
+                    </ol>
+                </div>
+            </article>
+            
+            <article id="transition">
+                <h3>7. <code>transition</code> (Animação A-B)</h3>
+                <div class="explicacao">
+                    <p><strong>Detalhe:</strong> A <code>transition</code> não é uma animação em si. Ela é uma <strong>instrução</strong> que diz ao navegador: "Se alguma destas propriedades mudar, não mude instantaneamente. Mude suavemente durante X segundos."</p>
+                    <p>O "disparo" (trigger) da mudança é sempre uma <strong>mudança de estado</strong> (ex: o usuário passa o mouse por cima, <code>:hover</code>) ou uma <strong>mudança de classe</strong> (adicionada via JavaScript).</p>
+                    
+                    <h4>Propriedades da Transição</h4>
+                    <ul>
+                        <li><code>transition-property</code>: O que animar (ex: <code>background-color</code>, <code>transform</code>, ou <code>all</code> para tudo).</li>
+                        <li><code>transition-duration</code>: Quanto tempo a animação deve durar (ex: <code>0.5s</code> ou <code>500ms</code>).</li>
+                        <li><code>transition-timing-function</code>: A "curva de velocidade" da animação (ex: <code>linear</code>, <code>ease-in</code>, <code>ease-in-out</code>).</li>
+                        <li><code>transition-delay</code>: Quanto tempo esperar antes de começar (ex: <code>0.2s</code>).</li>
+                    </ul>
+                </div>
+                
+                <h4>Exemplo 1: Disparo com CSS (<code>:hover</code>)</h4>
+                <div class="exemplo-container">
+                    <p>Passe o mouse sobre o quadrado:</p>
+                    <div id="box-transition">HOVER</div>
+                </div>
+                <pre><code><span style="color: #66d9ef;">#box-transition</span> {
+    <span style="color: #code-comment">/* 1. Define o estado inicial */</span>
+    width: 100px;
+    height: 100px;
+    background-color: var(--cor-css);
+    border-radius: 0%;
+    transform: rotate(0deg) scale(1);
+    
+    <span style="color: #code-comment">/* 2. Define a instrução de transição (forma completa) */</span>
+    <span style="color: #f92672;">transition-property</span>: <span style="color: #e6db74;">all</span>; <span style="color: #code-comment">/* Anima qualquer propriedade que mudar */</span>
+    <span style="color: #f92672;">transition-duration</span>: <span style="color: #e6db74;">0.5s</span>;
+    <span style="color: #f92672;">transition-timing-function</span>: <span style="color: #e6db74;">ease-in-out</span>;
+    
+    <span style="color: #code-comment">/* 3. Forma abreviada (shorthand) - MAIS COMUM */</span>
+    <span style="color: #f92672;">transition</span>: <span style="color: #e6db74;">all 0.5s ease-in-out</span>;
+}
+
+<span style="color: #code-comment">/* 4. Define o estado final (o "disparo") */</span>
+<span style="color: #66d9ef;">#box-transition:hover</span> {
+    background-color: #c0392b; <span style="color: #code-comment">/* Muda a cor */</span>
+    transform: rotate(45deg) scale(1.2); <span style="color: #code-comment">/* Gira e aumenta */</span>
+    border-radius: 50%; <span style="color: #code-comment">/* Vira um círculo */</span>
+}
+</code></pre>
+            </article>
+
+            <article id="keyframes">
+                <h3>8. <code>@keyframes</code> e <code>animation</code> (Animação Multi-etapa)</h3>
+                <div class="explicacao">
+                    <p><strong>Detalhe:</strong> Este é o método de animação "real". Ele funciona em duas partes:</p>
+                    <ol>
+                        <li><strong><code>@keyframes</code>:</strong> Você define um "roteiro" para a animação, dando um nome a ela. Você define o que acontece em <code>0%</code> (ou <code>from</code>), <code>50%</code>, <code>100%</code> (ou <code>to</code>), etc.</li>
+                        <li><strong><code>animation</code>:</strong> Você "aplica" esse roteiro a um elemento, definindo a duração, quantas vezes deve repetir, etc.</li>
+                    </ol>
+                    
+                    <h4>Propriedades da Animação</h4>
+                    <ul>
+                        <li><code>animation-name</code>: O nome do <code>@keyframes</code> que você criou.</li>
+                        <li><code>animation-duration</code>: A duração de UM ciclo da animação (ex: <code>2s</code>).</li>
+                        <li><code>animation-iteration-count</code>: Quantas vezes repetir (ex: <code>3</code>, ou <code>infinite</code> para sempre).</li>
+                        <li><code>animation-timing-function</code>: Curva de velocidade (<code>linear</code>, <code>ease</code>).</li>
+                        <li><code>animation-direction</code>: A direção (ex: <code>alternate</code> para fazer "vai-e-volta").</li>
+                    </ul>
+                </div>
+
+                <h4>Exemplo 1: Loading Spinner (Loop Infinito)</h4>
+                <div class="exemplo-container">
+                    <div class="spinner"></div>
+                </div>
+                <pre><code><span style="color: #code-comment">/* 1. Define o "roteiro" da animação */</span>
+<span style="color: #f92672;">@keyframes</span> <span style="color: #a6e22e;">spin</span> {
+    <span style="color: #e6db74;">from</span> {
+        transform: rotate(0deg);
+    }
+    <span style="color: #e6db74;">to</span> {
+        transform: rotate(360deg);
+    }
+}
+
+<span style="color: #code-comment">/* 2. Aplica a animação ao elemento */</span>
+<span style="color: #66d9ef;">.spinner</span> {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid var(--cor-css);
+    border-radius: 50%;
+    
+    <span style="color: #code-comment">/* Forma abreviada (shorthand): nome | duração | timing | contagem */</span>
+    <span style="color: #f92672;">animation</span>: <span style="color: #e6db74;">spin 1s linear infinite</span>;
+}
+</code></pre>
+
+                <h4>Exemplo 2: Botão Pulsante (Vai-e-Volta)</h4>
+                <div class="exemplo-container">
+                    <button class="btn-exemplo btn-pulse">Eu estou pulsando</button>
+                </div>
+                <pre><code><span style="color: #code-comment">/* 1. Define o "roteiro" da animação */</span>
+<span style="color: #f92672;">@keyframes</span> <span style="color: #a6e22e;">pulse</span> {
+    <span style="color: #e6db74;">0%</span> { <span style="color: #code-comment">/* Estado inicial */</span>
+        transform: scale(1);
+    }
+    <span style="color: #e6db74;">100%</span> { <span style="color: #code-comment">/* Estado final */</span>
+        transform: scale(1.1);
+    }
+}
+
+<span style="color: #code-comment">/* 2. Aplica a animação ao elemento */</span>
+<span style="color: #66d9ef;">.btn-pulse</span> {
+    <span style="color: #f92672;">animation-name</span>: <span style="color: #e6db74;">pulse</span>;
+    <span style="color: #f92672;">animation-duration</span>: <span style="color: #e6db74;">1.5s</span>;
+    <span style="color: #f92672;">animation-iteration-count</span>: <span style="color: #e6db74;">infinite</span>;
+    <span style="color: #f92672;">animation-direction</span>: <span style="color: #e6db74;">alternate</span>; <span style="color: #code-comment">/* Faz a animação ir e voltar (100% -> 0%) */</span>
+}
+</code></pre>
+            </article>
+        </section>
+        
+        <section id="js-css">
+            <h2 class="combo">Parte 3: JS + CSS (A Prática Correta)</h2>
+
+            <article id="pratica-correta">
+                <h3>9. A Prática Correta: JS Dispara, CSS Anima</h3>
+                <div class="explicacao">
+                    <p><strong>Detalhe mais importante:</strong> Evite fazer animações complexas diretamente no JavaScript (ex: <code>elemento.style.left = ...</code> dentro de um loop). Isso é lento e trava o navegador.</p>
+                    <p>A prática profissional é "Separar as Responsabilidades":</p>
+                    <ol>
+                        <li><strong>CSS:</strong> Define todos os estados da animação usando classes (ex: <code>.slide-in</code>, <code>.fade-out</code>) e as <code>transition</code> ou <code>animation</code>.</li>
+                        <li><strong>JavaScript:</strong> Atua apenas como o "controlador", adicionando ou removendo essas classes no momento certo (ex: em um <code>click</code>).</li>
+                    </ol>
+                    <p><strong>Vantagem:</strong> O navegador otimiza as animações CSS para rodarem de forma muito mais suave (usando a placa de vídeo), e seu código JavaScript fica limpo, focado apenas na <strong>lógica</strong> (o que fazer) e não na <strong>aparência</strong> (como fazer).</p>
+                </div>
+            </article>
+            
+            <article id="exemplo-popup">
+                <h3>10. Exemplo: Abrir/Fechar um Modal (Popup)</h3>
+                <div class="explicacao">
+                    <p>Aqui, o JS apenas adiciona/remove a classe <code>.ativo</code>. O CSS faz toda a animação de fade-in e fade-out usando <code>opacity</code> e <code>visibility</code>.</p>
+                </div>
+                
+                <div class="exemplo-container">
+                    <button class="btn-exemplo" id="btn-abrir-modal">Abrir Popup</button>
+                </div>
+                
+                <div class="modal-container" id="meu-modal">
+                    <div class="modal-content">
+                        <h3>Meu Popup</h3>
+                        <p>Este popup foi aberto com JavaScript, mas a animação de fade-in é 100% CSS!</p>
+                        <button class="btn-exemplo" id="btn-fechar-modal">Fechar</button>
+                    </div>
+                </div>
+
+                <h4>HTML</h4>
+                <pre><code><span style="color: #code-comment">&lt;!-- Botão para abrir --&gt;</span>
+&lt;button id="<span style="color: #e6db74;">btn-abrir-modal</span>"&gt;Abrir Popup&lt;/button&gt;
+
+<span style="color: #code-comment">&lt;!-- O Modal (começa escondido) --&gt;</span>
+&lt;div class="<span style="color: #e6db74;">modal-container</span>" id="<span style="color: #e6db74;">meu-modal</span>"&gt;
+    &lt;div class="<span style="color: #e6db74;">modal-content</span>"&gt;
+        &lt;h3&gt;Meu Popup&lt;/h3&gt;
+        &lt;button id="<span style="color: #e6db74;">btn-fechar-modal</span>"&gt;Fechar&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+                
+                <h4>CSS</h4>
+                <pre><code><span style="color: #66d9ef;">.modal-container</span> {
+    <span style="color: #f92672;">position</span>: <span style="color: #e6db74;">fixed</span>;
+    <span style="color: #f92672;">top</span>: <span style="color: #e6db74;">0</span>; <span style="color: #f92672;">left</span>: <span style="color: #e6db74;">0</span>;
+    <span style="color: #f92672;">width</span>: <span style="color: #e6db74;">100%</span>; <span style="color: #f92672;">height</span>: <span style="color: #e6db74;">100%</span>;
+    <span style="color: #f92672;">background-color</span>: <span style="color: #e6db74;">rgba(0,0,0,0.5)</span>;
+    <span style="color: #f92672;">display</span>: <span style="color: #e6db74;">grid</span>;
+    <span style="color: #f92672;">place-items</span>: <span style="color: #e6db74;">center</span>;
+    
+    <span style="color: #code-comment">/* 1. Estado Inicial: Escondido */</span>
+    <span style="color: #f92672;">visibility</span>: <span style="color: #e6db74;">hidden</span>;
+    <span style="color: #f92672;">opacity</span>: <span style="color: #e6db74;">0</span>;
+    
+    <span style="color: #code-comment">/* 2. A Transição */</span>
+    <span style="color: #f92672;">transition</span>: <span style="color: #e6db74;">opacity 0.3s ease, visibility 0.3s ease</span>;
+}
+
+<span style="color: #code-comment">/* 3. Estado Final: Ativo (quando o JS adicionar a classe) */</span>
+<span style="color: #66d9ef;">.modal-container.ativo</span> {
+    <span style="color: #f92672;">visibility</span>: <span style="color: #e6db74;">visible</span>;
+    <span style="color: #f92672;">opacity</span>: <span style="color: #e6db74;">1</span>;
+}
+</code></pre>
+
+                <h4>JavaScript</h4>
+                <pre><code><span style="color: #code-comment">// 1. Seleciona os elementos</span>
+const btnAbrir = document.querySelector(<span style="color: #e6db74;">'#btn-abrir-modal'</span>);
+const btnFechar = document.querySelector(<span style="color: #e6db74;">'#btn-fechar-modal'</span>);
+const modal = document.querySelector(<span style="color: #e6db74;">'#meu-modal'</span>);
+
+<span style="color: #code-comment">// 2. JS adiciona a classe 'ativo' no clique de ABRIR</span>
+btnAbrir.addEventListener(<span style="color: #e6db74;">'click'</span>, function() {
+  modal.classList.add(<span style="color: #e6db74;">'ativo'</span>);
+});
+
+<span style="color: #code-comment">// 3. JS remove a classe 'ativo' no clique de FECHAR</span>
+btnFechar.addEventListener(<span style="color: #e6db74;">'click'</span>, function() {
+  modal.classList.remove(<span style="color: #e6db74;">'ativo'</span>);
+});
+</code></pre>
+            </article>
+        </section>
+
+    </main>
+
+    <script>
+    // Espera o HTML ser totalmente carregado
+    document.addEventListener('DOMContentLoaded', () => {
+        
+        /* --- LÓGICA DA SEÇÃO 3: Eventos Comuns --- */
+        
+        // Exemplo 'click'
+        const btnClick = document.querySelector('#ex-btn-click');
+        const resClick = document.querySelector('#ex-resultado-click');
+        btnClick.addEventListener('click', function() {
+            resClick.textContent = 'Você clicou! ' + new Date().toLocaleTimeString();
+        });
+
+        // Exemplo 'mouseover'/'mouseout'
+        const boxMouse = document.querySelector('#ex-box-mouse');
+        boxMouse.addEventListener('mouseover', function() {
+            boxMouse.textContent = 'Mouse ENTROU!';
+            boxMouse.style.backgroundColor = '#d4edda'; // Verde
+        });
+        boxMouse.addEventListener('mouseout', function() {
+            boxMouse.textContent = 'Mouse SAIU!';
+            boxMouse.style.backgroundColor = '#f8d7da'; // Vermelho
+        });
+
+        // Exemplo 'input'
+        const inputTexto = document.querySelector('#ex-input-texto');
+        const resInput = document.querySelector('#ex-resultado-input');
+        inputTexto.addEventListener('input', function(event) {
+            // O 'event.target.value' contém o texto atual do input
+            resInput.textContent = event.target.value;
+        });
+
+        // Exemplo 'keydown'
+        const resKey = document.querySelector('#ex-resultado-key');
+        document.addEventListener('keydown', function(event) {
+            // O 'event.key' contém o nome da tecla pressionada
+            if(event.target.id === 'ex-input-texto') return; // Ignora se estiver digitando no input
+            resKey.textContent = `Você pressionou: ${event.key}`;
+        });
+        
+        // Exemplo 'Delegação de Eventos'
+        const lista = document.querySelector('#lista-delegacao');
+        lista.addEventListener('click', function(event) {
+            if (event.target.tagName === 'LI') {
+                // Remove o destaque de todos
+                lista.querySelectorAll('li').forEach(li => li.style.backgroundColor = 'transparent');
+                // Adiciona destaque apenas no clicado
+                event.target.style.backgroundColor = 'yellow';
+            }
+        });
+
+        // Exemplo 'preventDefault'
+        const form = document.querySelector('#ex-form');
+        const resForm = document.querySelector('#ex-form-resultado');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Impede a página de recarregar
+            resForm.textContent = 'Formulário enviado via JS! A página não recarregou.';
+        });
+        
+        /* --- LÓGICA DA SEÇÃO 10: Modal/Popup --- */
+        
+        // 1. Seleciona os elementos
+        const btnAbrir = document.querySelector('#btn-abrir-modal');
+        const btnFechar = document.querySelector('#btn-fechar-modal');
+        const modal = document.querySelector('#meu-modal');
+
+        // 2. JS adiciona a classe 'ativo' no clique de ABRIR
+        btnAbrir.addEventListener('click', function() {
+          modal.classList.add('ativo');
+        });
+
+        // 3. JS remove a classe 'ativo' no clique de FECHAR
+        btnFechar.addEventListener('click', function() {
+          modal.classList.remove('ativo');
+        });
+        
+        // Bônus: Fechar o modal se clicar fora do conteúdo (na área cinza)
+        modal.addEventListener('click', function(event) {
+            // Se o alvo do clique (event.target) for o PRÓPRIO container do modal...
+            if (event.target === modal) {
+                 modal.classList.remove('ativo');
+            }
+        });
+        
+    });
+    </script>
+    
+</body>
+</html>
