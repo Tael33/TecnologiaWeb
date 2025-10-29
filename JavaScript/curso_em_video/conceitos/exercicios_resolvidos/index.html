@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notas de Aula: Laboratório de Programação (JS)</title>
+    
+    <style>
+        /* --- 1. ESTILOS GERAIS DA PÁGINA --- */
+        :root {
+            --cor-primaria: #D95B00; /* Laranja (Notas de Aula) */
+            --cor-secundaria: #2c3e50;
+            --cor-fundo: #f4f7f6;
+            --cor-bloco: #ffffff;
+            --cor-borda: #ddd;
+            --cor-code: #272822;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            background-color: var(--cor-fundo);
+            color: var(--cor-secundaria);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+
+        /* --- Barra de Navegação Lateral (Sumário) --- */
+        nav.sumario {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 260px;
+            height: 100vh;
+            background-color: var(--cor-secundaria);
+            color: white;
+            padding: 15px;
+            overflow-y: auto;
+            border-right: 3px solid var(--cor-primaria);
+        }
+        nav.sumario h2 {
+            margin-top: 0;
+            color: var(--cor-primaria);
+        }
+        nav.sumario ul {
+            list-style: none;
+            padding: 0;
+        }
+        nav.sumario li {
+            margin-bottom: 8px;
+        }
+        nav.sumario li a {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            display: block;
+            padding: 5px 8px;
+            border-radius: 4px;
+        }
+        nav.sumario a:hover {
+            background-color: #555;
+        }
+        nav.sumario ul ul {
+            padding-left: 15px;
+            margin-top: 5px;
+        }
+        nav.sumario ul ul a {
+            font-size: 0.9em;
+            font-weight: normal;
+        }
+        nav.sumario a.exercicios-link {
+            font-weight: bold;
+            color: var(--cor-primaria);
+            font-size: 1.1em;
+        }
+
+        /* --- Conteúdo Principal --- */
+        main.conteudo {
+            margin-left: 270px; /* Deixa espaço para a NAV */
+            padding: 20px;
+        }
+
+        section {
+            background-color: var(--cor-bloco);
+            border: 1px solid var(--cor-borda);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            color: var(--cor-secundaria);
+            text-align: center;
+            border-bottom: 2px solid var(--cor-primaria);
+            padding-bottom: 10px;
+        }
+        section h2 {
+            border-bottom: 2px solid var(--cor-primaria);
+            padding-bottom: 5px;
+            margin-top: 0;
+            color: var(--cor-secundaria);
+        }
+        h3 {
+            color: #555;
+            margin-top: 30px;
+            font-weight: 600;
+        }
+
+        /* --- Estilo dos Blocos de Código --- */
+        pre {
+            background-color: var(--cor-code);
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: "Courier New", Courier, monospace;
+            font-size: 0.95em;
+        }
+        code {
+            font-family: "Courier New", Courier, monospace;
+            background-color: #eee;
+            padding: 2px 4px;
+            border-radius: 3px;
+            color: #d63384;
+        }
+        pre code {
+            background-color: transparent;
+            color: inherit;
+            padding: 0;
+        }
+        .code-comment { color: #75715e; font-style: italic; }
+        
+        /* --- Estilo dos Blocos de Explicação (Tradução) --- */
+        .explicacao {
+            background-color: #fdfaf6;
+            border: 1px solid #f0e0d0;
+            border-left: 5px solid var(--cor-primaria);
+            padding: 15px;
+            border-radius: 4px;
+            margin: 15px 0;
+        }
+        
+        /* --- Estilo dos Exemplos Interativos --- */
+        .exemplo-interativo {
+            background-color: #fdfdfd;
+            border: 2px dashed var(--cor-primaria);
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 10px;
+        }
+        .exemplo-interativo button, .btn-exemplo {
+            background-color: var(--cor-primaria);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-right: 5px;
+            margin-top: 5px;
+        }
+        .exemplo-interativo button:hover, .btn-exemplo:hover {
+            filter: brightness(1.2);
+        }
+        .exemplo-interativo input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-top: 5px;
+            margin-right: 5px;
+        }
+        .output-box {
+            background-color: #222;
+            color: #0f0;
+            font-family: "Courier New", Courier, monospace;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            min-height: 50px;
+            white-space: pre-wrap;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <nav class="sumario">
+        <h2>Sumário (JS)</h2>
+        <ul>
+            <li><a href="#revisao">1. Revisão de Algoritmos</a>
+                <ul>
+                    <li><a href="#saida">1.1 Saída de Dados</a></li>
+                    <li><a href="#variaveis">1.2 Variáveis</a></li>
+                    <li><a href="#operadores">1.3 Operadores Matemáticos</a></li>
+                    <li><a href="#entrada">1.4 Entrada de Dados</a></li>
+                    <li><a href="#condicionais">1.5 Estrutura Condicional (if/else)</a></li>
+                    <li><a href="#while">1.6 Estrutura de Repetição (while)</a></li>
+                    <li><a href="#arrays">1.7 Manipulação de Arrays (Listas)</a></li>
+                </ul>
+            </li>
+            <li><a href="#for">2. Estrutura de Repetição (for)</a></li>
+            <li><a href="#matrizes">3. Manipulação de Matrizes</a></li>
+            <li><a href="#strings">4. Manipulação de Strings</a></li>
+            <li><a href="#funcoes">5. Funções</a></li>
+            <li><a href="#objetos">6. Objetos (Dicionários)</a></li>
+            <li><a href="#exercicios" class="exercicios-link">7. Exercícios Resolvidos</a>
+                <ul>
+                    <li><a href="#ex1">Ex 1: Média de Idades (while)</a></li>
+                    <li><a href="#ex2">Ex 2: Análise de Números (for)</a></li>
+                    <li><a href="#ex3">Ex 3: Cadastro de Cidades (Funções)</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <main class="conteudo">
+        <h1>Notas de Aula: Laboratório de Programação (JavaScript)</h1>
+        <p class="explicacao">
+            Este é um guia de consulta rápida baseado na estrutura do seu PDF "Notas de Aula"[cite: 1187, 1189, 1190]. Todos os conceitos de Python foram <strong>traduzidos para seus equivalentes em JavaScript</strong>, a linguagem da web.
+        </p>
+
+        <section id="revisao">
+            <h2>1. Revisão de Algoritmos</h2>
+            
+            <h3 id="saida">1.1 Saída de Dados (Impressão) [cite: 1204]</h3>
+            <div class="explicacao">
+                <p><strong>Tradução:</strong> <code>print()</code> (Python) → <code>console.log()</code> (JavaScript)</p>
+                <p>Em JavaScript, a "impressão" principal para depuração é feita no console do navegador. Para exibir na tela, usamos a <a href="https://developer.mozilla.org/pt-BR/docs/Web/API/Document_Object_Model">Manipulação do DOM</a>.</p>
+            </div>
+            <pre><code><span class="code-comment">// Python: print("Hello, World!") [cite: 1205]</span>
+console.log(<span style="color: #e6db74;">"Hello, World!"</span>);
+
+<span class="code-comment">// Python: print("Olá,", nome, sobrenome) [cite: 1227]</span>
+let nome = <span style="color: #e6db74;">"Ana"</span>;
+let sobrenome = <span style="color: #e6db74;">"Silva"</span>;
+console.log(<span style="color: #e6db74;">"Olá,"</span>, nome, sobrenome);
+
+<span class="code-comment">// Forma moderna (Template Literals):</span>
+console.log(<span style="color: #e6db74;">`Olá, ${nome} ${sobrenome}`</span>);
+</code></pre>
+
+            <h3 id="variaveis">1.2 Variáveis [cite: 1208]</h3>
+            <div class="explicacao">
+                <p><strong>Tradução:</strong> Python (tipagem dinâmica) → JavaScript (<code>let</code>, <code>const</code>, <code>var</code>)</p>
+                <p>Em JS moderno, usamos <code>let</code> para variáveis que podem mudar de valor e <code>const</code> para constantes (que não podem mudar).</p>
+            </div>
+            <pre><code><span class="code-comment">// Python: nome = "Ana" [cite: 1215]</span>
+let nomeCompleto = <span style="color: #e6db74;">"Ana Silva"</span>;
+let idade = 30;
+const PI = 3.14159;
+
+idade = 31; <span class="code-comment">// Válido</span>
+<span class="code-comment">// PI = 3.14; // Inválido! (Geraria um erro)</span>
+</code></pre>
+
+            <h3 id="operadores">1.3 Operadores Matemáticos [cite: 1230]</h3>
+            <div class="explicacao">
+                <p><strong>Tradução:</strong> Os operadores são quase idênticos. A principal diferença é a divisão.</p>
+                <ul>
+                    <li>Python <code>/</code> (divisão real) e <code>//</code> (divisão inteira)[cite: 1233].</li>
+                    <li>JavaScript <code>/</code> (é sempre divisão real) e <code>Math.floor()</code> para a parte inteira.</li>
+                </ul>
+            </div>
+            <pre><code>let x = 10;
+let y = 3;
+
+console.log(x + y); <span class="code-comment">// 13</span>
+console.log(x - y); <span class="code-comment">// 7</span>
+console.log(x * y); <span class="code-comment">// 30</span>
+console.log(x / y); <span class="code-comment">// 3.333333... [cite: 1255] (Em JS, / é sempre real)</span>
+console.log(x % y); <span class="code-comment">// 1 (Resto da divisão) [cite: 1233]</span>
+console.log(x ** y); <span class="code-comment">// 1000 (Exponencial) [cite: 1233]</span>
+
+<span class="code-comment">// Equivalente ao // (divisão inteira) do Python [cite: 1233]</span>
+console.log(Math.floor(x / y)); <span class="code-comment">// 3</span>
+</code></pre>
+
+            <h3 id="entrada">1.4 Entrada de Dados (Leitura) [cite: 1263]</h3>
+            <div class="explicacao">
+                <p><strong>Tradução:</strong> <code>input()</code> (Python) → <code>prompt()</code> (JavaScript)</p>
+                <p><code>prompt()</code> é um alerta que captura texto. Assim como no Python[cite: 1264], ele <strong>sempre</strong> retorna uma string, exigindo conversão para números.</p>
+                <p><strong>Nota:</strong> <code>prompt()</code> não é muito usado. Em sites reais, usamos formulários HTML (<code>&lt;input&gt;</code>) para pegar dados.</p>
+            </div>
+            <pre><code><span class="code-comment">// Python: nome = input("Digite o nome: ") [cite: 1267]</span>
+let nomeUsuario = prompt(<span style="color: #e6db74;">"Digite o nome: "</span>);
+console.log(<span style="color: #e6db74;">"Nome: "</span>, nomeUsuario);
+
+<span class="code-comment">// Python: a = int(input("Digite o valor de a: ")) [cite: 1277]</span>
+let a = Number(prompt(<span style="color: #e6db74;">"Digite o valor de a: "</span>));
+let b = Number(prompt(<span style="color: #e6db74;">"Digite o valor de b: "</span>));
+console.log(a + b); <span class="code-comment">// Soma matemática [cite: 1283]</span>
+</code></pre>
+
+            <h3 id="condicionais">1.5 Estrutura Condicional (if...else) [cite: 1317]</h3>
+            <div class="explicacao">
+                <p><strong>Tradução:</strong> <code>if...elif...else:</code> (Python) → <code>if (...) { ... } else if (...) { ... } else { ... }</code> (JavaScript)</p>
+                <p>A lógica é idêntica [cite: 1320-1322]. A sintaxe JS requer parênteses <code>()</code> na condição e chaves <code>{}</code> para o bloco de código.</p>
+            </div>
+            <pre><code><span class="code-comment">// Python: (Código 1.12 do PDF) [cite: 1334]</span>
+<span class="code-comment">// num = int(input("Digite um número: "))</span>
+<span class="code-comment">// if num > 0:</span>
+<span class="code-comment">//   print("O número é positivo.") [cite: 1336]</span>
+<span class="code-comment">// elif num < 0:</span>
+<span class="code-comment">//   print("O número é negativo.") [cite: 1338]</span>
+<span class="code-comment">// else:</span>
+<span class="code-comment">//   print("O número é zero.") [cite: 1340]</span>
+
+<span class="code-comment">// JavaScript:</span>
+let num = Number(prompt(<span style="color: #e6db74;">"Digite um número:"</span>));
+
+if (num > 0) {
+  console.log(<span style="color: #e6db74;">"O número é positivo."</span>);
+} else if (num < 0) {
+  console.log(<span style="color: #e6db74;">"O número é negativo."</span>);
+} else {
+  console.log(<span style="color: #e6db74;">"O número é zero."</span>);
+}
+</code></pre>
+            <pre><code><span class="code-comment">// Operadores Lógicos (PDF 1.17) [cite: 1394]</span>
+<span class="code-comment">// Python: (prof=="professor" or prof=="estudante") and est=="Tocantins"</span>
+<span class="code-comment">// JS:</span>
+if ((prof === <span style="color: #e6db74;">"professor"</span> || prof === <span style="color: #e6db74;">"estudante"</span>) && est === <span style="color: #e6db74;">"Tocantins"</span>) {
+  console.log(<span style="color: #e6db74;">"Ganhará crédito!"</span>); [cite: 1395]
+}
+</code></pre>
+
+            <h3 id="while">1.6 Estrutura de Repetição (while) [cite: 1417]</h3>
+            <div class="explicacao">
+                <p><strong>Tradução:</strong> <code>while condicao:</code> (Python) → <code>while (condicao) { ... }</code> (JavaScript)</p>
+                <p>A sintaxe é muito similar, usando <code>()</code> e <code>{}</code>.</p>
+            </div>
+            <pre><code><span class="code-comment">// Python: (Código 1.18 do PDF) [cite: 1423]</span>
+<span class="code-comment">// cont = 0</span>
+<span class="code-comment">// while cont < 6: [cite: 1425]</span>
+<span class="code-comment">//   print(cont)</span>
+<span class="code-comment">//   cont = cont + 1</span>
+
+<span class="code-comment">// JavaScript:</span>
+let cont = 0;
+while (cont < 6) {
+  console.log(cont);
+  cont++; <span class="code-comment">// (cont++ é um atalho para cont = cont + 1)</span>
+}
+</code></pre>
+
+            <h3 id="arrays">1.7 Manipulação de Arrays (Listas) </h3>
+            <div class="explicacao">
+                <p><strong>Tradução:</strong> <code>Listas</code> (Python) → <code>Arrays</code> (JavaScript)</p>
+                <p>São funcionalmente idênticos. Onde o Python usa <code>.append()</code>, o JavaScript usa <code>.push()</code>.</p>
+            </div>
+            <pre><code><span class="code-comment">// Python: lista = []</span>
+const lista = [];
+
+<span class="code-comment">// Python: lista.append(10)</span>
+lista.push(10);
+lista.push(20);
+lista.push(30);
+
+console.log(lista); <span class="code-comment">// [10, 20, 30]</span>
+
+<span class="code-comment">// Acessando um elemento</span>
+console.log(lista[0]); <span class="code-comment">// 10</span>
+
+<span class="code-comment">// Alterando um elemento</span>
+lista[1] = 25;
+console.log(lista); <span class="code-comment">// [10, 25, 30]</span>
+
+<span class="code-comment">// Python: len(lista)</span>
+console.log(lista.length); <span class="code-comment">// 3</span>
+</code></pre>
+        </section>
+
+        <section id="for">
+            <h2>2. Estrutura de Repetição (for) </h2>
+            <div class="explicacao">
+                <p><strong>Tradução:</strong> O <code>for</code> do JavaScript tem duas formas principais que equivalem ao <code>for</code> do Python.</p>
+                <ul>
+                    <li>Python <code>for item in lista:</code>  (percorrer itens) → JS <strong><code>for...of</code></strong></li>
+                    <li>Python <code>for i in range(5):</code> (percorrer índices) → JS <strong><code>for (let i=0; ...)</code></strong></li>
+                </ul>
+            </div>
+            
+            <h3>Exemplo 1: <code>for...of</code> (Para percorrer itens)</h3>
+            <pre><code><span class="code-comment">// Python:</span>
+<span class="code-comment">// frutas = ["Maçã", "Banana", "Uva"]</span>
+<span class="code-comment">// for fruta in frutas:</span>
+<span class="code-comment">//   print(fruta)</span>
+
+<span class="code-comment">// JavaScript:</span>
+const frutas = [<span style="color: #e6db74;">"Maçã"</span>, <span style="color: #e6db74;">"Banana"</span>, <span style="color: #e6db74;">"Uva"</span>];
+for (const fruta of frutas) {
+  console.log(fruta);
+}
+<span class="code-comment">// Saída:</span>
+<span class="code-comment">// Maçã</span>
+<span class="code-comment">// Banana</span>
+<span class="code-comment">// Uva</span>
+</code></pre>
+
+            <h3>Exemplo 2: <code>for</code> clássico (Para contar ou usar índices)</h3>
+            <pre><code><span class="code-comment">// Python:</span>
+<span class="code-comment">// for i in range(5): # (0, 1, 2, 3, 4)</span>
+<span class="code-comment">//   print(i)</span>
+
+<span class="code-comment">// JavaScript:</span>
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+<span class="code-comment">// Saída:</span>
+<span class="code-comment">// 0</span>
+<span class="code-comment">// 1</span>
+<span class="code-comment// 2</span>
+<span class="code-comment">// 3</span>
+<span class="code-comment">// 4</span>
+</code></pre>
+        </section>
+
+        <section id="matrizes">
+            <h2>3. Manipulação de Matrizes (Arrays Aninhados) </h2>
+            <div class="explicacao">
+                <p><strong>Tradução:</strong> Listas de listas (Python) → Arrays de arrays (JavaScript)</p>
+                <p>A sintaxe e a lógica são <strong>idênticas</strong> às do Python.</p>
+            </div>
+            <pre><code><span class="code-comment">// Python: matriz = [ [1, 2, 3], [4, 5, 6], [7, 8, 9] ]</span>
+const matriz = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9]
+];
+
+<span class="code-comment">// Acessando o elemento da linha 1, coluna 2 (número 6)</span>
+<span class="code-comment">// Python: print(matriz[1][2])</span>
+console.log(matriz[1][2]); <span class="code-comment">// 6</span>
+
+<span class="code-comment">// Percorrendo a matriz (Python: for i in range(len(matriz))...)</span>
+for (let i = 0; i < matriz.length; i++) { <span class="code-comment">// Itera sobre as linhas</span>
+  for (let j = 0; j < matriz[i].length; j++) { <span class="code-comment">// Itera sobre as colunas</span>
+    console.log(<span style="color: #e6db74;">`Linha ${i}, Coluna ${j}: ${matriz[i][j]}`</span>);
+  }
+}
+</code></pre>
+        </section>
+        
+        <section id="strings">
+            <h2>4. Manipulação de Strings [cite: 983, 1001]</h2>
+            <div class="explicacao">
+                <p><strong>Tradução:</strong> Os métodos são muito parecidos, mas com nomes diferentes.</p>
+                <ul>
+                    <li>Python <code>.upper()</code> [cite: 983, 1001] → JS <code>.toUpperCase()</code></li>
+                    <li>Python <code>.lower()</code> [cite: 983, 1001] → JS <code>.toLowerCase()</code></li>
+                    <li>Python <code>.strip()</code> → JS <code>.trim()</code></li>
+                    <li>Python "fatiamento" <code>s[0:5]</code> → JS <code>.slice(0, 5)</code></li>
+                </ul>
+            </div>
+            <pre><code>let frase = <span style="color: #e6db74;">"  Laboratório de Programação  "</span>;
+
+console.log(frase.toUpperCase()); <span class="code-comment">// "  LABORATÓRIO DE PROGRAMAÇÃO  "</span>
+console.log(frase.toLowerCase()); <span class="code-comment">// "  laboratório de programação  "</span>
+console.log(frase.trim()); <span class="code-comment">// "Laboratório de Programação"</span>
+
+<span class="code-comment">// Fatiamento (Slice)</span>
+console.log(frase.trim().slice(0, 11)); <span class="code-comment">// "Laboratório"</span>
+</code></pre>
+        </section>
+
+        <section id="funcoes">
+            <h2>5. Funções (Functions) </h2>
+            <div class="explicacao">
+                <p><strong>Tradução:</strong> <code>def nome_funcao(arg):</code> (Python) → <code>function nomeFuncao(arg) { ... }</code> (JavaScript)</p>
+                <p>Novamente, a sintaxe JS usa <code>function</code>, <code>()</code> e <code>{}</code>.</p>
+            </div>
+            <pre><code><span class="code-comment">// Python: (Exercício Proposto 7.8.1) [cite: 1047, 1059]</span>
+<span class="code-comment">// def media(lista_de_notas):</span>
+<span class="code-comment">//   soma = sum(lista_de_notas)</span>
+<span class="code-comment">//   return soma / len(lista_de_notas)</span>
+
+<span class="code-comment">// JavaScript (Forma 1: Declaração de Função)</span>
+function media(listaDeNotas) {
+  let soma = 0;
+  for (const nota of listaDeNotas) {
+    soma = soma + nota; <span class="code-comment">// ou soma += nota</span>
+  }
+  return soma / listaDeNotas.length;
+}
+
+<span class="code-comment">// JavaScript (Forma 2: Arrow Function)</span>
+const mediaModerna = (listaDeNotas) => {
+  const soma = listaDeNotas.reduce((total, nota) => total + nota, 0);
+  return soma / listaDeNotas.length;
+};
+
+<span class="code-comment">// Chamando a função</span>
+const notas = [10, 8, 7, 9];
+console.log(media(notas)); <span class="code-comment">// 8.5</span>
+console.log(mediaModerna(notas)); <span class="code-comment">// 8.5</span>
+</code></pre>
+        </section>
+
+        <section id="objetos">
+            <h2>6. Objetos (Dicionários) </h2>
+            <div class="explicacao">
+                <p><strong>Tradução:</strong> <code>Dicionários</code> (Python) → <code>Objetos</code> (JavaScript)</p>
+                <p>Este é o equivalente mais direto. Ambos são coleções de pares chave-valor. A sintaxe de acesso e modificação é muito similar.</p>
+            </div>
+            <pre><code><span class="code-comment">// Python: aluno = { "nome": "Ana", "matricula": "ES256" }</span>
+const aluno = {
+  nome: <span style="color: #e6db74;">"Ana Maria"</span>,
+  matricula: <span style="color: #e6db74;">"ES256"</span>,
+  notas: [9.0, 5.6, 8.5]
+};
+
+<span class="code-comment">// Acessando valores (Python: aluno["nome"] ou aluno.get("nome"))</span>
+console.log(aluno.nome); <span class="code-comment">// "Ana Maria"</span>
+console.log(aluno.notas[1]); <span class="code-comment">// 5.6</span>
+
+<span class="code-comment">// Alterando valores (Python: aluno["nome"] = "Ana Silva")</span>
+aluno.nome = <span style="color: #e6db74;">"Ana Silva"</span>;
+console.log(aluno.nome); <span style="code-comment">// "Ana Silva"</span>
+
+<span class="code-comment">// Adicionando nova chave</span>
+aluno.curso = <span style="color: #e6db74;">"Engenharia de Software"</span>;
+</code></pre>
+        </section>
+        
+        <section id="exercicios">
+            <h2>7. Exercícios Resolvidos (Tradução JS)</h2>
+            <p>Abaixo estão traduções de exercícios do seu PDF  para JavaScript, com exemplos interativos.</p>
+
+            <h3 id="ex1">Exercício 1: Média de Idades (Baseado no Código 1.21 [cite: 914, 924])</h3>
+            <p>
+                <strong>Objetivo:</strong> Ler a idade de várias pessoas até que a idade 0 seja digitada. Calcular e mostrar a média das idades.
+            </p>
+            <div class="exemplo-interativo">
+                <button id="btn-ex1">Iniciar Exercício 1 (Média de Idades)</button>
+                <div id="output-ex1" class="output-box"></div>
+            </div>
+            <pre><code><span class="code-comment">// Versão interativa do Código 1.21 do PDF [cite: 914, 924]</span>
+function calcularMediaIdades() {
+  let somaIdades = 0;
+  let qtPessoas = 0;
+  let idade = -1; <span class="code-comment">// Inicia com valor diferente de 0</span>
+
+  <span class="code-comment">// Python: while idade > 0: [cite: 924]</span>
+  while (idade !== 0) {
+    idade = Number(prompt(<span style="color: #e6db74;">"Digite a idade (ou 0 para parar):"</span>));
+
+    if (idade > 0) {
+      somaIdades = somaIdades + idade; <span class="code-comment">// Python: soma_idades = soma_idades + idade [cite: 924]</span>
+      qtPessoas = qtPessoas + 1; <span class="code-comment">// Python: qt_pessoas = qt_pessoas + 1 [cite: 924]</span>
+    }
+  }
+
+  <span class="code-comment">// Exibe o resultado</span>
+  const output = document.querySelector(<span style="color: #e6db74;">'#output-ex1'</span>);
+  if (qtPessoas > 0) {
+    const media = somaIdades / qtPessoas;
+    output.textContent = <span style="color: #e6db74;">`Total de pessoas: ${qtPessoas}\nMédia das idades: ${media.toFixed(2)}`</span>;
+  } else {
+    output.textContent = <span style="color: #e6db74;">"Nenhuma idade foi digitada."</span>;
+  }
+}
+</code></pre>
+
+            <h3 id="ex2">Exercício 2: Análise de Lista (Baseado no Exercício 3.2 [cite: 959, 971])</h3>
+            <p>
+                <strong>Objetivo:</strong> Receber uma lista de números e informar: a) a lista completa, b) a quantidade de negativos, c) a soma dos positivos.
+            </p>
+            <div class="exemplo-interativo">
+                <button id="btn-ex2">Iniciar Exercício 2 (Analisar Lista)</button>
+                <div id="output-ex2" class="output-box"></div>
+            </div>
+            <pre><code><span class="code-comment">// Versão do Exercício Resolvido 3.2 do PDF [cite: 959, 971]</span>
+function analisarLista() {
+  const numeros = [10, -5, 20, 3.5, -15, 0, 7]; <span class="code-comment">// Lista de exemplo</span>
+  
+  let qtNegativos = 0;
+  let somaPositivos = 0;
+  
+  <span class="code-comment">// Python: for num in lista:</span>
+  for (const num of numeros) {
+    if (num < 0) {
+      qtNegativos++; <span class="code-comment">// b) informe a quantidade de elementos negativos [cite: 959]</span>
+    }
+    if (num > 0) {
+      somaPositivos += num; <span class="code-comment">// c) informe a soma dos elementos positivos [cite: 959]</span>
+    }
+  }
+  
+  <span class="code-comment">// Exibe o resultado</span>
+  const output = document.querySelector(<span style="color: #e6db74;">'#output-ex2'</span>);
+  output.textContent = <span style="color: #e6db74;">`Lista Completa: [${numeros.join(', ')}]\n`</span>; <span style="color: #75715e;">// a) imprima a lista [cite: 959]</span>
+  output.textContent += <span style="color: #e6db74;">`Quantidade de Negativos: ${qtNegativos}\n`</span>;
+  output.textContent += <span style="color: #e6db74;">`Soma dos Positivos: ${somaPositivos}`</span>;
+}
+</code></pre>
+            
+            <h3 id="ex3">Exercício 3: Cadastro de Cidades (Baseado no Exercício Proposto 3 da página 91)</h3>
+            <p>
+                <strong>Objetivo:</strong> Implementar funções para gerenciar uma lista de cidades do Tocantins (imprimir, verificar data, adicionar).
+            </p>
+            <div class="exemplo-interativo">
+                <p>Dados: <code>[ ["Paraiso", 1963], ["Gurupi", 1958], ["Palmas", 1989], ["Miranorte", 1964] ]</code></p>
+                <button id="btn-ex3-imprimir">a) Imprimir Cidades</button>
+                <button id="btn-ex3-verificar">b) Verificar Data (vs 1960)</button>
+                <br>
+                <input type="text" id="nova-cidade" placeholder="Nome da Cidade">
+                <input type="number" id="novo-ano" placeholder="Ano">
+                <button id="btn-ex3-add">c) Acrescentar Cidade</button>
+                
+                <div id="output-ex3" class="output-box"></div>
+            </div>
+            <pre><code><span style="color: #e6db74;">// --- Banco de Dados (Global para o script) ---</span>
+<span class="code-comment">// Python: cidades=[ ["Paraiso", 1963 ], ... ]</span>
+const cidades = [
+  [<span style="color: #e6db74;">"Paraiso"</span>, 1963],
+  [<span style="color: #e6db74;">"Gurupi"</span>, 1958],
+  [<span style="color: #e6db74;">"Palmas"</span>, 1989],
+  [<span style="color: #e6db74;">"Miranorte"</span>, 1964]
+];
+
+const outputEx3 = document.querySelector(<span style="color: #e6db74;">'#output-ex3'</span>);
+
+<span style="color: #e6db74;">// --- a) Função imprimir_cidade () ---</span>
+function imprimirCidades() {
+  outputEx3.textContent = <span style="color: #e6db74;">"--- Lista de Cidades ---\n"</span>;
+  for (const cidade of cidades) {
+    <span style="color: #code-comment">// Python: print(f"Cidade: {cidade[0]}; Ano: {cidade[1]}")</span>
+    outputEx3.textContent += <span style="color: #e6db74;">`Cidade: ${cidade[0]}; Ano de criação: ${cidade[1]}\n`</span>;
+  }
+}
+
+<span style="color: #e6db74;">// --- b) Função verificar_data () ---</span>
+function verificarData(anoReferencia) {
+  outputEx3.textContent = <span style="color: #e6db74;">`--- Verificando contra o ano ${anoReferencia} ---\n`</span>;
+  for (const cidade of cidades) {
+    if (cidade[1] < anoReferencia) {
+      outputEx3.textContent += <span style="color: #e6db74;">`A cidade de ${cidade[0]} foi criada ANTES de ${anoReferencia}\n`</span>;
+    } else if (cidade[1] > anoReferencia) {
+      outputEx3.textContent += <span style="color: #e6db74;">`A cidade de ${cidade[0]} foi criada DEPOIS de ${anoReferencia}\n`</span>;
+    } else {
+      outputEx3.textContent += <span style="color: #e6db74;">`A cidade de ${cidade[0]} foi criada EXATAMENTE em ${anoReferencia}\n`</span>;
+    }
+  }
+}
+
+<span style="color: #e6db74;">// --- c) Função acrescentar_cidade() ---</span>
+function acrescentarCidade(nome, ano) {
+  if (!nome || !ano) {
+    outputEx3.textContent = <span style="color: #e6db74;">"ERRO: Nome e Ano são obrigatórios."</span>;
+    return;
+  }
+  <span style="color: #code-comment">// Python: lista.append([nome, ano])</span>
+  cidades.push([nome, ano]);
+  outputEx3.textContent = <span style="color: #e6db74;">`Cidade "${nome}" adicionada com sucesso!\n`</span>;
+  imprimirCidades(); <span style="color: #code-comment">// Mostra a lista atualizada</span>
+}
+</code></pre>
+        </section>
+        
+    </main>
+
+    <script>
+    // Espera o HTML ser totalmente carregado
+    document.addEventListener('DOMContentLoaded', () => {
+        
+        /* --- LÓGICA DO EXERCÍCIO 1 --- */
+        document.getElementById('btn-ex1').addEventListener('click', () => {
+            // Função baseada no Código 1.21 do PDF [cite: 914, 924]
+            function calcularMediaIdades() {
+              let somaIdades = 0;
+              let qtPessoas = 0;
+              let idade = -1; // Inicia com valor diferente de 0
+
+              while (idade !== 0) {
+                idade = Number(prompt("Digite a idade (ou 0 para parar):"));
+                if (isNaN(idade)) {
+                    alert("Por favor, digite um número válido.");
+                    idade = -1; // Reseta para continuar no loop
+                    continue; // Pula esta iteração
+                }
+
+                if (idade > 0) {
+                  somaIdades = somaIdades + idade; // [cite: 924]
+                  qtPessoas = qtPessoas + 1; // [cite: 924]
+                }
+              }
+
+              const output = document.getElementById('output-ex1');
+              if (qtPessoas > 0) {
+                const media = somaIdades / qtPessoas;
+                output.textContent = `Total de pessoas: ${qtPessoas}\nMédia das idades: ${media.toFixed(2)}`;
+              } else {
+                output.textContent = "Nenhuma idade foi digitada.";
+              }
+            }
+            calcularMediaIdades();
+        });
+        
+        /* --- LÓGICA DO EXERCÍCIO 2 --- */
+        document.getElementById('btn-ex2').addEventListener('click', () => {
+            // Função baseada no Exercício 3.2 do PDF [cite: 959, 971]
+            function analisarLista() {
+              const numeros = [10, -5, 20, 3.5, -15, 0, 7]; // Lista de exemplo
+              let qtNegativos = 0;
+              let somaPositivos = 0;
+              
+              for (const num of numeros) {
+                if (num < 0) {
+                  qtNegativos++; // b) informe a quantidade de elementos negativos [cite: 959]
+                }
+                if (num > 0) {
+                  somaPositivos += num; // c) informe a soma dos elementos positivos [cite: 959]
+                }
+              }
+              
+              const output = document.getElementById('output-ex2');
+              output.textContent = `Lista Completa: [${numeros.join(', ')}]\n`; // a) imprima a lista [cite: 959]
+              output.textContent += `Quantidade de Negativos: ${qtNegativos}\n`;
+              output.textContent += `Soma dos Positivos: ${somaPositivos}`;
+            }
+            analisarLista();
+        });
+
+        /* --- LÓGICA DO EXERCÍCIO 3 --- */
+        // Banco de Dados (Global) - Baseado no Exercício Proposto 3 (pág 91)
+        const cidades = [
+          ["Paraiso", 1963],
+          ["Gurupi", 1958],
+          ["Palmas", 1989],
+          ["Miranorte", 1964]
+        ];
+        const outputEx3 = document.getElementById('output-ex3');
+
+        // a) Função imprimir_cidade ()
+        function imprimirCidades() {
+          outputEx3.textContent = "--- Lista de Cidades ---\n";
+          for (const cidade of cidades) {
+            outputEx3.textContent += `Cidade: ${cidade[0]}; Ano de criação: ${cidade[1]}\n`;
+          }
+        }
+
+        // b) Função verificar_data ()
+        function verificarData(anoReferencia) {
+          outputEx3.textContent = `--- Verificando contra o ano ${anoReferencia} ---\n`;
+          for (const cidade of cidades) {
+            if (cidade[1] < anoReferencia) {
+              outputEx3.textContent += `A cidade de ${cidade[0]} foi criada ANTES de ${anoReferencia}\n`;
+            } else if (cidade[1] > anoReferencia) {
+              outputEx3.textContent += `A cidade de ${cidade[0]} foi criada DEPOIS de ${anoReferencia}\n`;
+            } else {
+              outputEx3.textContent += `A cidade de ${cidade[0]} foi criada EXATAMENTE em ${anoReferencia}\n`;
+            }
+          }
+        }
+
+        // c) Função acrescentar_cidade()
+        function acrescentarCidade(nome, ano) {
+          if (!nome || !ano) {
+            outputEx3.textContent = "ERRO: Nome e Ano são obrigatórios.";
+            return;
+          }
+          cidades.push([nome, ano]);
+          outputEx3.textContent = `Cidade "${nome}" adicionada com sucesso!\n\n`;
+          imprimirCidades(); // Mostra a lista atualizada
+        }
+
+        // Conectando os botões às funções
+        document.getElementById('btn-ex3-imprimir').addEventListener('click', () => {
+            imprimirCidades();
+        });
+        
+        document.getElementById('btn-ex3-verificar').addEventListener('click', () => {
+            verificarData(1960); // Valor fixo para o exemplo
+        });
+        
+        document.getElementById('btn-ex3-add').addEventListener('click', () => {
+            const nome = document.getElementById('nova-cidade').value;
+            const ano = Number(document.getElementById('novo-ano').value);
+            acrescentarCidade(nome, ano);
+            // Limpa os campos
+            document.getElementById('nova-cidade').value = "";
+            document.getElementById('novo-ano').value = "";
+        });
+
+    });
+    </script>
+    
+</body>
+</html>
