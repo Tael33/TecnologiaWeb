@@ -1,0 +1,59 @@
+<!-- Objetivo 
+Criar uma página web que permita adicionar números e separá-los automaticamente em 
+listas de pares e ímpares, exibindo também o somatório de cada grupo. 
+ 
+Estrutura 
+A página deve conter: 
+• Um campo de entrada (<input>) para o usuário digitar um número. 
+• Um botão “Adicionar”. 
+• Duas listas (<ul>):
+o Lista de Números Pares    
+o Lista de Números Ímpares 
+• Um campo ou parágrafo que exiba o somatório dos números pares e o 
+somatório dos números ímpares. 
+• Estilização com CSS: organize os elementos de forma clara e agradável (cores, 
+espaçamento, títulos, etc.). 
+→ O CSS deve ser incluído em um arquivo separado (style.css) e adicionado 
+à página por meio da tag <link>.  -->
+
+<!DOCTYPE html>
+<html lang="pt-bt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Separador de pares e ímpares</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Separador de Pares e ímpares</h1>
+    </header>
+    <main class="containner">
+
+        <section class="containner-separador">
+
+             
+            <div class="containner-input">
+                <input type="number" id="numeroInput" placeholder="Digite um número">
+                <button onclick="adicionarNumero()">Adicionar</button>
+            </div>
+            <div class="containner-lista">
+                <div class="lista-pares">
+                    <h2>Números Pares</h2>
+                    <ul id="listaPares"></ul>
+                    <p>Somatório Pares: <span id="somatorioPares">0</span></p>
+                </div>
+                <div class="lista-impares">
+                    <h2>Números Ímpares</h2>
+                    <ul id="listaImpares"></ul>
+                    <p>Somatório Ímpares: <span id="somatorioImpares">0</span></p>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+    
+    <script src="script.js"></script>
+</body>
+</html>
