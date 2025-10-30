@@ -27,7 +27,6 @@ function adicionarNumero() {
     numeroInput.value = '';
     numeroInput.focus();
 }
-
 function atualizarLista(idLista, numero) {
     const lista = document.getElementById(idLista);
     const li = document.createElement('li');
