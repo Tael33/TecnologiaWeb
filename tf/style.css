@@ -1,0 +1,99 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+h1 {
+    color: #333;
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+input[type="file"] {
+    display: block;
+    margin-bottom: 15px;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#message {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+#message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+#message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+#container{
+    max-width: 700px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f8f8f8;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.form-group {
+    margin-bottom: 15px;
+}
+#preview{
+    max-width: 700px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f8f8f8;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+}
+#preview img{
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 10px;
+}
+
+#preview .text-content{
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    max-width: 100%;
+    overflow-x: auto;
+    display: block;
+    margin-bottom: 10px;
+}
+#preview .pdf-content{
+    max-width: 100%;
+    height: 500px; /* Adjust height as needed */
+    display: block;
+    margin-bottom: 10px;
+}
+
+

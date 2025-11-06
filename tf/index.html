@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classificador</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.0"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="container">
+        <h1>Classificador de Imagens</h1>
+        <p>Escolha uma imagem para classificar</p>
+        <input type="file" id="arquivo" accept="image/*"/>
+        <img id="preview" src="" alt="">
+
+        <div>
+            <button id="classificar-button">Classificar</button>
+            <span id="status">Caregando modelo...</span>
+        </div>
+        
+        <h3>Predições:</h3>
+        <ol id="predicoes"></ol>
+
+    </div>
+
+    <script>
+
+        let modelo;
+        let urlFoto = null;
+
+        const tags = {
+            arquivo: document.getElementById('arquivo'),
+            preview: document.getElementById('preview'),
+            classificarButton: document.getElementById('classificar-button'),
+            status: document.getElementById('status'),
+            predicoes: document.getElementById('predicoes')
+            
+        };
+
+        async function carregarModelo(){
+            modelo = await mobilenet.load({ version: 2, alpha: 1.0});
+            tags.status.textContent = 'Modelo carregado';
+        }
+
+        carregarModelo();
+
+
+        tags.arquivo.addEventListener('change', function() {
+            const arquivo = tags.arquivo.files?.[0];
+            if ( ! arquivo) {
+                return;
+            }
+            if (urlFoto) {
+                URL.revokeObjectURL(urlFoto);
+            }
+            urlFoto = URL.createObjectURL(arquivo);
+            tags.preview.src = urlFoto;
+            tags.preview.onload = function() {
+                tags.classificarButton.disabled = false;
+                tags.predicoes.innerHTML = '';
+            }
+
+            tags.classificarButton.addEventListener('click', async function() {
+                if (! modelo || ! tags.preview.complete) {
+                    return;
+                }
+                tags.classificarButton.disabled = true;
+                tags.status.textContent = 'Classificando...';
+
+                const predicoes = await modelo.classify(tags.preview, 5);
+
+                tags.status.textContent = 'Classificação concluída';
+
+                tags.predicoes.innerHTML = predicoes.map(function(p) {
+                    const certeza = (p.probability * 100).toFixed(2);
+                    return '<li>' + p.className + ': ' + certeza + '%' + '</li>';
+                }).join('');
+
+                tags.classificarButton.disabled = false;
+            });
+        
+        });
+
+    </script>
+</body>
+</html>
