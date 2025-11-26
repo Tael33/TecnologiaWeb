@@ -1,0 +1,145 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+}
+
+main {
+    width: 100%;
+    max-width: 800px;
+    background-color: #2c2c2c;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    padding: 25px;
+    box-sizing: border-box;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #ffffff;
+    border-bottom: 2px solid #444;
+    padding-bottom: 10px;
+}
+
+h1 {
+    font-size: 2.2em;
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 1.6em;
+}
+
+.input-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+    background-color: #333;
+    border: 1px solid #444;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+#produtoInput {
+    flex-grow: 1;
+    padding: 12px;
+    font-size: 1em;
+    border: 2px solid #555;
+    border-radius: 5px;
+    background-color: #3b3b3b;
+    color: #ffffff;
+    transition: border-color 0.3s;
+}
+
+#produtoInput::placeholder {
+    color: #999;
+}
+
+#produtoInput:focus {
+    border-color: #27ae60;
+    outline: none;
+}
+
+#adicionarBtn {
+    padding: 12px 20px;
+    font-size: 1em;
+    font-weight: bold;
+    color: white;
+    background-color: #27ae60;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#adicionarBtn:hover {
+    background-color: #2ecc71;
+}
+
+.listas-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.lista-box {
+    background-color: #333;
+    border: 1px solid #444;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+    min-height: 150px;
+}
+
+ul li {
+    background-color: #444;
+    color: #e0e0e0;
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    font-size: 1.1em;
+    transition: background-color 0.2s ease-in-out;
+}
+
+ul li:hover {
+    background-color: #505050;
+}
+
+#listaResumo li {
+    font-weight: 500;
+    color: #ffffff;
+    background-color: #3a4a5a;
+}
+
+#listaResumo li:hover {
+    background-color: #4a5a6a;
+}
+
+@media (max-width: 600px) {
+    .listas-container {
+        grid-template-columns: 1fr;
+    }
+
+    .input-container {
+        flex-direction: column;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    h2 {
+        font-size: 1.4em;
+    }
+}

@@ -1,0 +1,636 @@
+/* ============================================= */
+/* 1. GLOBAIS E VARIÁVEIS (Reset e Tema)         */
+/* ============================================= */
+:root {
+    /* Paleta de Cores Unificada */
+    --primary-color: #007bff;
+    --secondary-color: #4a90e2;
+    --background-color: #f4f7f6; /* Fundo principal (claro) */
+    --surface-color: #ffffff;    /* Fundo dos blocos (branco) */
+    --text-color: #333;
+    --text-muted-color: #666;
+    --border-color: #ddd;
+    
+    /* Cores de Destaque (dos arquivos originais) */
+    --color-js: #f0db4f;
+    --color-css: #2965f1;
+    --color-html: #e34c26;
+
+    /* Cores para Código */
+    --code-bg: #2d2d2d;
+    --code-text: #f8f8f2;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    
+    /* Layout Principal (Sidebar + Conteúdo) */
+    display: flex;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ============================================= */
+/* 2. LAYOUT PRINCIPAL (Sidebar e Conteúdo)      */
+/* ============================================= */
+
+/* --- A. NAVEGAÇÃO (Sidebar) --- */
+.sidebar {
+    width: 260px;
+    flex-shrink: 0; /* Impede que a sidebar encolha */
+    height: 100vh;
+    position: fixed; /* Fixa na tela */
+    top: 0;
+    left: 0;
+    background-color: #252a34; /* Cor escura unificada */
+    color: #eee;
+    overflow-y: auto; /* Permite scroll se o menu for grande */
+    border-right: 2px solid var(--primary-color);
+}
+.sidebar-header {
+    padding: 20px;
+    border-bottom: 1px solid #444;
+}
+.sidebar-header h3 {
+    color: white;
+    font-size: 1.4em;
+}
+.sidebar-menu {
+    list-style: none;
+    padding: 10px 0;
+}
+.sidebar-menu li a {
+    display: block;
+    padding: 10px 20px;
+    color: #f1f1f1;
+    font-weight: 500;
+    border-radius: 4px;
+    margin: 2px 10px;
+}
+.sidebar-menu li a:hover {
+    background-color: #444;
+    text-decoration: none;
+}
+.sidebar-menu .menu-header {
+    font-size: 0.8em;
+    font-weight: bold;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    padding: 15px 20px 5px;
+    margin-top: 10px;
+}
+
+/* --- B. CONTEÚDO PRINCIPAL (Content) --- */
+.content {
+    flex-grow: 1; /* Ocupa todo o espaço restante */
+    margin-left: 260px; /* Espaço para a sidebar fixa */
+    padding: 30px;
+    max-width: calc(100% - 260px);
+}
+.content-header {
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+.content-header h1 {
+    font-size: 2.5em;
+    color: var(--text-color);
+}
+
+/* --- C. SEÇÕES DE CONTEÚDO --- */
+.content-section {
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.content-section h2 {
+    font-size: 2em;
+    color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+.content-section h3 {
+    font-size: 1.5em;
+    color: var(--text-color);
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+/* ============================================= */
+/* 3. COMPONENTES GERAIS (Demo, Código, etc)   */
+/* ============================================= */
+
+/* --- A. Caixa de Demonstração --- */
+.demo-box {
+    background-color: #f9f9f9;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 20px;
+    margin-top: 15px;
+    overflow: hidden; /* Para conter floats ou grids */
+}
+.demo-box-dark {
+    background-color: #333;
+    border-color: #555;
+}
+.demo-resultado {
+    margin-top: 10px;
+    font-weight: bold;
+    color: var(--secondary-color);
+    min-height: 1.2em;
+}
+
+/* --- B. Visualizador de Código --- */
+.code-viewer {
+    margin-top: 20px;
+}
+pre {
+    background-color: var(--code-bg);
+    color: var(--code-text);
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto; /* Scroll horizontal para código */
+    font-family: "Courier New", Courier, monospace;
+    font-size: 0.95em;
+    margin-bottom: 10px;
+}
+code {
+    font-family: "Courier New", Courier, monospace;
+    background-color: #eee;
+    padding: 2px 4px;
+    border-radius: 3px;
+    color: #d63384;
+}
+pre code {
+    background-color: transparent;
+    color: inherit;
+    padding: 0;
+    font-size: inherit;
+}
+/* Destaque de sintaxe simples (simulado) */
+.language-css { color: #9cdcfe; }
+.language-html { color: #ce9178; }
+.language-javascript { color: #dcdcaa; }
+
+
+/* ============================================= */
+/* 4. ESTILOS ESPECÍFICOS (Vindos dos arquivos) */
+/* ============================================= */
+
+/* --- Alinhamento (Conceitos) --- */
+.demo-margin-auto {
+    width: 70%;
+    margin: 0 auto;
+    background: #555;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    text-align: center;
+}
+.demo-flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    background: #eee;
+}
+.demo-item-centralizado {
+    width: 80px;
+    height: 80px;
+    background-color: var(--primary-color);
+    color: white;
+    display: grid;
+    place-items: center;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+/* --- Flexbox & Grid (Conceitos) --- */
+.flex-container-demo {
+    display: flex;
+    gap: 10px;
+}
+.flex-item-demo {
+    flex-basis: 100px;
+    flex-grow: 1;
+    background: var(--secondary-color);
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    text-align: center;
+}
+.grid-container-demo {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(80px, auto);
+    gap: 10px;
+}
+.grid-item-demo {
+    background: var(--secondary-color);
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    display: grid;
+    place-items: center;
+}
+
+/* --- Galeria (Grid) --- */
+.galeria-responsiva-demo {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+}
+.galeria-item-demo img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 2px solid #ccc;
+}
+
+/* --- Variáveis CSS (Conceitos) --- */
+.vars-demo-container {
+   --cor-primaria-demo: #007bff;
+   --cor-texto-demo: #333;
+    
+    border: 2px solid var(--cor-primaria-demo);
+    color: var(--cor-texto-demo);
+    padding: 15px;
+    border-radius: 4px;
+}
+.vars-demo-button {
+    background-color: var(--cor-primaria-demo);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* --- Tabelas & Forms (Conceitos) --- */
+.demo-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.demo-table th, .demo-table td {
+    border: 1px solid var(--border-color);
+    padding: 8px 12px;
+    text-align: left;
+}
+.demo-table thead {
+    background-color: #f0f0f0;
+}
+.demo-form .form-group {
+    margin-bottom: 15px;
+}
+.demo-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.demo-form input[type="text"],
+.demo-form input[type="email"],
+.demo-form select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.demo-form button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* --- Animações CSS (Eventos) --- */
+.demo-box-transition {
+    width: 150px;
+    height: 100px;
+    background-color: var(--color-css);
+    color: white;
+    display: grid;
+    place-items: center;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    
+    /* Atalho de transição */
+    transition: all 0.4s ease-in-out;
+}
+.demo-box-transition:hover {
+    background-color: var(--color-js);
+    transform: scale(1.1) rotate(5deg);
+    border-radius: 50%;
+}
+@keyframes pulse-animation {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7);
+    }
+    70% {
+        transform: scale(1.05);
+        box-shadow: 0 0 10px 15px rgba(0, 123, 255, 0);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
+    }
+}
+.demo-btn-pulse {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    
+    /* Ligando a animação */
+    animation: pulse-animation 2s infinite;
+}
+.demo-btn-primary { /* Botão usado para abrir modal */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+}
+.demo-btn-primary:hover {
+    background-color: #0056b3;
+}
+
+
+/* --- Eventos JS (Exemplos) --- */
+#demo-btn-click {
+    padding: 8px 12px;
+    font-size: 1em;
+    cursor: pointer;
+}
+#demo-input-key {
+    width: 100%;
+    padding: 8px;
+    font-size: 1em;
+}
+#demo-box-mouse {
+    width: 100%;
+    height: 80px;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    display: grid;
+    place-items: center;
+    font-weight: bold;
+    color: #333;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+.demo-lista-delegation {
+    list-style: none;
+    padding: 0;
+    cursor: pointer;
+}
+.demo-lista-delegation li {
+    padding: 10px;
+    border: 1px solid #eee;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+.demo-lista-delegation li:hover {
+    background-color: #f9f9f9;
+}
+.demo-lista-delegation li.active {
+    background-color: var(--color-js);
+    color: #333;
+    font-weight: bold;
+}
+#demo-form-prevent {
+    display: flex;
+    gap: 10px;
+}
+#demo-form-prevent input {
+    flex-grow: 1;
+}
+
+/* --- Calculadora (Componente) --- */
+.calculadora {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+    border: 1px solid #444;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+.calculadora-display {
+    background-color: #222;
+    color: white;
+    font-size: 2.5em;
+    padding: 20px;
+    text-align: right;
+    word-wrap: break-word;
+    min-height: 100px;
+}
+.calculadora-teclado {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px; /* Cria o efeito de borda */
+    background-color: #111;
+}
+.calculadora-teclado button {
+    font-size: 1.5em;
+    padding: 20px 0;
+    border: none;
+    background-color: #555;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.calculadora-teclado button:hover {
+    background-color: #666;
+}
+.key--operator {
+    background-color: #f39c12;
+}
+.key--operator:hover {
+    background-color: #f1c40f;
+}
+.key--span-2 {
+    grid-column: span 2;
+}
+
+/* --- Carrossel (Componente) --- */
+.carrossel {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+.carrossel-viewport {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: #ddd;
+}
+.carrossel-filmstrip {
+    display: flex;
+    transition: transform 0.4s ease-in-out;
+}
+.carrossel-slide {
+    flex-shrink: 0;
+    width: 100%;
+    min-height: 300px;
+}
+.carrossel-slide img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+}
+.carrossel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    font-size: 1.5em;
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    text-align: center;
+    padding: 0;
+    cursor: pointer;
+    z-index: 10;
+    border-radius: 50%;
+}
+.carrossel-btn:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+.carrossel-btn.prev {
+    left: 10px;
+}
+.carrossel-btn.next {
+    right: 10px;
+}
+
+/* --- Modal (Componente) --- */
+.modal-container {
+    visibility: hidden;
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: grid;
+    place-items: center;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 1000;
+}
+/* JS controla esta classe */
+.modal-container.ativo {
+    visibility: visible;
+    opacity: 1;
+}
+.modal-content {
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    padding: 30px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+.modal-container.ativo .modal-content {
+    transform: scale(1);
+}
+.modal-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    font-size: 2em;
+    color: #888;
+    cursor: pointer;
+    line-height: 1;
+}
+.modal-close-btn:hover {
+    color: #333;
+}
+
+/* ============================================= */
+/* 5. RESPONSIVIDADE                             */
+/* ============================================= */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column; /* Empilha sidebar e conteúdo */
+    }
+    
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: static; /* Remove a sidebar fixa */
+        border-right: none;
+        border-bottom: 2px solid var(--primary-color);
+    }
+    
+    .content {
+        margin-left: 0; /* Reseta a margem */
+        max-width: 100%;
+        padding: 15px;
+    }
+    
+    .content-header h1 {
+        font-size: 1.8em;
+    }
+    
+    .content-section h2 {
+        font-size: 1.5em;
+    }
+    
+    .calculadora-display {
+        font-size: 2em;
+        min-height: 80px;
+    }
+}

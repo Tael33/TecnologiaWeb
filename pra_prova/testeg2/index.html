@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Sistema de Notas</title>
+</head>
+<body>
+
+    <div class="containner">
+
+        <h2>Registrar Aluno</h2>
+        
+        <label>Matrícula:</label>
+        <input type="number" id="matriculaInput" placeholder="Digite a matrícula">
+
+        <label>Nome:</label>
+        <input type="text" id="nomeInput" placeholder="Digite o nome">
+
+        <label>Nota:</label>
+        <input type="number" id="notaInput" placeholder="Digite a nota (0 a 10)">
+
+        <button onclick="adicionarAluno()">Adicionar Aluno</button>
+
+        <hr>
+        <h2>Lista de Alunos</h2>
+        <ul id="listaAlunos"></ul>
+
+        <h3>Média Geral da Turma</h3>
+        <p id="mediaGeral" class="media-geral">Média: 0.0</p>
+
+        <hr>
+        <h2>Remover Aluno</h2>
+        <label>Matrícula para remover:</label>
+        <input type="number" id="removerInput" placeholder="Digite a matrícula">
+        <button onclick="removerAluno()" class="btn-remover">Remover</button>
+
+    </div>
+    
+
+    <script src="script.js"></script>
+
+</body>
+</html>

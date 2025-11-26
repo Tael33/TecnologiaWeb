@@ -1,0 +1,85 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+/* Área de Cadastro */
+.input-area {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+.input-group {
+    margin-bottom: 10px;
+}
+
+label {
+    display: inline-block;
+    width: 100px;
+    font-weight: bold;
+}
+
+/* Contador Geral */
+#contador-geral-box {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+}
+
+/* Layout das Colunas (Lado a Lado) */
+.container-colunas {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.coluna {
+    flex: 1; /* Divide o espaço igualmente */
+    border: 1px solid #999;
+    padding: 10px;
+    border-radius: 5px;
+    min-height: 200px;
+}
+
+/* Cores das Prioridades */
+.alta {
+    background-color: #ffcccc; /* Vermelho claro */
+    border-color: #ff0000;
+}
+
+.media {
+    background-color: #fff4cc; /* Amarelo claro */
+    border-color: #ffcc00;
+}
+
+.baixa {
+    background-color: #ccffcc; /* Verde claro */
+    border-color: #008000;
+}
+
+/* Estilo da Tarefa Individual */
+.tarefa-item {
+    background-color: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(0,0,0,0.1);
+    padding: 8px;
+    margin-bottom: 5px;
+    border-radius: 3px;
+}
+
+/* Botão de remover */
+.btn-remover {
+    float: right;
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+    padding: 2px 5px;
+}

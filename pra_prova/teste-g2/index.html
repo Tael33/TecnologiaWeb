@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de Tarefas - Avaliação G2</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Controle de Tarefas</h1>
+
+    <div id="contador-geral-box">
+        Total de Tarefas Cadastradas: <span id="total-geral">0</span>
+    </div>
+
+    <div class="input-area">
+        <h3>Nova Tarefa</h3>
+        <div class="input-group">
+            <label>Código:</label>
+            <input type="text" id="codigo" placeholder="Ex: 001">
+        </div>
+        <div class="input-group">
+            <label>Descrição:</label>
+            <input type="text" id="descricao" placeholder="Ex: Estudar Web">
+        </div>
+        <div class="input-group">
+            <label>Prioridade:</label>
+            <select id="prioridade">
+                <option value="alta">Alta</option>
+                <option value="media">Média</option>
+                <option value="baixa">Baixa</option>
+            </select>
+        </div>
+        <button onclick="adicionarTarefa()">Adicionar Tarefa</button>
+    </div>
+
+    <div class="container-colunas">
+        
+        <div class="coluna alta" id="col-alta">
+            <h3>Prioridade Alta</h3>
+            <p>Qtd: <span id="cont-alta">0</span></p>
+            <div id="lista-alta"></div>
+        </div>
+
+        <div class="coluna media" id="col-media">
+            <h3>Prioridade Média</h3>
+            <p>Qtd: <span id="cont-media">0</span></p>
+            <div id="lista-media"></div>
+        </div>
+
+        <div class="coluna baixa" id="col-baixa">
+            <h3>Prioridade Baixa</h3>
+            <p>Qtd: <span id="cont-baixa">0</span></p>
+            <div id="lista-baixa"></div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
