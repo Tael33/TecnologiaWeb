@@ -11,18 +11,18 @@
     <h1>Controle de Tarefas</h1>
 
     <div id="contador-geral-box">
-        Total de Tarefas Cadastradas: <span id="total-geral">0</span>
+        Total Geral: <span id="total-geral">0</span>
     </div>
 
     <div class="input-area">
         <h3>Nova Tarefa</h3>
         <div class="input-group">
             <label>Código:</label>
-            <input type="text" id="codigo" placeholder="Ex: 001">
+            <input type="text" id="codigo" placeholder="Ex: 100">
         </div>
         <div class="input-group">
             <label>Descrição:</label>
-            <input type="text" id="descricao" placeholder="Ex: Estudar Web">
+            <input type="text" id="descricao" placeholder="Ex: Fazer backup">
         </div>
         <div class="input-group">
             <label>Prioridade:</label>
@@ -32,7 +32,17 @@
                 <option value="baixa">Baixa</option>
             </select>
         </div>
-        <button onclick="adicionarTarefa()">Adicionar Tarefa</button>
+        <button onclick="adicionarTarefa()">Cadastrar Tarefa</button>
+    </div>
+
+    <div class="input-area remove-area">
+        <h3>Remover Tarefa</h3>
+        <p><small>Informe o código da tarefa que deseja excluir.</small></p>
+        <div class="input-group">
+            <label>Código:</label>
+            <input type="text" id="codigo-remover" placeholder="Cód. para remover">
+            <button onclick="removerPorCodigo()" class="btn-excluir">Remover</button>
+        </div>
     </div>
 
     <div class="container-colunas">

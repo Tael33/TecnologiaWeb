@@ -3,13 +3,24 @@ body {
     padding: 20px;
 }
 
-/* Área de Cadastro */
+h1 { text-align: center; }
+
+/* Caixas de Entrada */
 .input-area {
     border: 1px solid #ccc;
     padding: 15px;
     margin-bottom: 20px;
-    background-color: #f9f9f9;
+    background-color: #f4f4f4;
     border-radius: 5px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Destaque para a área de remoção (Borda vermelha) */
+.remove-area {
+    border-left: 6px solid #d9534f;
+    background-color: #fff0f0;
 }
 
 .input-group {
@@ -18,68 +29,66 @@ body {
 
 label {
     display: inline-block;
-    width: 100px;
+    width: 90px;
     font-weight: bold;
+}
+
+input, select {
+    padding: 5px;
+    width: 200px;
+}
+
+button {
+    padding: 6px 15px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-excluir {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    margin-left: 10px;
 }
 
 /* Contador Geral */
 #contador-geral-box {
-    font-size: 1.2em;
+    font-size: 1.4em;
     margin-bottom: 20px;
-    padding: 10px;
-    background-color: #333;
-    color: white;
+    padding: 15px;
+    background-color: #222;
+    color: #fff;
     text-align: center;
     border-radius: 5px;
+    font-weight: bold;
 }
 
-/* Layout das Colunas (Lado a Lado) */
+/* Colunas Lado a Lado */
 .container-colunas {
     display: flex;
-    gap: 10px;
+    gap: 15px;
     width: 100%;
 }
 
 .coluna {
-    flex: 1; /* Divide o espaço igualmente */
-    border: 1px solid #999;
+    flex: 1;
+    border: 1px solid #aaa;
     padding: 10px;
     border-radius: 5px;
-    min-height: 200px;
+    min-height: 250px;
 }
 
-/* Cores das Prioridades */
-.alta {
-    background-color: #ffcccc; /* Vermelho claro */
-    border-color: #ff0000;
-}
+/* Cores específicas conforme pedido */
+.alta { background-color: #ffcccc; border: 2px solid #ff0000; }
+.media { background-color: #fff9cc; border: 2px solid #ffcc00; }
+.baixa { background-color: #ccffcc; border: 2px solid #008000; }
 
-.media {
-    background-color: #fff4cc; /* Amarelo claro */
-    border-color: #ffcc00;
-}
-
-.baixa {
-    background-color: #ccffcc; /* Verde claro */
-    border-color: #008000;
-}
-
-/* Estilo da Tarefa Individual */
+/* Item da Tarefa */
 .tarefa-item {
-    background-color: rgba(255, 255, 255, 0.7);
-    border: 1px solid rgba(0,0,0,0.1);
-    padding: 8px;
-    margin-bottom: 5px;
-    border-radius: 3px;
-}
-
-/* Botão de remover */
-.btn-remover {
-    float: right;
-    background-color: red;
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 12px;
-    padding: 2px 5px;
+    background-color: rgba(255,255,255,0.8);
+    border: 1px solid #999;
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    font-size: 0.95em;
 }
